@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/add2">
+
+    <fragment
+        android:id="@+id/add2"
+        android:name="com.example.insight.Add"
+        android:label="fragment_add"
+        tools:layout="@layout/fragment_add" >
+        <action
+            android:id="@+id/action_add2_to_mainPage"
+            app:destination="@id/mainPage" />
+        <action
+            android:id="@+id/action_add2_to_loginPage"
+            app:destination="@id/loginPage" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginPage"
+        android:name="com.example.insight.LoginPage"
+        android:label="fragment_login_page"
+        tools:layout="@layout/fragment_login_page" >
+        <action
+            android:id="@+id/action_loginPage_to_mainPage"
+            app:destination="@id/mainPage" />
+        <action
+            android:id="@+id/action_loginPage_to_startingPage"
+            app:destination="@id/startingPage" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainPage"
+        android:name="com.example.insight.MainPage"
+        android:label="fragment_main_page"
+        tools:layout="@layout/fragment_main_page" >
+        <action
+            android:id="@+id/action_mainPage_to_add2"
+            app:destination="@id/add2" />
+        <action
+            android:id="@+id/action_mainPage_to_loginPage"
+            app:destination="@id/loginPage" />
+    </fragment>
+    <fragment
+        android:id="@+id/startingPage"
+        android:name="com.example.insight.StartingPage"
+        android:label="fragment_start_page"
+        tools:layout="@layout/fragment_start_page" >
+        <action
+            android:id="@+id/action_startingPage_to_loginPage"
+            app:destination="@id/loginPage" />
+    </fragment>
+</navigation>
