@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "61418314658",
+    "project_id": "insight-cc302",
+    "storage_bucket": "insight-cc302.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:61418314658:android:169b7354062c15796ff0fb",
+        "android_client_info": {
+          "package_name": "com.example.insight"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "61418314658-clh8ussaoqoh587heanh0lrdvpfkoff8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.insight",
+            "certificate_hash": "28e3006269704e6995eafa3f2821b09545b0ce65"
+          }
+        },
+        {
+          "client_id": "61418314658-b97u44079m9v5n95qsa04vgpf1m7e121.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDByp1QoW-kEkEqu7b2LpVoatBQfZCmTw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "61418314658-b97u44079m9v5n95qsa04vgpf1m7e121.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
