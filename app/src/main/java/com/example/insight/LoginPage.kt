@@ -1,12 +1,10 @@
 package com.example.insight
 
 import android.app.Activity.RESULT_OK
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.insight.databinding.FragmentLoginPageBinding
@@ -16,10 +14,7 @@ import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -66,22 +61,17 @@ class LoginPage : Fragment() {
             googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
             auth = Firebase.auth
 //binding?.signOut?.setOnClickListener {
-//
-//}
             binding?.login?.setOnClickListener {
                 signInLauncher.launch(signInIntent)
 
                     findNavController().navigate(R.id.action_loginPage_to_mainPage)
             }
 
-            auth.currentUser?.displayName
-
 
         }
     private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
         val response = result.idpResponse
         if (result.resultCode == RESULT_OK) {
-            // Successfully signed in
             val user = FirebaseAuth.getInstance().currentUser
             // ...
         } else {
