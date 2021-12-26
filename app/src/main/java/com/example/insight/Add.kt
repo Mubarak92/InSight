@@ -22,7 +22,6 @@ class Add : Fragment() {
     var binding: FragmentAddBinding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding: FragmentAddBinding? = null
         setHasOptionsMenu(true)
     }
 
