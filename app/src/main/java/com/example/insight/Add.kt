@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.insight.databinding.FragmentAddBinding
 import com.firebase.ui.auth.AuthUI
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -25,7 +26,11 @@ class Add : Fragment() {
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val fragmentBinding = FragmentAddBinding.inflate(inflater, container, false)
         binding = fragmentBinding
         return fragmentBinding.root
@@ -41,40 +46,16 @@ class Add : Fragment() {
             chooser()
         }
         binding?.upload?.setOnClickListener {
-            Log.e("GGG","upload:${uploadFile()}")
+            Log.e("GGG", "upload:${uploadFile()}")
             uploadFile()
-            save(binding!!.name.editableText.toString(),binding!!.overview.editableText.toString())
-            Log.e("GGG","upload:${uploadFile()}")
+            save(binding!!.titleImage.editText?.text.toString(), binding!!.overview.editableText.toString())
+            Log.e("GGG", "upload:${uploadFile()}")
 
         }
     }
-    private fun uploadFile() {
-        val pd = ProgressDialog(this.requireContext())
-        pd.setTitle("Uploading")
-        pd.show()
-        val currentTime: Date = Calendar.getInstance().getTime()
-        val imageRef = FirebaseStorage.getInstance().reference.child("image/$currentTime.jpg")
-        imageRef.putFile(filepath).addOnSuccessListener {
-                p0 -> pd.dismiss()
-        }.addOnFailureListener {
-            Toast.makeText(this.requireContext(),"Error", Toast.LENGTH_SHORT).show()
-        }
 
-    }
-//private fun uploadFile(){
-//    val pd = ProgressDialog(this.requireContext())
-//    pd.setTitle("Uploading")
-//    pd.show()
-//    val currentTime: Date = Calendar.getInstance().getTime()
-//    val imageRef = FirebaseStorage.getInstance().reference.child("image/$currentTime.jpg")
-//    imageRef.putFile(filepath).addOnSuccessListener {
-//            pd.dismiss()
-//        Toast.makeText(this.requireContext(),"File Uploaded",Toast.LENGTH_SHORT).show()
-//    }.addOnFailureListener{
-//
-//    }
-//
-//}
+
+
 
     private fun chooser() {
         val i = Intent()
@@ -87,16 +68,38 @@ class Add : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && data != null) {
             filepath = data.data!!
-//            var bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filepath)
-//              imageView.setImageBitmap(bitmap)
+        }
+    }
+    private fun uploadFile() {
+        context?.let {
+            MaterialAlertDialogBuilder(it)
+                .setTitle(resources.getString(R.string.title_add))
+                .setMessage(resources.getString(R.string.support_add_page))
+                .setNegativeButton(resources.getString(R.string.cancel)) { dialog, which ->
+                    Toast.makeText(this.requireContext(), "Canceled", Toast.LENGTH_SHORT).show()
+
+                }
+                .setPositiveButton(resources.getString(R.string.upload)) { dialog, which ->
+
+                        val pd = ProgressDialog(this.requireContext())
+                        pd.setTitle("Uploading")
+                        pd.show()
+                        val currentTime: Date = Calendar.getInstance().getTime()
+                        val imageRef =
+                            FirebaseStorage.getInstance().reference.child("image/$currentTime.jpg")
+                        imageRef.putFile(filepath).addOnSuccessListener { p0 ->
+                            pd.dismiss()
+                        }
+
+                }  .show()
         }
 
     }
+
     private fun save(name: String, overview: String) {
 
-        SaveFirebase().save(name,overview)
+        SaveFirebase().save(name, overview)
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.signout, menu)
@@ -107,7 +110,7 @@ class Add : Fragment() {
             R.id.signOutMenu -> {
                 AuthUI.getInstance()
                     .signOut(this.requireContext())
-                        findNavController().navigate(R.id.action_add2_to_loginPage)
+                findNavController().navigate(R.id.action_add2_to_loginPage)
 
                 true
             }

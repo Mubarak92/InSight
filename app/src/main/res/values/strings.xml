@@ -2,4 +2,9 @@
     <string name="app_name">InSight</string>
     <string name="get_key">61418314658-clh8ussaoqoh587heanh0lrdvpfkoff8.apps.googleusercontent.com</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="title_add">Want to upload?</string>
+    <string name="cancel">Cancel</string>
+    <string name="upload">Upload</string>
+    <string name="support_add_page">are you sure you want to upload?</string>
 </resources>

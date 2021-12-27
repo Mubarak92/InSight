@@ -1,5 +1,6 @@
 package com.example.insight
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -12,6 +13,7 @@ import com.example.insight.databinding.FragmentMainPageBinding
 import com.example.insight.databinding.FragmentStartPageBinding
 import com.firebase.ui.auth.AuthUI
 import com.google.android.gms.tasks.Task
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ListResult
@@ -91,4 +93,6 @@ class MainPage : Fragment() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+
 }

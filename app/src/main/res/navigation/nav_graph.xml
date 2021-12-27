@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_loginPage_to_startingPage"
             app:destination="@id/startingPage" />
+        <action
+            android:id="@+id/action_loginPage_to_registerPage"
+            app:destination="@id/registerPage" />
     </fragment>
     <fragment
         android:id="@+id/mainPage"
@@ -48,6 +51,15 @@
         tools:layout="@layout/fragment_start_page" >
         <action
             android:id="@+id/action_startingPage_to_loginPage"
+            app:destination="@id/loginPage" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerPage"
+        android:name="com.example.insight.RegisterPage"
+        android:label="fragment_register_page"
+        tools:layout="@layout/fragment_register_page" >
+        <action
+            android:id="@+id/action_registerPage_to_loginPage"
             app:destination="@id/loginPage" />
     </fragment>
 </navigation>
