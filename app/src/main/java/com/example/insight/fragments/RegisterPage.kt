@@ -1,4 +1,4 @@
-package com.example.insight
+package com.example.insight.fragments
 
 import androidx.fragment.app.Fragment
 

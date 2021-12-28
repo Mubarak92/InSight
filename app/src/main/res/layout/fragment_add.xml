@@ -4,36 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Add"
+    tools:context=".fragments.AddNewPhoto"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="45dp">
 
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/title_image"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="194dp"
         android:layout_height="66dp"
         android:layout_marginStart="108dp"
-        android:layout_marginTop="185dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-    android:hint="name"
+        android:layout_marginTop="356dp"
+        android:hint="name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
-
-    <androidx.appcompat.widget.AppCompatEditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/overview"
-        android:layout_width="171dp"
-        android:layout_height="57dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="194dp"
+        android:layout_height="66dp"
         android:layout_marginStart="108dp"
-        android:layout_marginTop="328dp"
-        android:hint="overview"
+        android:layout_marginTop="492dp"
+        android:hint="name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/choose"
@@ -54,6 +60,25 @@
         android:text="Upload"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/choose" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/chosen_image"
+        android:layout_width="314dp"
+        android:layout_height="338dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/ic_baseline_image_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:menu="@menu/bottom_nav_menu"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

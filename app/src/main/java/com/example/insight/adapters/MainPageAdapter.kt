@@ -1,4 +1,4 @@
-package com.example.insight
+package com.example.insight.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.insight.data.Item
-import com.squareup.picasso.Picasso
-import java.lang.System.load
+import com.example.insight.R
+import com.example.insight.data.Images
 
-class ImageAdapter(private var items:List<Item>,private val context: Context):
-RecyclerView.Adapter<ImageAdapter.ViewHolder>(){
+
+class MainPageAdapter(private var Images: MutableList<Images>, private val context: Context):
+RecyclerView.Adapter<MainPageAdapter.ViewHolder>(){
                    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(context).inflate(
@@ -21,18 +21,20 @@ RecyclerView.Adapter<ImageAdapter.ViewHolder>(){
         )
     }
 
-    override fun onBindViewHolder(holder: ImageAdapter.ViewHolder, position: Int) {
-        val item = items[position]
-Glide.with(context).load(item.imageUrl).into(holder.imageView)
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val Images = Images[position]
+Glide.with(context).load(Images.image_url).into(holder.imageView)
+//        Glide.with(context).load(Images.image_url).into(holder.profile)
 
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return Images.size
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imageView: ImageView = view.findViewById(R.id.image_view)
+//        val profile:ImageView = view.findViewById(R.id.profile_image)
     }
 
 }

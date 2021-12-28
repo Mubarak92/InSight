@@ -1,4 +1,4 @@
-package com.example.insight
+package com.example.insight.fragments
 
 import android.app.Activity
 import android.app.ProgressDialog
@@ -10,15 +10,15 @@ import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.insight.R
+import com.example.insight.classes.SaveFirebase
 import com.example.insight.databinding.FragmentAddBinding
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import java.util.*
 
-class Add : Fragment() {
+class AddNewPhoto : Fragment() {
     private lateinit var filepath: Uri
     var binding: FragmentAddBinding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +48,7 @@ class Add : Fragment() {
         binding?.upload?.setOnClickListener {
             Log.e("GGG", "upload:${uploadFile()}")
             uploadFile()
-            save(binding!!.titleImage.editText?.text.toString(), binding!!.overview.editableText.toString())
+            save(binding!!.titleImage.editText?.text.toString(), binding!!.overview.toString())
             Log.e("GGG", "upload:${uploadFile()}")
 
         }
@@ -58,7 +58,7 @@ class Add : Fragment() {
 
 
     private fun chooser() {
-        val i = Intent()
+        val i = Intent(Intent.ACTION_PICK)
         i.type = "image/*"
         i.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(Intent.createChooser(i, "Choose Picture"), 1)
@@ -68,6 +68,7 @@ class Add : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && data != null) {
             filepath = data.data!!
+            binding?.chosenImage?.setImageURI(data.data)
         }
     }
     private fun uploadFile() {

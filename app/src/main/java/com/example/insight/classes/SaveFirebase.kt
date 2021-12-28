@@ -1,4 +1,4 @@
-package com.example.insight
+package com.example.insight.classes
 
 import android.util.Log
 import com.google.firebase.auth.ktx.*

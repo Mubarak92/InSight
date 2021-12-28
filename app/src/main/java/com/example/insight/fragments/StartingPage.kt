@@ -1,4 +1,4 @@
-package com.example.insight
+package com.example.insight.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.insight.R
 import com.example.insight.databinding.FragmentStartPageBinding
 
 class StartingPage : Fragment() {

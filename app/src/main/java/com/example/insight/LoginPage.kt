@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.insight.databinding.FragmentLoginPageBinding
@@ -17,7 +18,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-
+import java.time.Instant
 
 
 class LoginPage : Fragment() {
@@ -30,45 +31,73 @@ class LoginPage : Fragment() {
         AuthUI.IdpConfig.EmailBuilder().build(),
         AuthUI.IdpConfig.GoogleBuilder().build(),
     )
+
     // Create and launch sign-in intent
     val signInIntent = AuthUI.getInstance()
         .createSignInIntentBuilder()
         .setAvailableProviders(providers)
         .build()
-        private lateinit var auth: FirebaseAuth
-        lateinit var googleSignInClient: GoogleSignInClient
+//    private lateinit var auth: FirebaseAuth
+    lateinit var googleSignInClient: GoogleSignInClient
 
-        private var _binding: FragmentLoginPageBinding? = null
-        private val binding get() = _binding
+    private var _binding: FragmentLoginPageBinding? = null
+    private val binding get() = _binding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
 
 
-        override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-        ): View? {
-            _binding = FragmentLoginPageBinding.inflate(inflater, container, false)
-            return binding?.root
-        }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentLoginPageBinding.inflate(inflater, container, false)
+        return binding?.root
+    }
 
-        override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-            super.onViewCreated(view, savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val auth = FirebaseAuth.getInstance()
 
-            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.get_key))
-                .requestEmail().build()
 
-            googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
-            auth = Firebase.auth
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.get_key))
+            .requestEmail().build()
+
+        googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 //binding?.signOut?.setOnClickListener {
-            binding?.login?.setOnClickListener {
-                signInLauncher.launch(signInIntent)
+        binding
+        binding?.login?.setOnClickListener {
+            signInLauncher.launch(signInIntent)
 
-                    findNavController().navigate(R.id.action_loginPage_to_mainPage)
-            }
-
-
+            findNavController().navigate(R.id.action_loginPage_to_mainPage)
         }
+
+
+        val username = binding?.userName?.editableText.toString()
+        val password = binding?.password?.editableText.toString()
+
+        if (username.isBlank() || password.isBlank()) {
+            Toast.makeText(this.requireContext(), "Email or password is Empty", Toast.LENGTH_SHORT)
+                .show()
+        }
+
+//        auth.signInWithEmailAndPassword(username, password).addOnCompleteListener { task ->
+//            if (task.isSuccessful) {
+//                goMainPage()
+//            }
+//        }
+
+
+    }
+
+    private fun goMainPage() {
+        findNavController().navigate(R.id.mainPage)
+    }
+
     private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
         val response = result.idpResponse
         if (result.resultCode == RESULT_OK) {
@@ -83,6 +112,6 @@ class LoginPage : Fragment() {
     }
 
 
-    }
+}
 
 

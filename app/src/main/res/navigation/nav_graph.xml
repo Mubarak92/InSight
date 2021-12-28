@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/add2"
-        android:name="com.example.insight.Add"
+        android:name="com.example.insight.fragments.AddNewPhoto"
         android:label="fragment_add"
         tools:layout="@layout/fragment_add" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainPage"
-        android:name="com.example.insight.MainPage"
+        android:name="com.example.insight.fragments.MainPage"
         android:label="fragment_main_page"
         tools:layout="@layout/fragment_main_page" >
         <action
@@ -43,10 +43,13 @@
         <action
             android:id="@+id/action_mainPage_to_loginPage"
             app:destination="@id/loginPage" />
+        <action
+            android:id="@+id/action_mainPage_to_profile2"
+            app:destination="@id/profile2" />
     </fragment>
     <fragment
         android:id="@+id/startingPage"
-        android:name="com.example.insight.StartingPage"
+        android:name="com.example.insight.fragments.StartingPage"
         android:label="fragment_start_page"
         tools:layout="@layout/fragment_start_page" >
         <action
@@ -55,11 +58,16 @@
     </fragment>
     <fragment
         android:id="@+id/registerPage"
-        android:name="com.example.insight.RegisterPage"
+        android:name="com.example.insight.fragments.RegisterPage"
         android:label="fragment_register_page"
         tools:layout="@layout/fragment_register_page" >
         <action
             android:id="@+id/action_registerPage_to_loginPage"
             app:destination="@id/loginPage" />
     </fragment>
+    <fragment
+        android:id="@+id/profile2"
+        android:name="com.example.insight.fragments.Profile"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

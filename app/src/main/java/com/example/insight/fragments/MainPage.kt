@@ -1,25 +1,21 @@
-package com.example.insight
+package com.example.insight.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.insight.data.Item
+import com.example.insight.adapters.MainPageAdapter
+import com.example.insight.R
+import com.example.insight.data.Images
 import com.example.insight.databinding.FragmentMainPageBinding
-import com.example.insight.databinding.FragmentStartPageBinding
 import com.firebase.ui.auth.AuthUI
 import com.google.android.gms.tasks.Task
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ListResult
 import com.google.firebase.storage.StorageReference
-import java.sql.Ref
-import kotlin.math.log
 
 
 class MainPage : Fragment() {
@@ -52,7 +48,7 @@ class MainPage : Fragment() {
 
         val storage = FirebaseStorage.getInstance()
         val ref = storage.reference.child("image")
-        val imageList: MutableList<Item> = mutableListOf()
+        val imageList: MutableList<Images> = mutableListOf()
         val listAllTask: Task<ListResult> = ref.listAll()
 
 
@@ -61,9 +57,9 @@ class MainPage : Fragment() {
             items.forEachIndexed { index, item ->
                 item.downloadUrl.addOnSuccessListener {
                     Log.d("Tag", "$it")
-                    imageList.add(Item(it.toString()))
+                    imageList.add(Images(it.toString(),it.toString(),it))
                 }.addOnCompleteListener {
-                    binding?.recyclerView?.adapter = ImageAdapter(imageList, this.requireContext())
+                    binding?.recyclerView?.adapter = MainPageAdapter(imageList, this.requireContext())
                     binding?.recyclerView?.layoutManager =
                         LinearLayoutManager(this.requireContext())
                 }
@@ -76,8 +72,15 @@ class MainPage : Fragment() {
         inflater.inflate(R.menu.signout, menu)
     }
 
+
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            R.id.profile -> {
+                if( item.itemId == R.id.profile)
+                findNavController().navigate(R.id.action_mainPage_to_profile2)
+                true
+            }
             R.id.signOutMenu -> {
                 AuthUI.getInstance()
                     .signOut(this.requireContext())
@@ -92,6 +95,8 @@ class MainPage : Fragment() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+
+
     }
 
 
