@@ -14,11 +14,14 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="194dp"
         android:layout_height="66dp"
-        android:layout_marginStart="108dp"
-        android:layout_marginTop="356dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
         android:hint="name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintEnd_toEndOf="@+id/chosen_image"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/chosen_image"
+        app:layout_constraintTop_toBottomOf="@+id/chosen_image">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -30,11 +33,13 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="194dp"
         android:layout_height="66dp"
-        android:layout_marginStart="108dp"
-        android:layout_marginTop="492dp"
-        android:hint="name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="110dp"
+        android:layout_marginEnd="50dp"
+        android:hint="OverView"
+        app:layout_constraintEnd_toEndOf="@+id/title_image"
+        app:layout_constraintStart_toStartOf="@+id/title_image"
+        app:layout_constraintTop_toBottomOf="@+id/chosen_image">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -63,8 +68,8 @@
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
         android:id="@+id/chosen_image"
-        android:layout_width="314dp"
-        android:layout_height="338dp"
+        android:layout_width="308dp"
+        android:layout_height="250dp"
         android:layout_marginStart="56dp"
         android:layout_marginTop="4dp"
         android:src="@drawable/ic_baseline_image_24"

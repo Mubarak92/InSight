@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginPage"
-        android:name="com.example.insight.LoginPage"
+        android:name="com.example.insight.fragments.LoginPage"
         android:label="fragment_login_page"
         tools:layout="@layout/fragment_login_page" >
         <action
@@ -28,9 +28,6 @@
         <action
             android:id="@+id/action_loginPage_to_startingPage"
             app:destination="@id/startingPage" />
-        <action
-            android:id="@+id/action_loginPage_to_registerPage"
-            app:destination="@id/registerPage" />
     </fragment>
     <fragment
         android:id="@+id/mainPage"
@@ -55,6 +52,9 @@
         <action
             android:id="@+id/action_startingPage_to_loginPage"
             app:destination="@id/loginPage" />
+        <action
+            android:id="@+id/main_to_re"
+            app:destination="@id/registerPage" />
     </fragment>
     <fragment
         android:id="@+id/registerPage"

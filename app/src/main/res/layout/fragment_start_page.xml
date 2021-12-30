@@ -11,8 +11,8 @@
         android:id="@+id/Login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginBottom="112dp"
         android:text="Login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -21,22 +21,44 @@
         android:id="@+id/Register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="68dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginEnd="84dp"
+        android:layout_marginBottom="112dp"
         android:text="Register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/starting"
-        android:layout_width="800dp"
-        android:layout_height="800dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
         android:src="@drawable/starting_page"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.348"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="130dp"
+        android:layout_height="116dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="200dp"
+        android:src="@drawable/logo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/app_title"
+        android:layout_width="187dp"
+        android:layout_height="101dp"
+        android:layout_marginStart="168dp"
+        android:layout_marginTop="200dp"
+        android:text="InSight"
+        android:textStyle="bold"
+        android:textSize="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

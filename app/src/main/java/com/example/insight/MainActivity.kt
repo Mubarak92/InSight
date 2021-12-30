@@ -30,19 +30,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController)
 
 
-        BottomNavigationView.OnNavigationItemSelectedListener { item ->
-            when(item.itemId) {
-                R.id.home -> {
 
-                    true
-                }
-                R.id.add -> {
-                    navController.navigate(R.id.action_mainPage_to_add2)
-                    true
-                }
-                else -> false
-            }
-        }
 
     }
 

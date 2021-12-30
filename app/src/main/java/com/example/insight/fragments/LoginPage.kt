@@ -1,4 +1,4 @@
-package com.example.insight
+package com.example.insight.fragments
 
 import android.app.Activity.RESULT_OK
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.insight.R
 import com.example.insight.databinding.FragmentLoginPageBinding
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
@@ -16,9 +17,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
-import java.time.Instant
 
 
 class LoginPage : Fragment() {
@@ -38,7 +36,6 @@ class LoginPage : Fragment() {
         .setAvailableProviders(providers)
         .build()
 //    private lateinit var auth: FirebaseAuth
-    lateinit var googleSignInClient: GoogleSignInClient
 
     private var _binding: FragmentLoginPageBinding? = null
     private val binding get() = _binding
@@ -67,7 +64,7 @@ class LoginPage : Fragment() {
             .requestIdToken(getString(R.string.get_key))
             .requestEmail().build()
 
-        googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
+//        googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 //binding?.signOut?.setOnClickListener {
         binding
         binding?.login?.setOnClickListener {
@@ -77,10 +74,10 @@ class LoginPage : Fragment() {
         }
 
 
-        val username = binding?.userName?.editableText.toString()
-        val password = binding?.password?.editableText.toString()
+        val username = binding?.username?.toString()
+        val password = binding?.password?.toString()
 
-        if (username.isBlank() || password.isBlank()) {
+        if (username!!.isBlank() || password!!.isBlank()) {
             Toast.makeText(this.requireContext(), "Email or password is Empty", Toast.LENGTH_SHORT)
                 .show()
         }
