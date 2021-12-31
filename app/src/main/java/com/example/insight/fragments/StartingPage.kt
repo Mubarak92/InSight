@@ -40,5 +40,6 @@ class StartingPage : Fragment() {
         binding?.Register?.setOnClickListener {
             findNavController().navigate(R.id.main_to_re)
         }
+
     }
 }

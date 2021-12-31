@@ -2,9 +2,11 @@ package com.example.insight.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.insight.R
 import com.example.insight.data.Images
 import com.example.insight.databinding.ItemListBinding
 
@@ -55,8 +57,8 @@ class MainPageAdapter : ListAdapter<Images, MainPageAdapter.MainPageViewHolder>(
         holder.bind(photo)
 
 
-//        holder.pointer.setOnClickListener {
-//            holder.itemView.findNavController().navigate(R.id.action_mainPage_to_add2)
-//        }
+        holder.pointer.setOnClickListener {
+            holder.itemView.findNavController().navigate(R.id.main_to_overview)
+        }
     }
 }

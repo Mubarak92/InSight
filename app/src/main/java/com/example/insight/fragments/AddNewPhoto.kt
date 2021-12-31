@@ -48,7 +48,7 @@ class AddNewPhoto : Fragment() {
         binding?.upload?.setOnClickListener {
             Log.e("GGG", "upload:${uploadFile()}")
             uploadFile()
-            save(binding!!.titleImage.editText?.text.toString(), binding!!.overview.toString())
+            save(binding!!.titleImage.editText?.text.toString(), binding!!.overview.editText?.text.toString())
             Log.e("GGG", "upload:${uploadFile()}")
 
         }

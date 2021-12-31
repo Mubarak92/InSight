@@ -12,40 +12,33 @@ import com.example.insight.databinding.FragmentLoginPageBinding
 import com.example.insight.databinding.FragmentRegisterPageBinding
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 
 class RegisterPage : Fragment() {
-    private var _binding: FragmentRegisterPageBinding? = null
-    private val binding get() = _binding
+    private var binding: FragmentRegisterPageBinding? = null
+//    private val binding get() = _binding
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentRegisterPageBinding.inflate(inflater, container, false)
-        return binding?.root
+        val fragmentRegisterPageBinding = FragmentRegisterPageBinding.inflate(inflater, container, false)
+        binding = fragmentRegisterPageBinding
+        return fragmentRegisterPageBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
+binding?.registerBtn?.setOnClickListener {
+    register()
+}
 //        googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 //binding?.signOut?.setOnClickListener {
 
-
-
-        val username = binding?.username?.toString()
-        val password = binding?.password?.toString()
-        val password2 = binding?.rePassword.toString()
-        val email = binding?.email.toString()
-
-        if (username!!.isBlank() || password!!.isBlank() && password2.isBlank() || email.isBlank()) {
-            Toast.makeText(this.requireContext(), "Please fill everything", Toast.LENGTH_SHORT)
-                .show()
-        }
 
 //        auth.signInWithEmailAndPassword(username, password).addOnCompleteListener { task ->
 //            if (task.isSuccessful) {
@@ -56,5 +49,31 @@ class RegisterPage : Fragment() {
 
     }
 
+    fun register() {
+        val username = binding?.emailInput?.editableText.toString()
+        val password = binding?.passwordInput?.editableText.toString()
 
+        if (username.isNotEmpty() && password.isNotEmpty()) {
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(username, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val firebaseUser: FirebaseUser = task.result.user!!
+                        Toast.makeText(
+                            this.requireContext(),
+                            "you have been registered",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        findNavController().navigate(R.id.action_registerPage_to_startingPage)
+                    } else {
+                        Toast.makeText(this.requireContext(), "Error", Toast.LENGTH_SHORT).show()
+
+                    }
+
+                }.addOnFailureListener {
+                    println(it.message)
+                }
+
+
+        }
+    }
 }

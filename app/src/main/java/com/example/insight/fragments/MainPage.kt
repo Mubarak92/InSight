@@ -16,6 +16,8 @@ import com.example.insight.viewmodel.ViewModel
 import com.firebase.ui.auth.AuthUI
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ListResult
 import com.google.firebase.storage.StorageReference
@@ -30,10 +32,12 @@ class MainPage : Fragment() {
 
     private var binding: FragmentMainPageBinding? = null
     private lateinit var posts: MutableList<MainPageAdapter>
+    private lateinit var firestoreDb: FirebaseFirestore
 
     val storage = FirebaseStorage.getInstance()
     val ref = storage.reference.child("image")
-//    val imageList: MutableList<Images> = mutableListOf()
+
+    //    val imageList: MutableList<Images> = mutableListOf()
     val listAllTask: Task<ListResult> = ref.listAll()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +55,28 @@ class MainPage : Fragment() {
         val binding = FragmentMainPageBinding.inflate(inflater)
         setHasOptionsMenu(true)
 
+        firestoreDb = FirebaseFirestore.getInstance()
+        val postRef = firestoreDb.collection("images").limit(10).orderBy("creation_time",Query.Direction.DESCENDING)
+
+
+
+
+
+        postRef.addSnapshotListener { snapshot, e ->
+            if(e != null|| snapshot == null) {
+                for (documents in snapshot!!.documents) {
+                    Log.e("TAG", "Docmmmmmmmmmmmm ${documents.id}: ${documents.data?.values}")
+                    return@addSnapshotListener
+                }
+                val postList = snapshot.toObjects(Images::class.java)
+                for (Images in postList) {
+
+                }
+            }
+        }
+
+
+
 
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.lifecycleOwner = this
@@ -58,9 +84,8 @@ class MainPage : Fragment() {
         // Giving the binding access to the OverviewViewModel
         binding.viewModel = viewModel
 
-        // Sets the adapter of the photosGrid RecyclerView
         binding.recyclerView.adapter = MainPageAdapter()
-
+        Log.e("TAG", "onCreateView: i am here")
         return binding.root
 
 
@@ -73,7 +98,7 @@ class MainPage : Fragment() {
         listAllTask.addOnCompleteListener { result ->
             val items: List<StorageReference> = result.result.items
 
-            val li : MutableList<String> = mutableListOf()
+            val li: MutableList<Images> = mutableListOf()
 
 
             lifecycleScope.async {
@@ -81,11 +106,13 @@ class MainPage : Fragment() {
 
                 val l = async {
                     items.forEachIndexed { index, item ->
-
-                        li.add(item.downloadUrl.await().toString())
-
+                        li.add(Images(item.downloadUrl.await().toString()))
                     }
+                    viewModel.photo.value = li
+
                     return@async li
+                    // Sets the adapter of the photosGrid RecyclerView
+
                 }
                 Log.d("TAG", "onViewCreated: ${l.await().toString()} ")
             }
@@ -95,7 +122,7 @@ class MainPage : Fragment() {
     }
 
 
-                //                addOnSuccessListener {
+    //                addOnSuccessListener {
 //                    Log.e("TAG1", "$it")
 //                    viewModel.photo.value?.plus(it)
 //                    Log.e("TAG", "onViewCreated: ${viewModel.photo.value}", )
@@ -107,7 +134,6 @@ class MainPage : Fragment() {
 //                    binding?.recyclerView?.layoutManager =
 //                        LinearLayoutManager(this.requireContext())
 //                }
-
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -139,6 +165,7 @@ class MainPage : Fragment() {
 
 
     }
+
 //
 //    fun getImages() {
 //        listAllTask.addOnCompleteListener { result ->

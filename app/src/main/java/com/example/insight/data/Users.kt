@@ -1,6 +1,7 @@
 package com.example.insight.data
 
 
-data class Item(
-    var username: String
-){}
+data class Users(
+    var username: String,
+    var age :Int
+)
