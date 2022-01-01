@@ -21,7 +21,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/username"
+            android:id="@+id/tv_username"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginBottom="7dp"
@@ -35,10 +35,10 @@
             android:id="@+id/fire_image"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            app:imageFireBase="@{imageList.image_url}"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
+<!--        app:imageFireBase="@{imageList.image_url}"-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

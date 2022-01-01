@@ -132,8 +132,13 @@ class LoginPage : Fragment() {
                         if (task.isSuccessful) {
                             val firebaseUser: FirebaseUser = task.result.user!!
 
-                            findNavController().navigate(R.id.action_loginPage_to_mainPage)
-//                        activity?.let {
+
+                            activity?.let{
+                                val intent = Intent (this.requireContext(), NavActivity::class.java)
+                                this.startActivity(intent)
+
+                            }
+                            //                        activity?.let {
 //                            val intent = Intent(it, NavActivity::class.java)
 //                            it.startActivity(intent)
 //                        }
