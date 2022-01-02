@@ -17,7 +17,7 @@
         android:layout_marginStart="80dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="30dp"
-        android:hint="name"
+        android:hint="Title"
         app:layout_constraintEnd_toEndOf="@+id/chosen_image"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/chosen_image"
@@ -26,7 +26,9 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/title_image_input"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"/>
+
     </com.google.android.material.textfield.TextInputLayout>
 
 <!--    <com.google.android.material.textfield.TextInputLayout-->

@@ -88,14 +88,14 @@ class LoginPage : Fragment() {
     private fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         mAuth.signInWithCredential(credential)
-            .addOnCompleteListener(this.requireActivity()) {  task ->
+            .addOnCompleteListener(this.requireActivity()) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("TAG", "signInWithCredential:success")
 //                    findNavController().navigate(R.id.action_loginPage_to_mainPage)
 
-                    activity?.let{
-                        val intent = Intent (this.requireContext(), NavActivity::class.java)
+                    activity?.let {
+                        val intent = Intent(this.requireContext(), NavActivity::class.java)
                         this.startActivity(intent)
 
                     }
@@ -133,15 +133,11 @@ class LoginPage : Fragment() {
                             val firebaseUser: FirebaseUser = task.result.user!!
 
 
-                            activity?.let{
-                                val intent = Intent (this.requireContext(), NavActivity::class.java)
+                            activity?.let {
+                                val intent = Intent(this.requireContext(), NavActivity::class.java)
                                 this.startActivity(intent)
 
                             }
-                            //                        activity?.let {
-//                            val intent = Intent(it, NavActivity::class.java)
-//                            it.startActivity(intent)
-//                        }
                             Toast.makeText(
                                 this.requireContext(),
                                 "Signed in",
@@ -161,32 +157,13 @@ class LoginPage : Fragment() {
                         println(it.message)
                     }
             }
-        }//            activity?.let {
-//                val intent = Intent(it, NavActivity::class.java)
-//                it.startActivity(intent)
-//            }
+        }
         binding?.login?.setOnClickListener {
             login()
         }
-//
-//        binding?.googleSignIn?.setOnClickListener {
-//            signIn()
-//        }
+
     }
 
-
-    private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
-        val response = result.idpResponse
-        if (result.resultCode == RESULT_OK) {
-            val user = FirebaseAuth.getInstance().currentUser
-            // ...
-        } else {
-            // Sign in failed. If response is null the user canceled the
-            // sign-in flow using the back button. Otherwise check
-            // response.getError().getErrorCode() and handle the error.
-            // ...
-        }
-    }
 }
 
 

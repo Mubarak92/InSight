@@ -34,15 +34,6 @@ class RegisterPage : Fragment() {
 binding?.registerBtn?.setOnClickListener {
     register()
 }
-//        googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
-//binding?.signOut?.setOnClickListener {
-
-
-//        auth.signInWithEmailAndPassword(username, password).addOnCompleteListener { task ->
-//            if (task.isSuccessful) {
-//                goMainPage()
-//            }
-//        }
 
 
     }

@@ -20,8 +20,8 @@
     <fragment
         android:id="@+id/Login"
         android:name="com.mubarak.insight.fragments.LoginPage"
-        android:label="fragment_login_page"
-        tools:layout="@layout/fragment_login_page" >
+        android:label="Login"
+        tools:layout="@layout/fragment_login_page">
         <action
             android:id="@+id/action_loginPage_to_mainPage"
             app:destination="@id/InSight" />

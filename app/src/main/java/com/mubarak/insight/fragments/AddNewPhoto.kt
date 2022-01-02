@@ -12,20 +12,14 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 
 import com.firebase.ui.auth.AuthUI
-import com.firebase.ui.auth.data.model.User
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import com.mubarak.insight.R
-import com.mubarak.insight.SaveFirebase
-import com.mubarak.insight.data.Images
 import com.mubarak.insight.databinding.FragmentAddBinding
+import com.mubarak.insight.viewmodel.SaveFirebase
 import kotlinx.android.synthetic.main.fragment_add.*
 import kotlinx.android.synthetic.main.fragment_start_page.*
 import java.util.*
@@ -74,9 +68,9 @@ class AddNewPhoto : Fragment() {
             chooser()
         }
 
-binding?.upload?.setOnClickListener {
-    uploadFile()
-}
+        binding?.upload?.setOnClickListener {
+            uploadFile()
+        }
 //        binding?.upload?.setOnClickListener {
 //            Log.e("GGG", "upload:${uploadFile()}")
 //            uploadFile()
@@ -109,66 +103,6 @@ binding?.upload?.setOnClickListener {
         }
     }
 
-//    fun handle() {
-////        if (filepath == null){
-////            Toast.makeText(this.requireContext(), "No photo selected", Toast.LENGTH_SHORT).show()
-////            return
-////        }
-////        if (title_image_input.text!!.isBlank()){
-////            Toast.makeText(this.requireContext(), "Please give title", Toast.LENGTH_SHORT).show()
-////            return
-////        }
-////        if(signedInUser == null ){
-////            Toast.makeText(this.requireContext(), "no Signed user", Toast.LENGTH_SHORT).show()
-////        }
-//
-//
-//        val photoUploaduri = filepath
-//        val photoRef = StorageRef.child("images/${System.currentTimeMillis()}-Photo.jpg")
-//        photoRef.putFile(photoUploaduri).continueWithTask { photoUploadTask ->
-//            photoRef.downloadUrl
-//        }.continueWithTask { downloadUrlTask ->
-//            val post = Images(
-//                binding?.titleImageInput?.text.toString(),
-//                downloadUrlTask.result.toString(),
-//                System.currentTimeMillis(),
-//                signedInUser
-//            )
-//            firestoreDb.collection("images").add(post)
-//        }.addOnCompleteListener { postcreationTask ->
-//            uploadFile()
-//            imageView.setImageResource(0)
-//            findNavController()
-//
-//        }
-//    }
-
-
-    fun save(uri: String,   systemTime:Long = System.currentTimeMillis() ,title:String,) {
-        val db = FirebaseFirestore.getInstance()
-        Firebase.auth
-        Log.e("TAG", "save: start")
-
-
-        val data: MutableMap<String, Any> = HashMap()
-        data["image_url"] = uri
-        data["creation_time"] =  systemTime
-        data["title"] = title
-
-
-        db.collection("images")
-            .add(data)
-            .addOnSuccessListener {
-                // Toast.makeText(this, "Working", Toast.LENGTH_SHORT).show()
-                Log.e("TAG", "save: true")
-            }
-            .addOnFailureListener { e ->
-                Log.e("TAG", "save: error $e")
-
-                //                Toast.makeText(this, "Fail $e", Toast.LENGTH_SHORT).show()
-            }
-    }
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.signout, menu)
     }
@@ -187,34 +121,43 @@ binding?.upload?.setOnClickListener {
     }
 
 
+    private fun save(uri: String, systemTime: Long = System.currentTimeMillis(), title: String) {
+
+        SaveFirebase().save(uri, systemTime, title)
+    }
 
 
     private fun uploadFile() {
 
-        if(filePath != null){
+        if (filePath != null) {
 
-        val imageRef =
-            FirebaseStorage.getInstance().reference.child("images/${System.currentTimeMillis()}-Photo.jpg\"")
-        val uploadTask = imageRef?.putFile(filePath!!)
+            val imageRef =
+                FirebaseStorage.getInstance().reference.child("images/${System.currentTimeMillis()}-Photo.jpg\"")
+            val uploadTask = imageRef?.putFile(filePath!!)
 
-        val urlTask =
-            uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
-                if (!task.isSuccessful) {
-                    task.exception?.let {
-                        throw it
+            val urlTask =
+                uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+                    if (!task.isSuccessful) {
+                        task.exception?.let {
+                            throw it
+                        }
                     }
-                }
-                return@Continuation imageRef.downloadUrl
-            })?.addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val downloadUri = task.result
-                    save(downloadUri.toString(),System.currentTimeMillis(),title_image_input.text.toString())
-                } else {
-                    // Handle failures
-                }
-            }?.addOnFailureListener {
+                    return@Continuation imageRef.downloadUrl
+                })?.addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val downloadUri = task.result
+                        save(
+                            downloadUri.toString(),
+                            System.currentTimeMillis(),
+                            title_image_input.text.toString()
+                        )
+                    } else {
+                        // Handle failures
+                    }
+                }?.addOnFailureListener {
 
-            }
+                }
+        }
+
     }
-
-}}
+}

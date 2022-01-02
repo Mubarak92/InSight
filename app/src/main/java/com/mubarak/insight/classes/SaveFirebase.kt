@@ -8,7 +8,7 @@ import com.google.firebase.ktx.Firebase
 import java.util.*
 import kotlin.collections.HashMap
 
-class SaveFirebase {
+//class SaveFirebase {
 //    fun save(uri: String) {
 //        val db = FirebaseFirestore.getInstance()
 //        Firebase.auth
@@ -30,4 +30,3 @@ class SaveFirebase {
 //                //                Toast.makeText(this, "Fail $e", Toast.LENGTH_SHORT).show()
 //            }
 //    }
-}

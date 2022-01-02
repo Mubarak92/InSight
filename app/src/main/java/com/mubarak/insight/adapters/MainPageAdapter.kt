@@ -2,44 +2,62 @@ package com.mubarak.insight.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mubarak.insight.R
 import com.mubarak.insight.data.Images
+import com.mubarak.insight.databinding.ItemListBinding
 
 
-class MainPageAdapter(private var Images: MutableList<Images>, private val context: Context) :
-    RecyclerView.Adapter<MainPageAdapter.ViewHolder>() {
+class MainPageAdapter : ListAdapter<Images, MainPageAdapter.MainPageViewHolder>(DiffCallback) {
+
+    class MainPageViewHolder(
+
+        private var binding: ItemListBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(
-            LayoutInflater.from(context).inflate(
-                R.layout.item_list, parent, false
-            )
+        fun bind(PhotoItem: Images) {
+
+            binding.tvUsername.text.toString()
+            Glide.with(binding.fireImage).load(PhotoItem.image_url).into(binding.fireImage)
+            // This is important, because it forces the data binding to execute immediately,
+            // which allows the RecyclerView to make the correct view size measurements
+            binding.executePendingBindings()
+        }
+
+        var pointer = binding.fireImage
+    }
+
+    companion object DiffCallback : DiffUtil.ItemCallback<Images>() {
+        override fun areItemsTheSame(oldItem: Images, newItem: Images): Boolean {
+            return oldItem.image_url == newItem.image_url
+        }
+
+        override fun areContentsTheSame(oldItem: Images, newItem: Images): Boolean {
+            return oldItem.creation_time == newItem.creation_time
+        }
+    }
+
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): MainPageViewHolder {
+        return MainPageViewHolder(
+            ItemListBinding.inflate(LayoutInflater.from(parent.context))
         )
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val Images = Images[position]
-        Glide.with(context).load(Images.image_url).into(holder.imageView)
-        holder.user.text = Images.title.toString()
-//        Glide.with(context).load(Images.image_url).into(holder.profile)
+    override fun onBindViewHolder(holder: MainPageViewHolder, position: Int) {
+        val photo = getItem(position)
+        holder.bind(photo)
 
+//
+//        holder.pointer.setOnClickListener {
+//
+//        }
     }
-
-    override fun getItemCount(): Int = Images.size
-
-
-
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val user: TextView = view.findViewById(R.id.tv_username)
-        val imageView: ImageView = view.findViewById(R.id.fire_image)
-//        val profile:ImageView = view.findViewById(R.id.profile_image)
-    }
-
 }

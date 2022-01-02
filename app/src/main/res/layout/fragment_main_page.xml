@@ -20,9 +20,11 @@
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-             />
-<!--        app:listData="@{viewModel.photo}"-->
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:listData="@{viewModel.photo}"
+
+            />
+
         <ImageView
             android:id="@+id/status_image"
             android:layout_width="224dp"
@@ -33,8 +35,9 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.498" />
-<!--        app:InSightStatus="@{viewModel.status}"-->
+            app:layout_constraintVertical_bias="0.498"
+            app:InSightStatus="@{viewModel.status}"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
