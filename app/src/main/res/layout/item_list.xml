@@ -7,11 +7,11 @@
 
         <variable
             name="viewModel"
-            type="com.example.insight.viewmodel.ViewModel" />
+            type="com.mubarak.insight.viewmodel.ViewModel" />
 
         <variable
             name="imageList"
-            type="com.example.insight.data.Images" />
+            type="com.mubarak.insight.data.Images" />
 
     </data>
 
@@ -28,6 +28,7 @@
             android:text="Username"
             android:textSize="30sp"
             android:textStyle="bold"
+            android:textColor="@color/purple_200"
             app:layout_constraintBottom_toTopOf="@+id/fire_image"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -35,7 +36,6 @@
             android:id="@+id/fire_image"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 <!--        app:imageFireBase="@{imageList.image_url}"-->

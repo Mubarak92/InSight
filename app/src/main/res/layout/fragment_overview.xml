@@ -2,17 +2,17 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".fragments.Overview">
+    tools:context="com.mubarak.insight.fragments.Overview">
 
 
     <data>
         <variable
             name="viewModel"
-            type="com.example.insight.viewmodel.ViewModel"
+            type="com.mubarak.insight.viewmodel.ViewModel"
             />
         <variable
             name="imageList"
-            type="com.example.insight.data.Images" />
+            type="com.mubarak.insight.data.Images" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

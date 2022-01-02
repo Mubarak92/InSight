@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.insight" >
+    package="com.mubarak.insight" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,13 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.InSight" >
         <activity
-            android:name=".activitys.NavActivity"
+            android:name="com.mubarak.insight.activitys.NavActivity"
             android:exported="false"
             android:label="@string/title_activity_nav"
             android:theme="@style/Theme.InSight.NoActionBar"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".activitys.MainActivity"
+            android:name="com.mubarak.insight.activitys.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait" >
             <intent-filter>

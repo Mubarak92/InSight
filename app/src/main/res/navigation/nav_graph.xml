@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/addPhoto"
-        android:name="com.example.insight.fragments.AddNewPhoto"
+        android:name="com.mubarak.insight.fragments.AddNewPhoto"
         android:label="Add new photo"
         tools:layout="@layout/fragment_add">
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/Login"
-        android:name="com.example.insight.fragments.LoginPage"
+        android:name="com.mubarak.insight.fragments.LoginPage"
         android:label="fragment_login_page"
         tools:layout="@layout/fragment_login_page" >
         <action
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/InSight"
-        android:name="com.example.insight.fragments.MainPage"
+        android:name="com.mubarak.insight.fragments.MainPage"
         android:label="InSight"
         tools:layout="@layout/fragment_main_page">
         <action
@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/startingPage"
-        android:name="com.example.insight.fragments.StartingPage"
+        android:name="com.mubarak.insight.fragments.StartingPage"
         android:label="InSight "
         tools:layout="@layout/fragment_start_page">
         <action
@@ -67,7 +67,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerPage"
-        android:name="com.example.insight.fragments.RegisterPage"
+        android:name="com.mubarak.insight.fragments.RegisterPage"
         android:label="Register"
         tools:layout="@layout/fragment_register_page">
         <action
@@ -76,12 +76,12 @@
     </fragment>
     <fragment
         android:id="@+id/profile2"
-        android:name="com.example.insight.fragments.Profile"
+        android:name="com.mubarak.insight.fragments.Profile"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/overview2"
-        android:name="com.example.insight.fragments.Overview"
+        android:name="com.mubarak.insight.fragments.Overview"
         android:label="Overview"
         tools:layout="@layout/fragment_overview" >
         <argument
@@ -90,12 +90,12 @@
     </fragment>
     <activity
         android:id="@+id/navActivity"
-        android:name="com.example.insight.activitys.NavActivity"
+        android:name="com.mubarak.insight.activitys.NavActivity"
         android:label="activity_nav"
         tools:layout="@layout/activity_nav" />
     <fragment
         android:id="@+id/blankFragment"
-        android:name="com.example.insight.BlankFragment"
+        android:name="com.mubarak.insight.BlankFragment"
         android:label="fragment_blank"
         tools:layout="@layout/fragment_blank" />
 </navigation>
