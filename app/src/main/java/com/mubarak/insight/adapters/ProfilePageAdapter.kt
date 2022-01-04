@@ -1,39 +1,73 @@
 package com.mubarak.insight.adapters
 
-//import android.content.Context
-//import android.view.LayoutInflater
-//import android.view.View
-//import android.view.ViewGroup
-//import android.widget.ImageView
-//import androidx.recyclerview.widget.RecyclerView
-//import com.bumptech.glide.Glide
-//import com.example.insight.R
-//import com.example.insight.data.Images
+import android.content.Context
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.navigation.findNavController
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.mubarak.insight.R
+import com.mubarak.insight.data.Images
+import com.mubarak.insight.databinding.ItemListMainPageBinding
+import com.squareup.picasso.Picasso
+
+//
+//class ProfilePageAdapter : ListAdapter<Images, ProfilePageAdapter.ProfileViewHolder>(DiffCallback) {
+//
+//    class ProfileViewHolder(
+//
+//        private var binding: ItemListMainPageBinding
+//    ) : RecyclerView.ViewHolder(binding.root) {
 //
 //
-//class ProfilePageAdapter(private var Images: MutableList<Images>, private val context: Context):
-//    RecyclerView.Adapter<ProfilePageAdapter.ViewHolder>(){
-//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-//        return ViewHolder(
-//            LayoutInflater.from(context).inflate(
-//                R.layout.item_list, parent, false
-//            )
+//        fun bind(PhotoItem: Images) {
+//            binding.apply {
+//                Picasso.get().load(PhotoItem.image_url).into(fireImage)
+//
+////             Glide.with(fireImage).load(PhotoItem.image_url).into(fireImage)
+//                tvUsername.text = PhotoItem.title
+//                Log.e("TAG", "bind: ${PhotoItem.image_url}")
+//                // This is important, because it forces the data binding to execute immediately,
+//                // which allows the RecyclerView to make the correct view size measurements
+////                binding.executePendingBindings()
+//            }
+//        }
+//
+//        var pointer = binding.fireImage
+//    }
+//
+//
+//    companion object DiffCallback : DiffUtil.ItemCallback<Images>() {
+//        override fun areItemsTheSame(oldItem: Images, newItem: Images): Boolean {
+//            return oldItem.image_url == newItem.image_url
+//        }
+//
+//        override fun areContentsTheSame(oldItem: Images, newItem: Images): Boolean {
+//            return oldItem.image_url == newItem.image_url
+//        }
+//    }
+//
+//    override fun onCreateViewHolder(
+//        parent: ViewGroup,
+//        viewType: Int
+//    ): ProfileViewHolder {
+//        return ProfileViewHolder(
+//            ItemListMainPageBinding.inflate(LayoutInflater.from(parent.context))
 //        )
 //    }
 //
-//    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-//        val Images = Images[position]
-//        Glide.with(context).load(Images.image_url).into(holder.profile)
+//    override fun onBindViewHolder(holder: ProfileViewHolder, position: Int) {
+//        val images = getItem(position)
+//        holder.bind(images)
 //
 //
+//        holder.pointer.setOnClickListener {
+//            holder.itemView.findNavController().navigate(R.id.action_mainPage_to_overview)
+//        }
 //    }
-//
-//    override fun getItemCount(): Int {
-//        return Images.size
-//    }
-//
-//    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-//        val profile:ImageView = view.findViewById(R.id.profile_image)
-//    }
-//
 //}

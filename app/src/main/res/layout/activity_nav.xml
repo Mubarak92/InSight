@@ -8,16 +8,17 @@
 
 
 
-    <fragment
+
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_container"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:navGraph="@navigation/nav_graph2"
+        android:layout_height="match_parent"
         app:defaultNavHost="true"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_buttons"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_buttons"/>
+        app:navGraph="@navigation/nav_graph2" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation_buttons"

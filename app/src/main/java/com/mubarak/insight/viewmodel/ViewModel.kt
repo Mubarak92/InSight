@@ -15,7 +15,6 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import com.mubarak.insight.data.Images
-import com.mubarak.insight.databinding.FragmentAddBinding
 import kotlinx.android.synthetic.main.fragment_add.*
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -32,7 +31,7 @@ class ViewModel : ViewModel() {
 
 
     private val _photos = MutableLiveData<List<Images>?>()
-    val photo: MutableLiveData<List<Images>?> = _photos
+    val photos: MutableLiveData<List<Images>?> = _photos
 
     private val _status = MutableLiveData<InSightStatus>()
 
@@ -40,39 +39,39 @@ class ViewModel : ViewModel() {
     val status: LiveData<InSightStatus> = _status
 
 
-    val image_url = MutableLiveData<String>()
+    private val imageLink = MutableLiveData<String>()
 
 
     private val _username = MutableLiveData<Images>()
     val username: MutableLiveData<Images> = _username
 
-    init {
-        getPhotos()
-    }
+//    init {
+//        getPhotos()
+//    }
 
-    fun getPhotos() {
-        viewModelScope.launch {
-            try {
-
-
-            } catch (e: Exception) {
-
-            }
-        }
-    }
-
-
+//    fun getPhotos() {
+//        viewModelScope.launch {
+//            try {
+//
+//
+//            } catch (e: Exception) {
+//
+//            }
+//        }
+//    }
 
 
-    fun imageInfo(index: Int) {
-        val item = _photos.value?.get(index)
-        Log.e("image","Before")
-        image_url.value = item?.image_url
-        Log.e("image"," ${image_url.value}")
 
-        Log.e("image","After")
-
-    }
+//
+//    fun imageInfo(index: Int) {
+//        val item = _photos.value?.get(index)
+//        Log.e("image","Before")
+//       imageLink.value = item?.image_url
+//        Log.e("image"," ${imageLink.value}")
+//
+//        Log.e("image","After")
+//
+//    }
 }
 class SaveFirebase {
     fun save(uri: String, systemTime: Long = System.currentTimeMillis(), title: String, ) {

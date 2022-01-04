@@ -12,6 +12,7 @@ import com.mubarak.insight.R
 import com.mubarak.insight.adapters.MainPageAdapter
 import com.mubarak.insight.data.Images
 import com.mubarak.insight.viewmodel.InSightStatus
+import com.squareup.picasso.Picasso
 
 
 @BindingAdapter("listData")              //setData
@@ -23,13 +24,13 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<Images>?) {
 
 @BindingAdapter("imageFireBase")
 fun bindingFirebase(imageView: ImageView,imageUrl:String?){
-    imageUrl?.let {
-        Log.e("xbhjdghjxhk","xbjswdjhs")
-      imageUrl.toUri().buildUpon().build()
+
         Glide.with(imageView).load(imageUrl).into(imageView)
-        Log.e("xbhjdghjxhk","xbjswdjhs")
+    Picasso.get().load(imageUrl).into(imageView)
+
+
+    Log.e("hello ","data is here ")
     }
-}
 
 
 @BindingAdapter("InSightStatus")

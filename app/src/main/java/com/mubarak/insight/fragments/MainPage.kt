@@ -28,12 +28,14 @@ class MainPage : Fragment() {
     private var signedInUser : User? = null
     private var binding: FragmentMainPageBinding? = null
     private lateinit var firestoreDb: FirebaseFirestore
-    private lateinit var imageList: MutableList<Images>
-    lateinit var adapter: MainPageAdapter
+    private val storage = FirebaseStorage.getInstance()
+    private val ref = storage.reference.child("images/")
+    private val imageList: MutableList<Images> = mutableListOf()
+    val listAllTask: Task<ListResult> = ref.listAll()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        imageList = mutableListOf()
         firestoreDb = FirebaseFirestore.getInstance()
     }
 
@@ -56,19 +58,15 @@ class MainPage : Fragment() {
     }
 
 
-    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding?.recyclerView?.adapter = MainPageAdapter()
 
-        binding?.lifecycleOwner= this
+        binding?.lifecycleOwner= viewLifecycleOwner
 
         binding?.viewModel = viewModel
 
-        val storage = FirebaseStorage.getInstance()
-        val ref = storage.reference.child("images/")
-        val imageList: MutableList<Images> = mutableListOf()
-        val listAllTask: Task<ListResult> = ref.listAll()
 
         firestoreDb.collection("images").document(FirebaseAuth.getInstance().currentUser?.uid as String)
             .get().addOnSuccessListener { userSnapshot ->
@@ -93,41 +91,42 @@ class MainPage : Fragment() {
                 Log.e(TAG, "image ${image}")
             }
 
-            var adapter=     ( binding?.recyclerView?.adapter )as MainPageAdapter
+            var adapter= binding?.recyclerView?.adapter as MainPageAdapter
             adapter.submitList(imageList)
 
-
-        }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.signout, menu)
-    }
-
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.signOutMenu -> {
-                AuthUI.getInstance()
-                    .signOut(this.requireContext())
-                findNavController().navigate(R.id.action_mainPage_to_loginPage)
-
-                true
-            }
-            R.id.add -> {
-
-                findNavController().navigate(R.id.action_mainPage_to_add2)
-                true
-            }
-            R.id.profile -> {
-
-                findNavController().navigate(R.id.action_mainPage_to_profile2)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
         }
 
 
+
     }
+
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        inflater.inflate(R.menu.signout, menu)
+//    }
+//
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        return when (item.itemId) {
+//            R.id.signOutMenu -> {
+//                AuthUI.getInstance()
+//                    .signOut(this.requireContext())
+//                findNavController().navigate(R.id.action_mainPage_to_loginPage)
+//
+//                true
+//            }
+//            R.id.add -> {
+//
+//                findNavController().navigate(R.id.action_mainPage_to_add2)
+//                true
+//            }
+//            R.id.profile -> {
+//
+//                findNavController().navigate(R.id.action_mainPage_to_profile2)
+//                true
+//            }
+//            else -> super.onOptionsItemSelected(item)
+//        }
+//
+
 
 }

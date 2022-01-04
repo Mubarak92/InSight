@@ -12,9 +12,10 @@
         <variable
             name="imageList"
             type="com.mubarak.insight.data.Images" />
-<variable
-    name="titleList"
-    type="com.mubarak.insight.data.Images" />
+
+        <variable
+            name="titleList"
+            type="com.mubarak.insight.data.Images" />
     </data>
 
 
@@ -27,18 +28,17 @@
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginBottom="7dp"
-            android:text="Username"
+            android:text="Title"
             android:textColor="@color/purple_200"
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/fire_image"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/fire_image"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
 

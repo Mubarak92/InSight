@@ -8,18 +8,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
-import com.mubarak.insight.R
+import com.mubarak.insight.adapters.MainPageAdapter
 import com.mubarak.insight.databinding.FragmentProfileBinding
+import com.mubarak.insight.viewmodel.ViewModel
 
 class Profile : Fragment() {
 
     private lateinit var firestoreDb: FirebaseFirestore
     private var binding: FragmentProfileBinding? = null
     private lateinit var mAuth: FirebaseAuth
+    private val viewModel: ViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,20 +44,20 @@ class Profile : Fragment() {
         val fragmentProfileBinding = FragmentProfileBinding.inflate(inflater, container, false)
 
         binding = fragmentProfileBinding
-        return fragmentProfileBinding.root
+        return binding?.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mAuth = FirebaseAuth.getInstance()
-        val currentUser = mAuth.currentUser
-        binding?.username?.text = currentUser?.email
-//Glide.with(this).load(currentUser?.photoUrl).into(R.id.profile_image)
-//        binding?.username?.text.toString()
-//
-//        Glide.with(requireContext()).load(image_url).into(holder.imageView)
-//     binding?.profileImage?.setImageURI("https://firebasestorage.googleapis.com/v0/b/insight-cc302.appspot.com/o/image%2FMon%20Dec%2027%2011%3A47%3A23%20GMT%2B03%3A00%202021.jpg?alt=media&token=bee69eab-06c4-458c-bf23-df107bf3dca9".toUri())
+
+
+        binding?.rvProfile?.adapter = MainPageAdapter()
+
+        binding?.lifecycleOwner= viewLifecycleOwner
+
+        binding?.viewModel = viewModel
+
 
     }
 

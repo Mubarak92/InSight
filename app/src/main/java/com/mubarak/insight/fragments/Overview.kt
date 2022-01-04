@@ -7,28 +7,34 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import com.google.common.collect.Sets
 import com.mubarak.insight.databinding.FragmentOverviewBinding
+import com.squareup.picasso.Picasso
 
 class Overview : Fragment() {
 
+    var binding: FragmentOverviewBinding? = null
+//    private val navigationArgs:
+
     private val viewModel: com.mubarak.insight.viewmodel.ViewModel by activityViewModels()
-    var position: Int = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
 
-        arguments.let {
-            position = it!!.getInt("ImageId")
-        }
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        arguments.let {
 
-        viewModel.imageInfo(position)
+//Picasso.get().load()
+        }
+
+//        viewModel.imageInfo(position)
     }
 
     override fun onCreateView(
@@ -39,7 +45,7 @@ class Overview : Fragment() {
 
 
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 //
 //         Giving the binding access to the OverviewViewModel
         binding.viewModel = viewModel

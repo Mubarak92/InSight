@@ -83,11 +83,7 @@
         android:id="@+id/overview2"
         android:name="com.mubarak.insight.fragments.Overview"
         android:label="Overview"
-        tools:layout="@layout/fragment_overview" >
-        <argument
-            android:name="ImageId"
-            app:argType="integer" />
-    </fragment>
+        tools:layout="@layout/fragment_overview" />
     <activity
         android:id="@+id/navActivity"
         android:name="com.mubarak.insight.activitys.NavActivity"

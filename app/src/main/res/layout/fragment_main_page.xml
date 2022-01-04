@@ -9,6 +9,9 @@
         <variable
             name="viewModel"
             type="com.mubarak.insight.viewmodel.ViewModel" />
+        <variable
+            name="mainPage"
+            type="com.mubarak.insight.fragments.MainPage" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:listData="@{viewModel.photo}"
+            app:listData="@{viewModel.photos}"
 
             />
 

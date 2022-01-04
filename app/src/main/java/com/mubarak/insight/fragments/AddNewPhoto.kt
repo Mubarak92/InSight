@@ -151,7 +151,8 @@ class AddNewPhoto : Fragment() {
                             System.currentTimeMillis(),
                             title_image_input.text.toString()
                         )
-                    } else {
+
+                        Log.e("TAG","massage:$filePath")} else {
                         // Handle failures
                     }
                 }?.addOnFailureListener {

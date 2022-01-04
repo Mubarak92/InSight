@@ -14,8 +14,8 @@ buildscript {
         room_version = '2.3.0'
     }
     repositories {
-        google()
         jcenter()
+        google()
         mavenCentral()
     }
     dependencies {

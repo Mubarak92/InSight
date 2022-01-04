@@ -1,8 +1,10 @@
 package com.mubarak.insight.fragments
 
 import android.app.Activity.RESULT_OK
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +27,9 @@ import com.google.firebase.ktx.Firebase
 import com.mubarak.insight.R
 import com.mubarak.insight.activitys.NavActivity
 import com.mubarak.insight.databinding.FragmentLoginPageBinding
+import kotlinx.android.synthetic.main.fragment_login_page.*
+import kotlinx.android.synthetic.main.fragment_register_page.*
+import kotlinx.android.synthetic.main.fragment_register_page.email
 
 
 class LoginPage : Fragment() {
@@ -120,16 +125,37 @@ class LoginPage : Fragment() {
         val auth = FirebaseAuth.getInstance()
 
 
-//
+         fun validate(email: String, password: String): Boolean {
+            return when {
+
+                TextUtils.isEmpty(email) -> {
+                    Toast.makeText(this.requireContext(), "Please your Email", Toast.LENGTH_SHORT)
+                        .show()
+                    false
+                }
+                TextUtils.isEmpty(password) -> {
+                    Toast.makeText(this.requireContext(), "Please Enter Password", Toast.LENGTH_SHORT)
+                        .show()
+                    false
+                }
+                else -> true
+            }
+
+        }
 
         fun login() {
-            val username = _binding?.emailInputs?.editableText.toString()
+
+            var pd = ProgressDialog(this.requireContext())
+            pd.setTitle("Please Wait")
+            pd.show()
+            val email = binding?.emailInputs?.editableText.toString()
             val password = binding?.passwordInputs?.editableText.toString()
 
-            if (username.isNotEmpty() || password.isNotEmpty()) {
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(username, password)
+            if (validate(email,password)) {
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
+
                             val firebaseUser: FirebaseUser = task.result.user!!
 
 

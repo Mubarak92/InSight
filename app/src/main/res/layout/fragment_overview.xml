@@ -6,13 +6,18 @@
 
 
     <data>
+
         <variable
             name="viewModel"
-            type="com.mubarak.insight.viewmodel.ViewModel"
-            />
+            type="com.mubarak.insight.viewmodel.ViewModel" />
+
         <variable
             name="imageList"
             type="com.mubarak.insight.data.Images" />
+
+        <variable
+            name="sharedViewModel"
+            type="com.mubarak.insight.fragments.Overview" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,6 +33,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="181dp"
+            android:layout_height="71dp"
+            android:layout_marginEnd="136dp"
+            android:layout_marginBottom="224dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
