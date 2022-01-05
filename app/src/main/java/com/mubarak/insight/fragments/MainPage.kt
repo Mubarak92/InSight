@@ -2,6 +2,7 @@ package com.mubarak.insight.fragments
 
 import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -17,8 +18,11 @@ import com.google.firebase.firestore.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ListResult
 import com.mubarak.insight.R
+import com.mubarak.insight.activitys.NavActivity
 import com.mubarak.insight.adapters.MainPageAdapter
+import com.mubarak.insight.classes.Firestore
 import com.mubarak.insight.data.Images
+import com.mubarak.insight.data.Users
 import com.mubarak.insight.databinding.FragmentMainPageBinding
 import com.mubarak.insight.viewmodel.ViewModel
 
@@ -27,7 +31,7 @@ class MainPage : Fragment() {
     private val viewModel: ViewModel by activityViewModels()
     private var signedInUser : User? = null
     private var binding: FragmentMainPageBinding? = null
-    private lateinit var firestoreDb: FirebaseFirestore
+    private lateinit var mFirestore: FirebaseFirestore
     private val storage = FirebaseStorage.getInstance()
     private val ref = storage.reference.child("images/")
     private val imageList: MutableList<Images> = mutableListOf()
@@ -36,11 +40,11 @@ class MainPage : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        firestoreDb = FirebaseFirestore.getInstance()
+        mFirestore = FirebaseFirestore.getInstance()
+        Firestore().signInUser(this)
+
+
     }
-
-
-
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
@@ -68,7 +72,7 @@ class MainPage : Fragment() {
         binding?.viewModel = viewModel
 
 
-        firestoreDb.collection("images").document(FirebaseAuth.getInstance().currentUser?.uid as String)
+        mFirestore.collection("images").document(FirebaseAuth.getInstance().currentUser?.uid as String)
             .get().addOnSuccessListener { userSnapshot ->
                 signedInUser = userSnapshot.toObject(User::class.java)
                 Log.e(TAG, "signin: $signedInUser ", )
@@ -76,7 +80,7 @@ class MainPage : Fragment() {
                 Log.e(TAG, "onCreateView: Faild to signin", )
             }
 
-        val imageRef = firestoreDb.collection("images").limit(20)
+        val imageRef = mFirestore.collection("images").limit(20)
             .orderBy("creation_time", Query.Direction.DESCENDING)
         imageRef.addSnapshotListener { snapshot, e ->
             if (e != null || snapshot == null) {
@@ -99,6 +103,9 @@ class MainPage : Fragment() {
 
 
     }
+
+
+
 
 //    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 //        inflater.inflate(R.menu.signout, menu)
@@ -129,4 +136,12 @@ class MainPage : Fragment() {
 //
 
 
+
+//    fun signInSuccess(user: Users){
+//        activity?.let {
+//            val intent = Intent(this.requireContext(), NavActivity::class.java)
+//            this.startActivity(intent)
+//
+//        }
+//    }
 }

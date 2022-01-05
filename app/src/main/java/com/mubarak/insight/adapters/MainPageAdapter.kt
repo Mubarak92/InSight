@@ -29,7 +29,7 @@ class MainPageAdapter : ListAdapter<Images, MainPageAdapter.MainPageViewHolder>(
             binding.apply {
                 Picasso.get().load(PhotoItem.image_url).into(fireImage)
 
-//             Glide.with(fireImage).load(PhotoItem.image_url).into(fireImage)
+//             Glide.with(context).load(PhotoItem.image_url).into(fireImage)
                 tvUsername.text = PhotoItem.title
                 Log.e("TAG", "bind: ${PhotoItem.image_url}")
                 // This is important, because it forces the data binding to execute immediately,

@@ -1,6 +1,5 @@
 package com.mubarak.insight.fragments
 
-import android.app.Activity.RESULT_OK
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
@@ -11,10 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.firebase.ui.auth.AuthUI
-import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
+import com.firebase.ui.auth.data.model.User
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -26,6 +23,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.mubarak.insight.R
 import com.mubarak.insight.activitys.NavActivity
+import com.mubarak.insight.data.Users
 import com.mubarak.insight.databinding.FragmentLoginPageBinding
 import kotlinx.android.synthetic.main.fragment_login_page.*
 import kotlinx.android.synthetic.main.fragment_register_page.*
@@ -53,9 +51,6 @@ class LoginPage : Fragment() {
             .requestIdToken(getString(R.string.get_key))
             .requestEmail().build()
         googleSignInClient = GoogleSignIn.getClient(this.requireContext(), gso)
-
-
-
 
         mAuth = Firebase.auth
 
@@ -143,11 +138,16 @@ class LoginPage : Fragment() {
 
         }
 
+//        fun login(){
+//
+//
+//        }
+
         fun login() {
 
-            var pd = ProgressDialog(this.requireContext())
-            pd.setTitle("Please Wait")
-            pd.show()
+//            var pd = ProgressDialog(this.requireContext())
+//            pd.setTitle("Please Wait")
+//            pd.show()
             val email = binding?.emailInputs?.editableText.toString()
             val password = binding?.passwordInputs?.editableText.toString()
 
@@ -157,12 +157,12 @@ class LoginPage : Fragment() {
                         if (task.isSuccessful) {
 
                             val firebaseUser: FirebaseUser = task.result.user!!
+//                            val loggedInUser = task.toObject(Users::class.java)!!
 
 
                             activity?.let {
                                 val intent = Intent(this.requireContext(), NavActivity::class.java)
                                 this.startActivity(intent)
-
                             }
                             Toast.makeText(
                                 this.requireContext(),
@@ -189,7 +189,13 @@ class LoginPage : Fragment() {
         }
 
     }
+    fun signInSuccess(user: Users){
+        activity?.let {
+            val intent = Intent(this.requireContext(), NavActivity::class.java)
+            this.startActivity(intent)
 
+        }
+    }
 }
 
 

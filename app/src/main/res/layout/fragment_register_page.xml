@@ -13,7 +13,7 @@
         android:layout_height="63dp"
         android:layout_marginTop="184dp"
         android:layout_marginEnd="72dp"
-        android:hint="Username"
+        android:hint="@string/username"
         app:layout_constraintBottom_toTopOf="@+id/email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -31,7 +31,7 @@
         android:layout_height="106dp"
         android:layout_marginStart="76dp"
         android:layout_marginTop="36dp"
-        android:text="Register"
+        android:text="@string/register"
         android:textSize="70dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -74,12 +74,13 @@
         android:layout_height="63dp"
         android:layout_marginTop="136dp"
         android:layout_marginEnd="72dp"
-        android:hint="Email"
+        android:hint="@string/email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Register">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/emailInput"
+            android:inputType="textEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -91,13 +92,15 @@
         android:layout_height="63dp"
         android:layout_marginTop="364dp"
         android:layout_marginEnd="72dp"
-        android:hint="Password"
+        android:hint="@string/password"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passwordInput"
             android:layout_width="match_parent"
+            android:inputType="textPassword"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -107,7 +110,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="152dp"
         android:layout_marginTop="540dp"
-        android:text="Register"
+        android:text="@string/register"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -117,7 +120,7 @@
         android:layout_height="29dp"
         android:layout_marginEnd="72dp"
         android:layout_marginBottom="232dp"
-        android:text="Note: The user name can't be changed "
+        android:text="@string/note_register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

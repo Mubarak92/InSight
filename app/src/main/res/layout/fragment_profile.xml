@@ -1,56 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:context="com.mubarak.insight.fragments.Profile">
 
-    <data>
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="409dp"
+        android:layout_height="203dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="4dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <variable
-            name="viewModel"
-            type="com.mubarak.insight.viewmodel.ViewModel" />
-        <variable
-            name="mainPage"
-            type="com.mubarak.insight.fragments.MainPage" />
-    </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_profile"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:listData="@{viewModel.photos}"
+            android:layout_height="match_parent">
 
-            />
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:id="@+id/profile_image"
+                android:layout_width="130dp"
+                android:layout_height="139dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="48dp"
+                android:src="@drawable/ic_baseline_person_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/username" />
 
-        <ImageView
-            android:id="@+id/status_image"
-            android:layout_width="224dp"
-            android:layout_height="192dp"
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="236dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="16dp"
+                android:text="TextView"
+                app:layout_constraintStart_toEndOf="@+id/profile_image"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.498"
-            app:InSightStatus="@{viewModel.status}"
-            />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/edit"
+                android:layout_width="139dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="100dp"
+                android:src="@drawable/ic_baseline_edit_note_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.493"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!--    ImageView-->
-    <!--    android:id="@+id/profile_image"-->
-    <!--    android:layout_width="130dp"-->
-    <!--    android:layout_height="139dp"-->
-    <!--    android:layout_marginEnd="3dp"-->
-    <!--    android:layout_marginBottom="48dp"-->
-    <!--    android:src="@drawable/ic_baseline_person_24"-->
-    <!--    app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--    app:layout_constraintEnd_toStartOf="@+id/username" />-->
+    </LinearLayout>
 
-</layout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="409dp"
+        android:layout_height="522dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,28 +7,30 @@ import com.google.android.gms.common.internal.safeparcel.SafeParcelWriter.writeS
 
 data class Users(
     var id: String = "",
-    var profileImage: String = "",
     var username: String? = "",
     var email: String? = "",
-    var password: String? = ""
+    var profile_image: String? = "",
+    var User: String? = null
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString()
     ) {
     }
 
-    override fun describeContents(): Int = 0
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(id)
+        parcel.writeString(username)
+        parcel.writeString(email)
+        parcel.writeString(profile_image)
+        parcel.writeString(User)
 
-    override fun writeToParcel(dest: Parcel?, flags: Int) = with(dest) {
-        this!!.writeString(id)
-        this.writeString(profileImage)
-        this.writeString(username)
-        this.writeString(email)
-        this.writeString(password)
+    }
+
+    override fun describeContents(): Int {
+        return 0
     }
 
     companion object CREATOR : Parcelable.Creator<Users> {

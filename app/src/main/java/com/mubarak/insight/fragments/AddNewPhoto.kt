@@ -2,6 +2,7 @@ package com.mubarak.insight.fragments
 
 import android.app.Activity
 import android.app.ProgressDialog
+import android.content.ContentValues
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -14,30 +15,34 @@ import androidx.navigation.fragment.findNavController
 import com.firebase.ui.auth.AuthUI
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import com.mubarak.insight.R
+import com.mubarak.insight.data.Images
 import com.mubarak.insight.databinding.FragmentAddBinding
 import com.mubarak.insight.viewmodel.SaveFirebase
 import kotlinx.android.synthetic.main.fragment_add.*
+import kotlinx.android.synthetic.main.fragment_overview.*
 import kotlinx.android.synthetic.main.fragment_start_page.*
 import java.util.*
 
 private const val PICK_PHOTO_CODE = 1234
 
 class AddNewPhoto : Fragment() {
-    private val PICK_IMAGE_REQUEST = 71
     private var filePath: Uri? = null
-    private var firebaseStore: FirebaseStorage? = null
+    private val mFirestore = FirebaseFirestore.getInstance()
     private var storageReference: StorageReference? = null
     var binding: FragmentAddBinding? = null
+//    private lateinit var images:MutableList<Images>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
         storageReference = FirebaseStorage.getInstance().reference
-//
+
 //        firestoreDb.collection("users").document(FirebaseAuth.getInstance().currentUser?.uid as String)
 //            .get().addOnSuccessListener { userSnapshot ->
 //                signedinUser = userSnapshot.toObject(User::class.java)
@@ -127,8 +132,29 @@ class AddNewPhoto : Fragment() {
     }
 
 
-    private fun uploadFile() {
 
+//         val filePath: Uri? = null
+//
+//        val imageRef =
+//                FirebaseStorage.getInstance().reference.child("images/${System.currentTimeMillis()}-Photo.jpg")
+////            val uploadTask = imageRef?.putFile(filePath!!)
+//        imageRef.putFile(filePath)
+//            .continueWithTask { photoUploadTask ->
+//                imageRef.downloadUrl
+//            }.continueWithTask { downloadUrlTask ->
+//                val post = Images (
+//                    title.text.toString(),
+//                    downloadUrlTask.result.toString(),
+//                    System.currentTimeMillis(),
+//                    signedInUser)
+//                mFirestore.collection("Images").add(post)
+//            }.addOnCompletelistener { postCreationTask ->
+//
+//                if (!postCreationTask.isSuccessful) {
+//
+//
+//
+private fun uploadFile() {
         if (filePath != null) {
 
             val imageRef =

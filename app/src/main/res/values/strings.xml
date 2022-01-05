@@ -8,6 +8,15 @@
     <string name="upload">Upload</string>
     <string name="support_add_page">are you sure you want to upload?</string>
     <string name="title_activity_nav">NavActivity</string>
+    <string name="title">Title</string>
+    <string name="choose_photo">Choose Photo</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="note_register">Note: The user name can\'t be changed</string>
+    <string name="username">Username</string>
+
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>

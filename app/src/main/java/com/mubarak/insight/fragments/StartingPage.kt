@@ -1,16 +1,19 @@
 package com.mubarak.insight.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.firestore.FirebaseFirestore
 import com.mubarak.insight.R
 import com.mubarak.insight.databinding.FragmentStartPageBinding
 
 class StartingPage : Fragment() {
     private var binding: FragmentStartPageBinding? = null
+    private val mFirestore = FirebaseFirestore.getInstance()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,12 +32,12 @@ class StartingPage : Fragment() {
     }
 
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.Login!!.setOnClickListener {
             findNavController().navigate(R.id.action_startingPage_to_loginPage)
-
         }
 
         binding?.Register?.setOnClickListener {

@@ -72,11 +72,11 @@
         android:id="@+id/app_title"
         android:layout_width="187dp"
         android:layout_height="101dp"
-        android:layout_marginStart="168dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="224dp"
         android:text="InSight"
-        android:textStyle="bold"
         android:textSize="50dp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

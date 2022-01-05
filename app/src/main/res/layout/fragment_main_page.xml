@@ -28,7 +28,7 @@
 
             />
 
-        <ImageView
+        <androidx.constraintlayout.utils.widget.ImageFilterView
             android:id="@+id/status_image"
             android:layout_width="224dp"
             android:layout_height="192dp"
