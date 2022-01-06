@@ -65,10 +65,10 @@ class MainPageAdapter : ListAdapter<Images, MainPageAdapter.MainPageViewHolder>(
         val images = getItem(position)
         holder.bind(images)
 
-
-        holder.pointer.setOnClickListener{
-            holder.itemView.findNavController().navigate(R.id.action_mainPage_to_overview)
-        }
+//
+//        holder.pointer.setOnClickListener{
+//            holder.itemView.findNavController().navigate(R.id.action_mainPage_to_overview)
+//        }
     }
 
 

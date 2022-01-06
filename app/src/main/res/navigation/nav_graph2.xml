@@ -28,5 +28,9 @@
         android:id="@+id/overview"
         android:name="com.mubarak.insight.fragments.Overview"
         android:label="fragment_overview"
-        tools:layout="@layout/fragment_overview" />
+        tools:layout="@layout/fragment_overview" >
+        <argument
+            android:name="overview"
+            app:argType="string" />
+    </fragment>
 </navigation>

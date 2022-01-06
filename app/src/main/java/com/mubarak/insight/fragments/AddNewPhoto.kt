@@ -2,10 +2,14 @@ package com.mubarak.insight.fragments
 
 import android.app.Activity
 import android.app.ProgressDialog
+import android.app.appsearch.AppSearchResult.RESULT_OK
+import android.content.ActivityNotFoundException
 import android.content.ContentValues
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.*
 import android.widget.Toast
@@ -30,7 +34,7 @@ import kotlinx.android.synthetic.main.fragment_start_page.*
 import java.util.*
 
 private const val PICK_PHOTO_CODE = 1234
-
+val REQUEST_IMAGE_CAPTURE = 1
 class AddNewPhoto : Fragment() {
     private var filePath: Uri? = null
     private val mFirestore = FirebaseFirestore.getInstance()
@@ -76,20 +80,15 @@ class AddNewPhoto : Fragment() {
         binding?.upload?.setOnClickListener {
             uploadFile()
         }
-//        binding?.upload?.setOnClickListener {
-//            Log.e("GGG", "upload:${uploadFile()}")
-//            uploadFile()
-//            save(
-//                binding!!.titleImage.editText?.text.toString(),
-////                binding!!.overview.editText?.text.toString()
-//            )
-//            Log.e("GGG", "upload:${uploadFile()}")
+//        binding?.camera?.setOnClickListener {
+//            camera()
 //        }
+
     }
 
 
     private fun chooser() {
-        val i = Intent(Intent.ACTION_GET_CONTENT)
+        val i = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         i.type = "image/*"
         i.action = Intent.ACTION_GET_CONTENT
         if (i != null) {
@@ -97,11 +96,22 @@ class AddNewPhoto : Fragment() {
         }
     }
 
+    private fun camera() {
+        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        try {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+        } catch (e: ActivityNotFoundException) {
+            // display error state to the user
+        }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && data != null) {
+        if (resultCode == Activity.RESULT_OK && data != null ) {
             filePath = data.data!!
-            binding?.chosenImage?.setImageURI(filePath)
+            binding?.ivImage?.setImageURI(filePath)
+//            val imageBitmap = data.extras?.get(filePath.toString()) as Bitmap
+//            imageView.setImageBitmap(imageBitmap)
 
         } else {
             Toast.makeText(this.requireContext(), "Image pick canceled", Toast.LENGTH_SHORT).show()
@@ -132,7 +142,7 @@ class AddNewPhoto : Fragment() {
     }
 
 
-
+    private fun uploadFile() {
 //         val filePath: Uri? = null
 //
 //        val imageRef =
@@ -154,7 +164,9 @@ class AddNewPhoto : Fragment() {
 //
 //
 //
-private fun uploadFile() {
+        val pd = ProgressDialog(this.requireContext())
+        pd.setTitle("Uploading")
+        pd.show()
         if (filePath != null) {
 
             val imageRef =
@@ -171,6 +183,9 @@ private fun uploadFile() {
                     return@Continuation imageRef.downloadUrl
                 })?.addOnCompleteListener { task ->
                     if (task.isSuccessful) {
+
+                        pd.dismiss()
+                        Toast.makeText(this.requireContext(), "Photo uploaded successfully", Toast.LENGTH_SHORT).show()
                         val downloadUri = task.result
                         save(
                             downloadUri.toString(),

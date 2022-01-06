@@ -20,12 +20,14 @@ import com.google.firebase.storage.UploadTask
 import com.mubarak.insight.data.Images
 import com.mubarak.insight.data.Users
 import com.mubarak.insight.fragments.LoginPage
+import com.mubarak.insight.fragments.Overview
 import com.mubarak.insight.fragments.Profile
 import com.mubarak.insight.fragments.RegisterPage
 import kotlinx.android.synthetic.main.fragment_add.*
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import java.util.HashMap
+import kotlin.reflect.KProperty
 
 private const val PICK_PHOTO_CODE = 1234
 
@@ -35,114 +37,64 @@ enum class InSightStatus { LOADING, ERROR, DONE }
 class ViewModel : ViewModel() {
 
 
+    private val _list = MutableLiveData<List<Users>>()
+    val list: MutableLiveData<List<Users>> get() = _list
+
+    private val _imagelist = MutableLiveData<List<Images>>()
+    val imagelist: MutableLiveData<List<Images>> get() = _imagelist
+
+    private val _photos = MutableLiveData<String>()
+    val photos: MutableLiveData<String> get() = _photos
+
+    private var _username = MutableLiveData<String>()
+    val username: MutableLiveData<String> get() = _username
+
+    private val _creationTime = MutableLiveData<Int>()
+    val creationTime: MutableLiveData<Int> = _creationTime
+
+    private var _title = MutableLiveData<String>()
+    val title: MutableLiveData<String> get() = _title
+
+    private var _overview = MutableLiveData<String>()
+    val overview: MutableLiveData<String> get() = _overview
+
+    private var _link = MutableLiveData<String>()
+    val link: MutableLiveData<String> get() = _link
 
 
-    private val _photos = MutableLiveData<List<Images>?>()
-    val photos: MutableLiveData<List<Images>?> = _photos
+//    private var _username = MutableLiveData<String>()
+//    val username: MutableLiveData<String> get() =  _username
+
 
     private val _status = MutableLiveData<InSightStatus>()
 
-    // The external immutable LiveData for the request status
     val status: LiveData<InSightStatus> = _status
-
-
     private val imageLink = MutableLiveData<String>()
 
 
-    private val _username = MutableLiveData<Images>()
-    val username: MutableLiveData<Images> = _username
+    private val mFirestore = FirebaseFirestore.getInstance()
 
-//    init {
-//        getPhotos()
-//    }
+    fun getUserId(): String {
+        val currentUser = FirebaseAuth.getInstance().currentUser!!
 
-//    fun getPhotos() {
-//        viewModelScope.launch {
-//            try {
-//
-//
-//            } catch (e: Exception) {
-//
-//            }
-//        }
-//    }
-
-
-        private val mFirestore = FirebaseFirestore.getInstance()
-//
-//        fun registerUserIntoFirestore(
-//            fragment: RegisterPage,
-//            userInfo: Users
-//        ) {
-//            mFirestore.collection("Users").document(getUserId())
-//                .set(userInfo, SetOptions.merge())
-//                .addOnCompleteListener {
-//                    fragment.userRegistresSuccess(Users)
-//                }
-//        }
-//
-//        fun signInUser(fragment: Fragment) {
-//            Log.e("TAG", "signInUser: userId = ${getUserId()}", )
-//            // Here we pass the collection name from which we wants the data.
-//            var a= mFirestore.collection("Users")
-//                .document(getUserId())
-//
-//            Log.e("TAG", "signInUser: a= $a", )
-//
-//            a.get()
-//                .addOnSuccessListener { userSnapshot ->
-//                    Log.e("TAG", "signInUser: userSnapshot=  $userSnapshot", )
-//                    val loggedInUser = userSnapshot.toObject(Users::class.java)!!
-//
-//
-//                    when (fragment) {
-//                        is LoginPage -> {
-//                            fragment.signInSuccess(loggedInUser)
-//                        }
-//                        is Profile -> {
-//                            fragment.updateUserDetails(loggedInUser)
-//                        }
-//                        // END
-//                    }
-//                    // END
-//                }
-//                .addOnFailureListener { e ->
-//                }
-//
-//        }
-
-        fun getUserId(): String {
-            val currentUser = FirebaseAuth.getInstance().currentUser!!
-
-            // A variable to assign the currentUserId if it is not null or else it will be blank.
-            var currentUserID = ""
-            if (currentUser != null) {
-                currentUserID = currentUser.uid
-            }
-
-            return currentUserID
+        // A variable to assign the currentUserId if it is not null or else it will be blank.
+        var currentUserID = ""
+        if (currentUser != null) {
+            currentUserID = currentUser.uid
         }
+
+        return currentUserID
     }
 
 
 
-//
-//    fun imageInfo(index: Int) {
-//        val item = _photos.value?.get(index)
-//        Log.e("image","Before")
-//       imageLink.value = item?.image_url
-//        Log.e("image"," ${imageLink.value}")
-//
-//        Log.e("image","After")
-//
-//    }
+    operator fun setValue(overview: Overview, property: KProperty<*>, viewModel: ViewModel) {
 
-
-
-
+    }
+}
 
 class SaveFirebase {
-    fun save(uri: String, systemTime: Long = System.currentTimeMillis(), title: String, ) {
+    fun save(uri: String, systemTime: Long = System.currentTimeMillis(), title: String) {
         val db = FirebaseFirestore.getInstance()
         Firebase.auth
         Log.e("TAG", "save: start")
@@ -166,7 +118,6 @@ class SaveFirebase {
                 //                Toast.makeText(this, "Fail $e", Toast.LENGTH_SHORT).show()
             }
     }
-
 
 
 }

@@ -15,25 +15,25 @@ import com.mubarak.insight.viewmodel.InSightStatus
 import com.squareup.picasso.Picasso
 
 
-@BindingAdapter("listData")              //setData
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<Images>?) {
-    Log.e("TAG","BindingAdapter: listData $data")
-    val adapter = recyclerView.adapter as MainPageAdapter
-    adapter.submitList(data)
+@BindingAdapter("imageUrl")
+fun ImageView.bindImage(imageUrl: String?){
+    var image= imageUrl?.toUri()?.buildUpon()?.build()
+    Glide.with(this)
+        .load(image)
+        .into(this)
+    // this.bindImage(imageUrl = imageUrl)
 }
 
+
+@BindingAdapter("listData")
+fun RecyclerView.bindRecyclerView(data: List<Images>?) {
+    val adapter = this.adapter as MainPageAdapter
+    setOf(adapter)
+}
+
+
+
 @BindingAdapter("imageFireBase")
-fun bindingFirebase(imageView: ImageView,imageUrl:String?){
-
-        Glide.with(imageView).load(imageUrl).into(imageView)
-    Picasso.get().load(imageUrl).into(imageView)
-
-
-    Log.e("hello ","data is here ")
-    }
-
-
-@BindingAdapter("InSightStatus")
 fun bindStatus(statusImageView: ImageView,status: InSightStatus?) {
     when (status) {
         InSightStatus.LOADING -> {

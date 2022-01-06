@@ -8,78 +8,61 @@
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="45dp">
 
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/title_image"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="194dp"
-        android:layout_height="66dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="32dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="30dp"
+        android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:hint="@string/title"
-        app:layout_constraintEnd_toEndOf="@+id/chosen_image"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/chosen_image"
-        app:layout_constraintTop_toBottomOf="@+id/chosen_image">
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/title_image_input"
+        <ImageView
+            android:id="@+id/ivImage"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:src="#dedede" />
+
+        <Button
+            android:id="@+id/upload"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:errorEnabled="true"/>
+            android:layout_marginTop="20dp"
+            android:background="@color/colorPrimary"
+            android:text="upload"
+            android:textColor="@android:color/white" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+        <Button
+            android:id="@+id/choose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorAccent"
+            android:text="Open Gallery"
+            android:textColor="@android:color/white" />
 
-<!--    <com.google.android.material.textfield.TextInputLayout-->
-<!--        android:id="@+id/overview"-->
-<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-<!--        android:layout_width="194dp"-->
-<!--        android:layout_height="66dp"-->
-<!--        android:layout_marginStart="80dp"-->
-<!--        android:layout_marginTop="108dp"-->
-<!--        android:layout_marginEnd="50dp"-->
-<!--        android:hint="OverView"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/title_image"-->
-<!--        app:layout_constraintHorizontal_bias="0.615"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/title_image"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/chosen_image">-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/title"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:hint="@string/title"
 
-<!--        <com.google.android.material.textfield.TextInputEditText-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content" />-->
-<!--    </com.google.android.material.textfield.TextInputLayout>-->
+            app:layout_constraintBottom_toTopOf="@+id/email"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.135">
 
-    <Button
-        android:id="@+id/choose"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:layout_marginBottom="76dp"
-        android:text="@string/choose_photo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/title_image_input"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/upload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginBottom="76dp"
-        android:text="@string/upload"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/choose" />
-
-    <androidx.constraintlayout.utils.widget.ImageFilterView
-        android:id="@+id/chosen_image"
-        android:layout_width="308dp"
-        android:layout_height="250dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="4dp"
-        android:src="@drawable/ic_baseline_image_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
