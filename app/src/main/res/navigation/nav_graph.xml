@@ -83,7 +83,11 @@
         android:id="@+id/overview2"
         android:name="com.mubarak.insight.fragments.Overview"
         android:label="Overview"
-        tools:layout="@layout/fragment_overview" />
+        tools:layout="@layout/fragment_overview" >
+        <argument
+            android:name="creation_time"
+            app:argType="integer" />
+    </fragment>
     <activity
         android:id="@+id/navActivity"
         android:name="com.mubarak.insight.activitys.NavActivity"
@@ -94,4 +98,9 @@
         android:name="com.mubarak.insight.BlankFragment"
         android:label="fragment_blank"
         tools:layout="@layout/fragment_blank" />
+    <fragment
+        android:id="@+id/camera3"
+        android:name="com.mubarak.insight.fragments.Camera"
+        android:label="fragment_camera"
+        tools:layout="@layout/fragment_camera" />
 </navigation>

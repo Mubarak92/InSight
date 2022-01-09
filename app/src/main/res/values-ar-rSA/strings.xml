@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">InSight</string>
+    <string name="please_wait">الرجاء الانتظار</string>
+    <string name="cancel">إلغاء</string>
+    <string name="upload">رفع</string>
+    <string name="support_add_page">هل ترغب في رفع الصورة؟</string>
+    <string name="title">العنوان</string>
+    <string name="choose_photo">اختيار صوره</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="email">البريد الألكتروني</string>
+    <string name="password">كلمة المرور</string>
+    <string name="register">"التسجيل "</string>
+    <string name="note_register">ملاحظة: لايمكن تغيير اسم المستخدم بعد التسجيل</string>
+    <string name="username">اسم المستخدم</string>
+    <string name="next">التالي</string>
+    <string name="previous">رجوع</string>
+    <string name="title_add">هل ترعب في رفع الصورة؟</string>
+</resources>

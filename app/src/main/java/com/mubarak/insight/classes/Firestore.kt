@@ -2,13 +2,11 @@ package com.mubarak.insight.classes
 
 import android.util.Log
 import androidx.fragment.app.Fragment
-import com.firebase.ui.auth.data.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.mubarak.insight.data.Users
 import com.mubarak.insight.fragments.LoginPage
-import com.mubarak.insight.fragments.MainPage
 import com.mubarak.insight.fragments.Profile
 import com.mubarak.insight.fragments.RegisterPage
 
@@ -38,15 +36,17 @@ class Firestore {
             a.get()
             .addOnSuccessListener { userSnapshot ->
                 Log.e("TAG", "signInUser: userSnapshot=  $userSnapshot", )
-                val loggedInUser = userSnapshot.toObject(Users::class.java)!!
+                val loggedInUser = userSnapshot.toObject(Users::class.java)
 
 
                 when (fragment) {
                     is LoginPage -> {
-                        fragment.signInSuccess(loggedInUser)
+                        if (loggedInUser != null) {
+                            fragment.signInSuccess(loggedInUser)
+                        }
                     }
                     is Profile -> {
-                        fragment.updateUserDetails(loggedInUser)
+//                        fragment.updateUserDetails(loggedInUser)
                     }
                     // END
                 }

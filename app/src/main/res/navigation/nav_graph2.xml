@@ -19,10 +19,13 @@
         android:id="@+id/mainPage"
         android:name="com.mubarak.insight.fragments.MainPage"
         android:label="fragment_main_page"
-        tools:layout="@layout/fragment_main_page" >
+        tools:layout="@layout/fragment_main_page">
         <action
-            android:id="@+id/action_mainPage_to_overview"
+            android:id="@+id/main_to_overview2"
             app:destination="@id/overview" />
+        <action
+            android:id="@+id/action_mainPage_to_camera2"
+            app:destination="@id/camera2" />
     </fragment>
     <fragment
         android:id="@+id/overview"
@@ -30,7 +33,12 @@
         android:label="fragment_overview"
         tools:layout="@layout/fragment_overview" >
         <argument
-            android:name="overview"
-            app:argType="string" />
+            android:name="creation_time"
+            app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/camera2"
+        android:name="com.mubarak.insight.fragments.Camera"
+        android:label="fragment_camera"
+        tools:layout="@layout/fragment_camera" />
 </navigation>

@@ -80,9 +80,9 @@ class AddNewPhoto : Fragment() {
         binding?.upload?.setOnClickListener {
             uploadFile()
         }
-//        binding?.camera?.setOnClickListener {
-//            camera()
-//        }
+        binding?.camera?.setOnClickListener {
+            camera()
+        }
 
     }
 

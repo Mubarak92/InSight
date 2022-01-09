@@ -45,7 +45,10 @@ class NavActivity : AppCompatActivity() {
         navController = navHostFragment.navController
 
         bottomNavigationView.setupWithNavController(navController)
-    }}
+    }
+
+
+}
 
 
 //    val navListener = BottomNavigationView.OnNavigationItemSelectedListener {

@@ -25,9 +25,6 @@ import com.mubarak.insight.R
 import com.mubarak.insight.activitys.NavActivity
 import com.mubarak.insight.data.Users
 import com.mubarak.insight.databinding.FragmentLoginPageBinding
-import kotlinx.android.synthetic.main.fragment_login_page.*
-import kotlinx.android.synthetic.main.fragment_register_page.*
-import kotlinx.android.synthetic.main.fragment_register_page.email
 
 
 class LoginPage : Fragment() {
@@ -189,6 +186,7 @@ class LoginPage : Fragment() {
         }
 
     }
+
     fun signInSuccess(user: Users){
         activity?.let {
             val intent = Intent(this.requireContext(), NavActivity::class.java)

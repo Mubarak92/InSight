@@ -1,6 +1,7 @@
 package com.mubarak.insight.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,23 +20,19 @@ class Overview : Fragment() {
     lateinit var overview: String
     lateinit var link: String
     lateinit var arg: String
-lateinit var imageUrl:String
+    private lateinit var imageUrl: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-arguments.let {
-    arguments?.let {
-
-        title = it.getString("Title").toString()
-        imageUrl = it.getString("imageUrl").toString()
-        creationTime = it.getString("creationTime").toString()
-        overview = it.getString("overview").toString()
-        link = it.getString("link").toString()
-
-
-    }
-}
+        arguments.let {
+            Log.e("TAG", "onCreate: title ${it?.getString("Title").toString()}", )
+            title = it?.getString("Title").toString()
+            imageUrl = it?.getString("imageUrl").toString()
+            creationTime = it?.getString("creationTime").toString()
+            overview = it?.getString("overview").toString()
+            link = it?.getString("link").toString()
+        }
 
     }
 
@@ -43,7 +40,8 @@ arguments.let {
 
         binding?.showImg?.bindImage(viewModel.photos.value)
         arguments.let {
-arg = it!!.getString("overview").toString()
+            Log.e("TAG", "onViewCreated: ${it?.getString("overview").toString()}", )
+           // arg = it?.getString("overview").toString()
         }
 
 //        viewModel.imageInfo(position)
