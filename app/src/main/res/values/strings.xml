@@ -40,4 +40,13 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="app_name">InSight</string>
+
+    <!--shared prefrance-->
+        <string name="dark_theme_preference_value">dark_theme</string>
+        <string name="light_theme_preference_value">Light_theme</string>
+        <string name="system_theme_preference_value">defualt</string>
+        <string name="theme_preferences_key">prefrence</string>
+        <string name="dark_theme_description">dark</string>
+        <string name="light_theme_description">light</string>
+        <string name="system_theme_description">defualt</string>
 </resources>

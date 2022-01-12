@@ -35,8 +35,8 @@
             android:id="@+id/action_startingPage_to_navActivity"
             app:destination="@id/navActivity" />
         <action
-            android:id="@+id/action_startingPage_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            android:id="@+id/action_startingPage_to_userPrefrencFragment"
+            app:destination="@id/userPrefrencFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerPage"
@@ -54,12 +54,12 @@
         tools:layout="@layout/activity_nav" />
     <include app:graph="@navigation/nav_graph2" />
     <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.mubarak.insight.fragments.SettingsFragment"
-        android:label="SettingsFragment" />
-    <fragment
         android:id="@+id/addNewPhoto2"
         android:name="com.mubarak.insight.fragments.AddNewPhoto"
         android:label="fragment_add"
         tools:layout="@layout/fragment_add" />
+    <fragment
+        android:id="@+id/userPrefrencFragment"
+        android:name="com.example.testf.prefrence.UserPrefrencFragment"
+        android:label="UserPrefrencFragment" />
 </navigation>

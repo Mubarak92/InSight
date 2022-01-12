@@ -43,7 +43,7 @@ class StartingPage : Fragment() {
             findNavController().navigate(R.id.main_to_re)
         }
         binding?.settings?.setOnClickListener {
-            findNavController().navigate(R.id.action_startingPage_to_settingsFragment)
+            findNavController().navigate(R.id.action_startingPage_to_userPrefrencFragment)
         }
     }
 }
