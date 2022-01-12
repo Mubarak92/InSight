@@ -135,11 +135,6 @@ class LoginPage : Fragment() {
 
         }
 
-//        fun login(){
-//
-//
-//        }
-
         fun login() {
 
 //            var pd = ProgressDialog(this.requireContext())
@@ -195,9 +190,3 @@ class LoginPage : Fragment() {
         }
     }
 }
-
-
-
-
-
-

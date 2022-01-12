@@ -21,7 +21,6 @@ fun ImageView.bindImage(imageUrl: String?){
     Glide.with(this)
         .load(image)
         .into(this)
-    // this.bindImage(imageUrl = imageUrl)
 }
 
 

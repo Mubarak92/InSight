@@ -5,16 +5,25 @@
     android:id="@+id/nav_graph2"
     app:startDestination="@id/mainPage">
 
+
     <fragment
         android:id="@+id/profile3"
         android:name="com.mubarak.insight.fragments.Profile"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profile3_to_profileEdit"
+            app:destination="@id/profileEdit" />
+    </fragment>
     <fragment
         android:id="@+id/addNewPhoto"
         android:name="com.mubarak.insight.fragments.AddNewPhoto"
         android:label="fragment_add"
-        tools:layout="@layout/fragment_add" />
+        tools:layout="@layout/fragment_add" >
+        <action
+            android:id="@+id/action_addNewPhoto_to_camera2"
+            app:destination="@id/camera2" />
+    </fragment>
     <fragment
         android:id="@+id/mainPage"
         android:name="com.mubarak.insight.fragments.MainPage"
@@ -23,9 +32,6 @@
         <action
             android:id="@+id/main_to_overview2"
             app:destination="@id/overview" />
-        <action
-            android:id="@+id/action_mainPage_to_camera2"
-            app:destination="@id/camera2" />
     </fragment>
     <fragment
         android:id="@+id/overview"
@@ -34,8 +40,13 @@
         tools:layout="@layout/fragment_overview" >
         <argument
             android:name="creation_time"
-            app:argType="integer" />
+            app:argType="long" />
     </fragment>
+    <fragment
+        android:id="@+id/profileEdit"
+        android:name="com.mubarak.insight.fragments.ProfileEdit"
+        android:label="fragment_profile_edit"
+        tools:layout="@layout/fragment_profile_edit" />
     <fragment
         android:id="@+id/camera2"
         android:name="com.mubarak.insight.fragments.Camera"

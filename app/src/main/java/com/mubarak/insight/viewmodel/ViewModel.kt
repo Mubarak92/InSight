@@ -1,31 +1,15 @@
 package com.mubarak.insight.viewmodel
 
-import android.content.Intent
-import android.net.Uri
 import android.util.Log
-import androidx.core.app.ActivityCompat.startActivityForResult
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import androidx.lifecycle.ViewModel
-import com.google.android.gms.tasks.Continuation
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
-import com.google.firebase.storage.UploadTask
 import com.mubarak.insight.data.Images
 import com.mubarak.insight.data.Users
-import com.mubarak.insight.fragments.LoginPage
 import com.mubarak.insight.fragments.Overview
-import com.mubarak.insight.fragments.Profile
-import com.mubarak.insight.fragments.RegisterPage
-import kotlinx.android.synthetic.main.fragment_add.*
-import kotlinx.coroutines.launch
-import java.lang.Exception
 import java.util.HashMap
 import kotlin.reflect.KProperty
 
@@ -36,34 +20,36 @@ enum class InSightStatus { LOADING, ERROR, DONE }
 
 class ViewModel : ViewModel() {
 
+    //===========================================================================================================
+    private var _users = MutableLiveData<List<Users>>()
+    val users: MutableLiveData<List<Users>> get() = _users
 
-    private val _list = MutableLiveData<List<Users>>()
-    val list: MutableLiveData<List<Users>> get() = _list
-
-    private val _imagelist = MutableLiveData<List<Images>>()
-    val imagelist: MutableLiveData<List<Images>> get() = _imagelist
-
-    private val _photos = MutableLiveData<String>()
-    val photos: MutableLiveData<String> get() = _photos
+    private var _id = MutableLiveData<String>()
+    val id: MutableLiveData<String> get() = _id
 
     private var _username = MutableLiveData<String>()
     val username: MutableLiveData<String> get() = _username
 
-    private val _creationTime = MutableLiveData<Int>()
-    val creationTime: MutableLiveData<Int> = _creationTime
+    private var _email = MutableLiveData<String>()
+    val email: MutableLiveData<String> get() = _email
+
+    private var _user1 = MutableLiveData<String>()
+    val user1: MutableLiveData<String> get() = _user1
+
+
+//===========================================================================================================
+
+    private var _images = MutableLiveData<List<Images>>()
+    val images: MutableLiveData<List<Images>> get() = _images
+
+    private var _imageUrl = MutableLiveData<String>()
+    val imageUrl: MutableLiveData<String> get() = _imageUrl
 
     private var _title = MutableLiveData<String>()
     val title: MutableLiveData<String> get() = _title
 
-    private var _overview = MutableLiveData<String>()
-    val overview: MutableLiveData<String> get() = _overview
-
-    private var _link = MutableLiveData<String>()
-    val link: MutableLiveData<String> get() = _link
-
-
-//    private var _username = MutableLiveData<String>()
-//    val username: MutableLiveData<String> get() =  _username
+    private var _creationTime = MutableLiveData<String>()
+    val creationTime: MutableLiveData<String> get() = _creationTime
 
 
     private val _status = MutableLiveData<InSightStatus>()
@@ -87,14 +73,33 @@ class ViewModel : ViewModel() {
     }
 
 
-
     operator fun setValue(overview: Overview, property: KProperty<*>, viewModel: ViewModel) {
+
+    }
+
+    init {
+        getImages()
+    }
+
+
+    fun imageInfo(creation_time: String){
+        val item = _images.value?.get(creation_time.toInt())
+        imageUrl.value = item?.image_url
+    }
+
+    private fun getImages() {
+        users.value = listOf()
 
     }
 }
 
 class SaveFirebase {
-    fun save(uri: String, systemTime: Long = System.currentTimeMillis(), title: String) {
+    fun save(
+        uri: String,
+        systemTime: Long = System.currentTimeMillis(),
+        title: String,
+        overview: String,
+    ) {
         val db = FirebaseFirestore.getInstance()
         Firebase.auth
         Log.e("TAG", "save: start")
@@ -104,6 +109,8 @@ class SaveFirebase {
         data["image_url"] = uri
         data["creation_time"] = systemTime
         data["title"] = title
+        data["overview"] = overview
+
 
 
         db.collection("images")
@@ -122,3 +129,54 @@ class SaveFirebase {
 
 }
 
+class EditFirebase {
+    fun edit(uri: String, username: String) {
+        val db = FirebaseFirestore.getInstance()
+        Firebase.auth
+        Log.e("TAG", "save: start")
+
+
+        val data: MutableMap<String, Any> = HashMap()
+        data["id"] = FirebaseAuth.getInstance().currentUser!!.uid
+        data["profile_image"] = uri
+        data["username"] = username
+
+
+        db.collection("Users").document(FirebaseAuth.getInstance().currentUser!!.uid)
+            .update(data)
+            .addOnCompleteListener {
+                // Toast.makeText(this, "Working", Toast.LENGTH_SHORT).show()
+                Log.e("TAG", "save: true")
+            }
+            .addOnFailureListener { e ->
+                Log.e("TAG", "save: error $e")
+
+                //                Toast.makeText(this, "Fail $e", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+
+}
+
+
+class DeleteFirebase {
+    fun delete() {
+        val db = FirebaseFirestore.getInstance()
+        Firebase.auth
+        Log.e("TAG", "save: start")
+
+
+        db.collection("Users").document(FirebaseAuth.getInstance().currentUser!!.uid)
+            .delete()
+            .addOnSuccessListener {
+                // Toast.makeText(this, "Working", Toast.LENGTH_SHORT).show()
+                Log.e("TAG", "save: true")
+            }
+            .addOnFailureListener { e ->
+                Log.e("TAG", "save: error $e")
+
+                //                Toast.makeText(this, "Fail $e", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+}

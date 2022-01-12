@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.firebase.ui.auth.AuthUI
@@ -28,13 +29,15 @@ import com.mubarak.insight.viewmodel.ViewModel
 
 
 class MainPage : Fragment() {
-    private val viewModel: ViewModel by activityViewModels()
-    private var signedInUser : User? = null
+
+
+    private val viewModel: ViewModel by viewModels()
+    private var signedInUser: User? = null
     private var binding: FragmentMainPageBinding? = null
     private lateinit var mFirestore: FirebaseFirestore
     private val storage = FirebaseStorage.getInstance()
     private val ref = storage.reference.child("images/")
-    private val imageList: MutableList<Images> = mutableListOf()
+    private val imageUrl: MutableList<Images> = mutableListOf()
     val listAllTask: Task<ListResult> = ref.listAll()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,6 +59,12 @@ class MainPage : Fragment() {
         val fragmentMainPageBinding = FragmentMainPageBinding.inflate(inflater, container, false)
         binding = fragmentMainPageBinding
 
+        binding?.recyclerView?.adapter = MainPageAdapter()
+
+        binding?.lifecycleOwner = viewLifecycleOwner
+
+        binding?.viewModel = viewModel
+
 
         return binding?.root
 
@@ -65,19 +74,14 @@ class MainPage : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding?.recyclerView?.adapter = MainPageAdapter()
 
-        binding?.lifecycleOwner= viewLifecycleOwner
-
-        binding?.viewModel = viewModel
-
-
-        mFirestore.collection("images").document(FirebaseAuth.getInstance().currentUser?.uid as String)
+        mFirestore.collection("images")
+            .document(FirebaseAuth.getInstance().currentUser?.uid as String)
             .get().addOnSuccessListener { userSnapshot ->
                 signedInUser = userSnapshot.toObject(User::class.java)
-                Log.e(TAG, "signin: $signedInUser ", )
+                Log.e(TAG, "signin: $signedInUser ")
             }.addOnFailureListener {
-                Log.e(TAG, "onCreateView: Faild to signin", )
+                Log.e(TAG, "onCreateView: Faild to signin")
             }
 
         val imageRef = mFirestore.collection("images").limit(20)
@@ -88,60 +92,17 @@ class MainPage : Fragment() {
                 return@addSnapshotListener
             }
             val images = snapshot.toObjects(Images::class.java)
-            imageList.addAll(images)
+            imageUrl.addAll(images)
 
 
-            for (image in imageList) {
-                Log.e(TAG, "image ${image}")
-            }
+//            for (image in imageList) {
+//                Log.e(TAG, "image ${image}")
+//            }
 
-            var adapter= binding?.recyclerView?.adapter as MainPageAdapter
-            adapter.submitList(imageList)
+            var adapter = binding?.recyclerView?.adapter as MainPageAdapter
+            adapter.submitList(imageUrl)
 
         }
-
-
-
     }
 
-
-
-
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        inflater.inflate(R.menu.signout, menu)
-//    }
-//
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        return when (item.itemId) {
-//            R.id.signOutMenu -> {
-//                AuthUI.getInstance()
-//                    .signOut(this.requireContext())
-//                findNavController().navigate(R.id.action_mainPage_to_loginPage)
-//
-//                true
-//            }
-//            R.id.add -> {
-//
-//                findNavController().navigate(R.id.action_mainPage_to_add2)
-//                true
-//            }
-//            R.id.profile -> {
-//
-//                findNavController().navigate(R.id.action_mainPage_to_profile2)
-//                true
-//            }
-//            else -> super.onOptionsItemSelected(item)
-//        }
-//
-
-
-
-//    fun signInSuccess(user: Users){
-//        activity?.let {
-//            val intent = Intent(this.requireContext(), NavActivity::class.java)
-//            this.startActivity(intent)
-//
-//        }
-//    }
 }

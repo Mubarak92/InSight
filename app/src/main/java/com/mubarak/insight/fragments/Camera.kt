@@ -1,6 +1,8 @@
 package com.mubarak.insight.fragments
 
 import android.Manifest
+import android.app.Activity
+import android.app.Activity.RESULT_OK
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -13,15 +15,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.mubarak.insight.activitys.MainActivity
+import com.mubarak.insight.activitys.NavActivity
 import com.mubarak.insight.databinding.FragmentCameraBinding
 import com.mubarak.insight.databinding.FragmentLoginPageBinding
 import kotlinx.android.synthetic.main.fragment_add.*
+import kotlinx.android.synthetic.main.fragment_camera.*
 import java.io.File
 import java.nio.ByteBuffer
 import java.text.SimpleDateFormat
@@ -35,13 +41,11 @@ typealias LumaListener = (luma: Double) -> Unit
 class Camera : Fragment() {
     private var binding: FragmentCameraBinding? = null
 
-
     private var imageCapture: ImageCapture? = null
     lateinit var currentPhotoPath: String
 
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,12 +60,13 @@ class Camera : Fragment() {
         }
 
         // Set up the listener for take photo button
-        binding?.camera?.setOnClickListener { takePhoto() }
+        binding?.tosave?.setOnClickListener { takePhoto() }
 
         outputDirectory = getOutputDirectory()
 
         cameraExecutor = Executors.newSingleThreadExecutor()
     }
+
     val REQUEST_IMAGE_CAPTURE = 1
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -76,11 +81,12 @@ class Camera : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding?.camera?.setOnClickListener {
-startCamera()
+        binding?.toshow?.setOnClickListener {
+takePhoto()
         }
     }
-    private fun takePhoto()  {
+
+    private fun takePhoto() {
         // Get a stable reference of the modifiable image capture use case
         val imageCapture = imageCapture ?: return
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -92,8 +98,10 @@ startCamera()
         // Create time-stamped output file to hold the image
         val photoFile = File(
             outputDirectory,
-            SimpleDateFormat(FILENAME_FORMAT, Locale.US
-            ).format(System.currentTimeMillis()) + ".jpg").apply {   currentPhotoPath = absolutePath }
+            SimpleDateFormat(
+                FILENAME_FORMAT, Locale.US
+            ).format(System.currentTimeMillis()) + ".jpg"
+        ).apply { currentPhotoPath = absolutePath }
 
         // Create output options object which contains file + metadata
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
@@ -101,7 +109,9 @@ startCamera()
         // Set up image capture listener, which is triggered after photo has
         // been taken
         imageCapture.takePicture(
-            outputOptions, ContextCompat.getMainExecutor(this.requireContext()), object : ImageCapture.OnImageSavedCallback {
+            outputOptions,
+            ContextCompat.getMainExecutor(this.requireContext()),
+            object : ImageCapture.OnImageSavedCallback {
                 override fun onError(exc: ImageCaptureException) {
                     Log.e(TAG, "Photo capture failed: ${exc.message}", exc)
                 }
@@ -112,7 +122,9 @@ startCamera()
                         mediaScanIntent.data = Uri.fromFile(f)
                         activity?.sendBroadcast(mediaScanIntent)
                     }
-
+                    val msg = "Photo capture succeeded"
+                    Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, msg)
                 }
             })
     }
@@ -125,12 +137,12 @@ startCamera()
             // Used to bind the lifecycle of cameras to the lifecycle owner
             val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
 
-//            // Preview
-//            val preview = Preview.Builder()
-//                .build()
-//                .also {
-//                    it.setSurfaceProvider(viewFinder.surfaceProvider)
-//                }
+            // Preview
+            val preview = Preview.Builder()
+                .build()
+                .also {
+                    it.setSurfaceProvider(viewFinder.surfaceProvider)
+                }
 
             imageCapture = ImageCapture.Builder()
                 .build()
@@ -152,9 +164,10 @@ startCamera()
 
                 // Bind use cases to camera
                 cameraProvider.bindToLifecycle(
-                    this, cameraSelector, imageCapture, imageAnalyzer)
+                    this, cameraSelector,preview, imageCapture, imageAnalyzer
+                )
 
-            } catch(exc: Exception) {
+            } catch (exc: Exception) {
                 Log.e(TAG, "Use case binding failed", exc)
             }
 
@@ -169,7 +182,10 @@ startCamera()
 
     private fun getOutputDirectory(): File {
         val mediaDir = activity?.externalMediaDirs?.firstOrNull()?.let {
-            File(it, resources.getString(R.string.androidx_camera_default_config_provider)).apply { mkdirs() }
+            File(
+                it,
+                resources.getString(R.string.androidx_camera_default_config_provider)
+            ).apply { mkdirs() }
         }
         return if (mediaDir != null && mediaDir.exists())
             mediaDir else requireActivity().filesDir
@@ -183,8 +199,8 @@ startCamera()
     companion object {
         private const val TAG = "CameraXBasic"
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
-        private const val REQUEST_CODE_PERMISSIONS = 10
-        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+        const val REQUEST_CODE_PERMISSIONS = 10
+        val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
     }
 
     override fun onRequestPermissionsResult(
@@ -204,7 +220,8 @@ startCamera()
             }
         }
     }
-    private class LuminosityAnalyzer(private val listener: LumaListener) : ImageAnalysis.Analyzer {
+
+    class LuminosityAnalyzer(private val listener: LumaListener) : ImageAnalysis.Analyzer {
 
         private fun ByteBuffer.toByteArray(): ByteArray {
             rewind()    // Rewind the buffer to zero
@@ -225,12 +242,27 @@ startCamera()
             image.close()
         }
     }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if ( resultCode == AppCompatActivity.RESULT_OK) {
+        if ( resultCode == RESULT_OK) {
             val imageBitmap = data!!.extras!!.get("data") as Bitmap
-            ivImage.setImageBitmap(imageBitmap)
+            image.setImageBitmap(imageBitmap)
         }
     }
+//    private var resultLauncher =
+//        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+//
+//            if (result.resultCode == RESULT_OK && result.data?.data !=null) {
+//
+//                val data: Intent? = result.data
+//                openCamActivity()
+//
+//
+//            }
+//        }
+//
+//    private fun openCamActivity() {
+//        val intent = Intent(this.requireContext(), MainActivity::class.java)
+//        resultLauncher.launch(intent)
+//    }
 }

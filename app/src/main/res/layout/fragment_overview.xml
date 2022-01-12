@@ -5,6 +5,7 @@
     tools:context="com.mubarak.insight.fragments.Overview">
 
 
+
     <data>
 
         <variable
@@ -16,7 +17,7 @@
             type="com.mubarak.insight.data.Images" />
 
         <variable
-            name="sharedViewModel"
+            name="overView"
             type="com.mubarak.insight.fragments.Overview" />
     </data>
 
@@ -35,11 +36,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.utils.widget.ImageFilterView
+            <ImageView
                 android:id="@+id/show_img"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
-                imageUrl="@{viewModel.photos}"
+                imageUrl="@{viewModel.imageUrl}"
                 android:src="#dedede" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -72,7 +73,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@color/colorAccent"
-                android:text="@{viewModel.overview}"
                 android:hint="over"
                 android:textColor="@android:color/white" />
 
@@ -83,7 +83,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@color/teal_200"
-                android:text="@{viewModel.link}"
                 android:hint="Link"
                 android:textColor="@android:color/white" />
 

@@ -9,19 +9,17 @@ import android.view.WindowManager
 import com.mubarak.insight.R
 
 class SplashActivity : AppCompatActivity() {
+
+    companion object {
+        const val ANIMATION_TIME: Long = 1400
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        supportActionBar!!.hide()
-
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
-        Handler().postDelayed({
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+        Handler(this.mainLooper).postDelayed({
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
-        }, 1000)
+        }, ANIMATION_TIME)
     }
 }

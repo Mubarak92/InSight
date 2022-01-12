@@ -14,6 +14,12 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdk 31
+    buildscript {
+        repositories {
+            mavenCentral()
+        }
+    }
+
     buildFeatures {
         viewBinding true
         dataBinding true
@@ -47,6 +53,7 @@ android {
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.firebase:firebase-messaging'
+    implementation "androidx.preference:preference-ktx:1.1.1"
 
     implementation platform('com.google.firebase:firebase-bom:29.0.3')
     implementation 'com.google.firebase:firebase-analytics-ktx'
@@ -55,6 +62,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore-ktx:24.0.0'
     implementation 'com.google.android.gms:play-services-auth:20.0.0'
     implementation 'com.google.firebase:firebase-messaging-ktx:23.0.0'
+    implementation 'androidx.preference:preference:1.1.1'
     def lottieVersion = "3.4.0"
     implementation "com.airbnb.android:lottie:$lottieVersion"
     implementation 'com.firebaseui:firebase-ui-auth:7.2.0'

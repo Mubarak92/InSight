@@ -5,47 +5,20 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/startingPage">
 
-    <fragment
-        android:id="@+id/addPhoto"
-        android:name="com.mubarak.insight.fragments.AddNewPhoto"
-        android:label="Add new photo"
-        tools:layout="@layout/fragment_add">
-        <action
-            android:id="@+id/action_add2_to_mainPage"
-            app:destination="@id/InSight" />
-        <action
-            android:id="@+id/action_add2_to_loginPage"
-            app:destination="@id/Login" />
-    </fragment>
+
+    <include app:graph="@navigation/nav_graph2"/>
+
     <fragment
         android:id="@+id/Login"
         android:name="com.mubarak.insight.fragments.LoginPage"
         android:label="Login"
         tools:layout="@layout/fragment_login_page">
         <action
-            android:id="@+id/action_loginPage_to_mainPage"
-            app:destination="@id/InSight" />
-        <action
             android:id="@+id/action_loginPage_to_startingPage"
             app:destination="@id/startingPage" />
-    </fragment>
-    <fragment
-        android:id="@+id/InSight"
-        android:name="com.mubarak.insight.fragments.MainPage"
-        android:label="InSight"
-        tools:layout="@layout/fragment_main_page">
         <action
-            android:id="@+id/action_mainPage_to_add2"
-            app:destination="@id/addPhoto" />
-        <action
-            android:id="@+id/action_mainPage_to_loginPage"
-            app:destination="@id/Login" />
-        <action
-            android:id="@+id/action_mainPage_to_profile2"
-            app:destination="@id/profile2" />
-        <action
-            android:id="@+id/main_to_overview"
-            app:destination="@id/overview2" />
+            android:id="@+id/action_Login_to_nav_graph2"
+            app:destination="@id/nav_graph2" />
     </fragment>
     <fragment
         android:id="@+id/startingPage"
@@ -62,8 +35,8 @@
             android:id="@+id/action_startingPage_to_navActivity"
             app:destination="@id/navActivity" />
         <action
-            android:id="@+id/action_startingPage_to_blankFragment2"
-            app:destination="@id/blankFragment" />
+            android:id="@+id/action_startingPage_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerPage"
@@ -74,33 +47,19 @@
             android:id="@+id/action_registerPage_to_startingPage"
             app:destination="@id/startingPage" />
     </fragment>
-    <fragment
-        android:id="@+id/profile2"
-        android:name="com.mubarak.insight.fragments.Profile"
-        android:label="Profile"
-        tools:layout="@layout/fragment_profile" />
-    <fragment
-        android:id="@+id/overview2"
-        android:name="com.mubarak.insight.fragments.Overview"
-        android:label="Overview"
-        tools:layout="@layout/fragment_overview" >
-        <argument
-            android:name="creation_time"
-            app:argType="integer" />
-    </fragment>
     <activity
         android:id="@+id/navActivity"
         android:name="com.mubarak.insight.activitys.NavActivity"
         android:label="activity_nav"
         tools:layout="@layout/activity_nav" />
+    <include app:graph="@navigation/nav_graph2" />
     <fragment
-        android:id="@+id/blankFragment"
-        android:name="com.mubarak.insight.BlankFragment"
-        android:label="fragment_blank"
-        tools:layout="@layout/fragment_blank" />
+        android:id="@+id/settingsFragment"
+        android:name="com.mubarak.insight.fragments.SettingsFragment"
+        android:label="SettingsFragment" />
     <fragment
-        android:id="@+id/camera3"
-        android:name="com.mubarak.insight.fragments.Camera"
-        android:label="fragment_camera"
-        tools:layout="@layout/fragment_camera" />
+        android:id="@+id/addNewPhoto2"
+        android:name="com.mubarak.insight.fragments.AddNewPhoto"
+        android:label="fragment_add"
+        tools:layout="@layout/fragment_add" />
 </navigation>

@@ -1,40 +1,31 @@
 package com.mubarak.insight.adapters
-
-import android.content.Context
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.navigation.findNavController
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.mubarak.insight.R
-import com.mubarak.insight.data.Images
-import com.mubarak.insight.databinding.ItemListMainPageBinding
-import com.squareup.picasso.Picasso
-
 //
-//class ProfilePageAdapter : ListAdapter<Images, ProfilePageAdapter.ProfileViewHolder>(DiffCallback) {
+//import android.text.format.DateUtils
+//import android.view.LayoutInflater
+//import android.view.ViewGroup
+//import androidx.recyclerview.widget.DiffUtil
+//import androidx.recyclerview.widget.ListAdapter
+//import androidx.recyclerview.widget.RecyclerView
+//import com.mubarak.insight.data.Images
+//import com.mubarak.insight.databinding.ItemListProfilePageBinding
+//import kotlinx.android.synthetic.main.item_list_main_page.view.*
 //
-//    class ProfileViewHolder(
 //
-//        private var binding: ItemListMainPageBinding
+//class ProfilePageAdapter : ListAdapter<Images, ProfilePageAdapter.ProfilePageViewHolder>(DiffCallback) {
+//
+//    class ProfilePageViewHolder(
+//
+//        var binding: ItemListProfilePageBinding
 //    ) : RecyclerView.ViewHolder(binding.root) {
 //
 //
 //        fun bind(PhotoItem: Images) {
 //            binding.apply {
-//                Picasso.get().load(PhotoItem.image_url).into(fireImage)
 //
-////             Glide.with(fireImage).load(PhotoItem.image_url).into(fireImage)
-//                tvUsername.text = PhotoItem.title
-//                Log.e("TAG", "bind: ${PhotoItem.image_url}")
-//                // This is important, because it forces the data binding to execute immediately,
-//                // which allows the RecyclerView to make the correct view size measurements
-////                binding.executePendingBindings()
+//                binding.imageList = PhotoItem
+//                itemView.creation_time.text =
+//                    DateUtils.getRelativeTimeSpanString(PhotoItem.creation_time)
+//
 //            }
 //        }
 //
@@ -55,19 +46,24 @@ import com.squareup.picasso.Picasso
 //    override fun onCreateViewHolder(
 //        parent: ViewGroup,
 //        viewType: Int
-//    ): ProfileViewHolder {
-//        return ProfileViewHolder(
-//            ItemListMainPageBinding.inflate(LayoutInflater.from(parent.context))
+//    ): ProfilePageAdapter.ProfilePageViewHolder {
+//        return ProfilePageAdapter.ProfilePageViewHolder(
+//            ItemListProfilePageBinding.inflate(LayoutInflater.from(parent.context))
 //        )
 //    }
 //
-//    override fun onBindViewHolder(holder: ProfileViewHolder, position: Int) {
+//    override fun onBindViewHolder(holder: ProfilePageAdapter.ProfilePageViewHolder, position: Int) {
 //        val images = getItem(position)
 //        holder.bind(images)
 //
+////
+////        holder.pointer.setOnClickListener{
+////            val action = MainPageDirections.mainToOverview(position)
+////            holder.itemView.findNavController().navigate(action)
+////        }
 //
-//        holder.pointer.setOnClickListener {
-//            holder.itemView.findNavController().navigate(R.id.action_mainPage_to_overview)
-//        }
+//
 //    }
+//
+//
 //}
