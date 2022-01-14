@@ -281,12 +281,12 @@ class AddNewPhoto : Fragment() {
 
         if (resultCode == Activity.RESULT_OK && data != null) {
 
-//            filePath = data.data!!
-//            binding?.ivImage?.setImageURI(filePath)
-//
+            filePath = data.data!!
+            binding?.ivImage?.setImageURI(filePath)
 
-            val imageBitmap = data.extras?.get("data") as Bitmap
-            imageView.setImageBitmap(imageBitmap)
+//
+//            val imageBitmap = data.extras?.get("data") as Bitmap
+//            imageView.setImageBitmap(imageBitmap)
 
         } else {
             Toast.makeText(this.requireContext(), "Image pick canceled", Toast.LENGTH_SHORT).show()

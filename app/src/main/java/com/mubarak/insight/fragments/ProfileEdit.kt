@@ -84,7 +84,7 @@ class ProfileEdit : Fragment() {
         binding?.saveChanges?.setOnClickListener {
             editProfile()
         }
-        binding?.profileImage?.setOnClickListener {
+        binding?.ivImage?.setOnClickListener {
             chooser()
         }
         binding?.delete?.setOnClickListener {
@@ -128,7 +128,8 @@ class ProfileEdit : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && data != null) {
             filePath = data.data!!
-//            binding??.setImageURI(filePath)
+
+            binding?.ivImage?.setImageURI(filePath)
         }
     }
 
@@ -153,9 +154,6 @@ class ProfileEdit : Fragment() {
 
     private fun editProfile() {
 
-//        val pd = ProgressDialog(this.requireContext())
-//        pd.setTitle("Uploading")
-//        pd.show()
         if (filePath != null) {
 
             val imageRef =

@@ -2,28 +2,20 @@ package com.mubarak.insight.fragments
 
 import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.data.model.User
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ListResult
-import com.mubarak.insight.R
-import com.mubarak.insight.activitys.NavActivity
 import com.mubarak.insight.adapters.MainPageAdapter
-import com.mubarak.insight.classes.Firestore
+import com.mubarak.insight.classes.FirestoreClass
 import com.mubarak.insight.data.Images
-import com.mubarak.insight.data.Users
 import com.mubarak.insight.databinding.FragmentMainPageBinding
 import com.mubarak.insight.viewmodel.ViewModel
 
@@ -44,9 +36,7 @@ class MainPage : Fragment() {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
         mFirestore = FirebaseFirestore.getInstance()
-        Firestore().signInUser(this)
-
-
+        FirestoreClass().signInUser(this)
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -88,18 +78,12 @@ class MainPage : Fragment() {
             .orderBy("creation_time", Query.Direction.DESCENDING)
         imageRef.addSnapshotListener { snapshot, e ->
             if (e != null || snapshot == null) {
-                Log.e(TAG, "exception when query post", e)
                 return@addSnapshotListener
             }
             val images = snapshot.toObjects(Images::class.java)
             imageUrl.addAll(images)
 
-
-//            for (image in imageList) {
-//                Log.e(TAG, "image ${image}")
-//            }
-
-            var adapter = binding?.recyclerView?.adapter as MainPageAdapter
+            val adapter = binding?.recyclerView?.adapter as MainPageAdapter
             adapter.submitList(imageUrl)
 
         }

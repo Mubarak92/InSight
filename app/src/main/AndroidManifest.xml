@@ -52,8 +52,9 @@
             android:name=".activitys.NavActivity"
             android:exported="false"
             android:label="@string/title_activity_nav"
-            android:screenOrientation="fullSensor"
-            android:theme="@style/Theme.InSight.NoActionBar" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.InSight.NoActionBar"
+            />
         <activity
             android:name=".activitys.MainActivity"
             android:exported="true"

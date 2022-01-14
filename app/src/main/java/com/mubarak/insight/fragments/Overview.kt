@@ -7,62 +7,61 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.mubarak.insight.binding.bindImage
 import com.mubarak.insight.databinding.FragmentOverviewBinding
+import com.mubarak.insight.databinding.FragmentProfileBinding
+import kotlinx.android.synthetic.main.fragment_add.view.*
+import kotlinx.android.synthetic.main.fragment_overview.*
 
 class Overview : Fragment() {
+    private val navigationArgs: OverviewArgs by navArgs()
 
-    var binding: FragmentOverviewBinding? = null
+
+    private var _binding: FragmentOverviewBinding? = null
+    private val binding get() = _binding
+
     private val viewModel: com.mubarak.insight.viewmodel.ViewModel by activityViewModels()
     var position: Int = 0
     lateinit var getImages: String
     lateinit var title: String
     private var creationTime: Long = 0
     lateinit var overview: String
-    lateinit var link: String
-    lateinit var arg: String
-    private lateinit var imageUrl: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        arguments.let {
-            Log.e("TAG", "onCreate: title ${it?.getString("creation_time").toString()}")
-            getImages = it?.getString(IMAGE).toString()
-            creationTime = it?.getLong(CREATION_TIME)!!
-            Log.e("TAG", "onCreate: CREATION_TIME ${it?.getString("creation_time").toString()}")
-
-        }
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        binding?.showImg?.bindImage(viewModel.creationTime.value)
-        arguments?.let {
-            Log.e("TAG", "onViewCreated: ${it.getString("creation_time").toString()}")
-            position = it.getLong("creation_time").toInt()
-        }
+        val getTitle = navigationArgs.title
+        val getImages = navigationArgs.creationTime
 
-        viewModel.imageInfo(position.toString())
+        binding?.textView2?.text = navigationArgs.title
+        Glide.with(this).load(getImages).into(show_img)
+
+
+        Log.e("TAG", "onViewCreated: ${getImages}")
+        Log.e("TAG", "onViewCreated: ${getTitle}")
+        binding?.titleOverview?.text = getTitle
+
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val binding = FragmentOverviewBinding.inflate(inflater)
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        _binding = FragmentOverviewBinding.inflate(inflater, container, false)
         binding?.apply {
             viewModel = this@Overview.viewModel
             lifecycleOwner = this@Overview.viewLifecycleOwner
             overView = this@Overview
         }
-        return binding.root
+        return binding!!.root
 
     }
 
@@ -75,18 +74,7 @@ class Overview : Fragment() {
 
     fun getImageTime(creationTime: Long) {
 
-        Firebase.firestore.collection("images").whereEqualTo("creation_time", creationTime)
-            .get().addOnCompleteListener(OnCompleteListener<QuerySnapshot?> { task ->
-                if (task.isSuccessful) {
-                    for (documentSnapshot in task.result.documents) {
-                        viewModel.creationTime.value =
-                            documentSnapshot.data?.get("creation_time").toString()
-                    }
-                } else {
 
-                }
-
-            })
     }
 
 }

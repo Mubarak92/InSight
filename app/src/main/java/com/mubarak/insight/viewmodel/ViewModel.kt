@@ -85,6 +85,8 @@ class ViewModel : ViewModel() {
     fun imageInfo(creation_time: String){
         val item = _images.value?.get(creation_time.toInt())
         imageUrl.value = item?.image_url
+        title.value = item?.title
+        
     }
 
     private fun getImages() {

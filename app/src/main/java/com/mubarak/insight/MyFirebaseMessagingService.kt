@@ -16,7 +16,7 @@ import com.mubarak.insight.activitys.MainActivity
 const val channelId = "notification_channel"
 
 //packeg name -> channel name
-const val channelName = "com.khulud.gathering"
+const val channelName = "com.mubarak.insight"
 
 
 class MyFirebaseMessagingService  : FirebaseMessagingService() {
@@ -59,7 +59,7 @@ class MyFirebaseMessagingService  : FirebaseMessagingService() {
     // 2.1) remoteView fun
     @SuppressLint("RemoteViewLayout")
     private fun getRemoteView(title: String, body: String): RemoteViews {
-        val remoteview = RemoteViews("com.khulud.gathering", R.layout.notification)
+        val remoteview = RemoteViews("com.mubarak.insight", R.layout.notification)
         remoteview.setTextViewText(R.id.title, title)
         remoteview.setTextViewText(R.id.body, body)
         remoteview.setImageViewResource(R.id.app_logo, R.drawable.logo)

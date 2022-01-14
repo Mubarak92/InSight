@@ -51,7 +51,7 @@ class MainPageAdapter : ListAdapter<Images, MainPageAdapter.MainPageViewHolder>(
         viewType: Int
     ): MainPageViewHolder {
         return MainPageViewHolder(
-            ItemListMainPageBinding.inflate(LayoutInflater.from(parent.context))
+            ItemListMainPageBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         )
     }
 
@@ -61,12 +61,8 @@ class MainPageAdapter : ListAdapter<Images, MainPageAdapter.MainPageViewHolder>(
 
 
         holder.pointer.setOnClickListener{
-         val action = MainPageDirections.mainToOverview2(position.toLong())
+         val action = MainPageDirections.mainToOverview2(images.image_url.toString(),images.title.toString())
             holder.itemView.findNavController().navigate(action)
         }
-
-
     }
-
-
 }

@@ -5,7 +5,6 @@
     tools:context="com.mubarak.insight.fragments.Overview">
 
 
-
     <data>
 
         <variable
@@ -24,6 +23,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,21 +40,23 @@
                 android:id="@+id/show_img"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
-                imageUrl="@{viewModel.imageUrl}"
                 android:src="#dedede" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/title"
+            <TextView
+                android:id="@+id/titleOverview"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:hint="@string/title"
-                android:text="@{viewModel.title}"
                 app:layout_constraintBottom_toTopOf="@+id/email"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.135"/>
+                app:layout_constraintVertical_bias="0.135" />
+
+            <TextView
+                android:id="@+id/test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -63,8 +65,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:background="@color/colorPrimary"
-                android:text="@{viewModel.creationTime}"
                 android:hint="creation_time"
+                android:text="@{viewModel.creationTime}"
                 android:textColor="@android:color/white" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -85,6 +87,12 @@
                 android:background="@color/teal_200"
                 android:hint="Link"
                 android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

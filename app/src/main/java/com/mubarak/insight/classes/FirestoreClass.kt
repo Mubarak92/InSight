@@ -10,7 +10,7 @@ import com.mubarak.insight.fragments.LoginPage
 import com.mubarak.insight.fragments.Profile
 import com.mubarak.insight.fragments.RegisterPage
 
-class Firestore {
+class FirestoreClass {
 
     private val mFirestore = FirebaseFirestore.getInstance()
 
@@ -31,6 +31,10 @@ class Firestore {
        var a= mFirestore.collection("Users")
             .document(getUserId())
 
+
+
+
+
         Log.e("TAG", "signInUser: a= $a", )
 
             a.get()
@@ -46,7 +50,7 @@ class Firestore {
                         }
                     }
                     is Profile -> {
-//                        fragment.updateUserDetails(loggedInUser)
+                        loggedInUser?.let { fragment.profileInfo(it) }
                     }
                     // END
                 }

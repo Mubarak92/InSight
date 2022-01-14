@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.mubarak.insight.R
-import com.mubarak.insight.classes.Firestore
+import com.mubarak.insight.classes.FirestoreClass
 import com.mubarak.insight.data.Users
 import com.mubarak.insight.databinding.FragmentRegisterPageBinding
 
@@ -101,7 +101,7 @@ class RegisterPage : Fragment() {
 
 
 
-                        Firestore().registerUserIntoFirestore( this, users)
+                        FirestoreClass().registerUserIntoFirestore( this, users)
                         findNavController().navigate(R.id.action_registerPage_to_startingPage)
 
                     } else {
