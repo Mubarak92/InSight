@@ -31,7 +31,6 @@ class MainPageAdapter : ListAdapter<Images, MainPageAdapter.MainPageViewHolder>(
 
             }
         }
-
         var pointer = binding.fireImage
     }
 

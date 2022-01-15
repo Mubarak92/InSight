@@ -19,12 +19,12 @@ package com.mubarak.insight.adapters
 //    ) : RecyclerView.ViewHolder(binding.root) {
 //
 //
-//        fun bind(PhotoItem: Images) {
+//        fun bind(PhotoItemProfile: Images) {
 //            binding.apply {
 //
-//                binding.imageList = PhotoItem
+//                binding.imageList = PhotoItemProfile
 //                itemView.creation_time.text =
-//                    DateUtils.getRelativeTimeSpanString(PhotoItem.creation_time)
+//                    DateUtils.getRelativeTimeSpanString(PhotoItemProfile.creation_time)
 //
 //            }
 //        }
@@ -46,13 +46,13 @@ package com.mubarak.insight.adapters
 //    override fun onCreateViewHolder(
 //        parent: ViewGroup,
 //        viewType: Int
-//    ): ProfilePageAdapter.ProfilePageViewHolder {
-//        return ProfilePageAdapter.ProfilePageViewHolder(
-//            ItemListProfilePageBinding.inflate(LayoutInflater.from(parent.context))
+//    ): ProfilePageViewHolder {
+//        return ProfilePageViewHolder(
+//            ItemListProfilePageBinding.inflate(LayoutInflater.from(parent.context),parent,false)
 //        )
 //    }
 //
-//    override fun onBindViewHolder(holder: ProfilePageAdapter.ProfilePageViewHolder, position: Int) {
+//    override fun onBindViewHolder(holder: ProfilePageViewHolder, position: Int) {
 //        val images = getItem(position)
 //        holder.bind(images)
 //

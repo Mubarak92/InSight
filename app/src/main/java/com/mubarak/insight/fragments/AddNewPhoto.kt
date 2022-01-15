@@ -50,7 +50,6 @@ class AddNewPhoto : Fragment() {
     var binding: FragmentAddBinding? = null
     private var imageCapture: ImageCapture? = null
     lateinit var currentPhotoPath: String
-
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
 
@@ -68,7 +67,6 @@ class AddNewPhoto : Fragment() {
                 this.requireActivity(), Camera.REQUIRED_PERMISSIONS, Camera.REQUEST_CODE_PERMISSIONS
             )
         }
-
         // Set up the listener for take photo button
         binding?.camera?.setOnClickListener { startCamera() }
 

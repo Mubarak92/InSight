@@ -73,6 +73,17 @@ class Profile : Fragment() {
 
         binding?.viewModel = viewModel
 
+
+
+
+
+
+
+
+
+
+
+
         mFirestore.collection("images")
             .document(FirebaseAuth.getInstance().currentUser?.uid as String)
             .get().addOnSuccessListener { userSnapshot ->
@@ -96,12 +107,17 @@ class Profile : Fragment() {
             for (image in imageList) {
                 Log.e(ContentValues.TAG, "image111 ${image}")
             }
+
         }
+
+
     }
 
-    fun profileInfo(user: Users) {
+    fun profileInfo(user: Users){
         Glide.with(this).load(user.profile_image).into(profile_image)
-        username.text = user.username
+
+
+username.text = user.username
     }
 
 }
