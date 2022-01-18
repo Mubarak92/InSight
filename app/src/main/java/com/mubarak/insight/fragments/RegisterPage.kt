@@ -1,11 +1,13 @@
 package com.mubarak.insight.fragments
 
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isNotEmpty
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
@@ -14,12 +16,12 @@ import com.mubarak.insight.R
 import com.mubarak.insight.classes.FirestoreClass
 import com.mubarak.insight.data.Users
 import com.mubarak.insight.databinding.FragmentRegisterPageBinding
+import kotlinx.android.synthetic.main.fragment_register_page.*
 
 
 class RegisterPage : Fragment() {
     private var binding: FragmentRegisterPageBinding? = null
 //    private val binding get() = _binding
-
 
 
     override fun onCreateView(
@@ -44,7 +46,7 @@ class RegisterPage : Fragment() {
 
     }
 
-    private fun validate(username: String, email: String, password: String): Boolean {
+    private fun validateRegister(username: String, email: String, password: String): Boolean {
         return when {
 
             TextUtils.isEmpty(username) -> {
@@ -79,29 +81,37 @@ class RegisterPage : Fragment() {
     }
 
 
-     fun registerNewUser() {
-//   pd.setTitle("Please wait")
-//        pd.show()
-//
+    fun registerNewUser() {
+        val pd = ProgressDialog(this.requireContext())
+
+        pd.setTitle("Please wait")
+        pd.show()
+
 
         val username = binding?.usernameInput?.editableText.toString()
         val email = binding?.emailInput?.editableText.toString()
         val password = binding?.passwordInput?.editableText.toString()
+        usernameReg?.error = getString(R.string.usernameError)
 
-        if(validate(username, email, password)){
+        emailReg?.error = getString(R.string.emailError)
+//        emailReg.error = null
+        passwordReg?.error = getString(R.string.passwordError)
+//        passwordReg.error = null
+        if (validateRegister(username, email, password)) {
 
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
-//                    pd.dismiss()
 
                     if (task.isSuccessful) {
+                        pd.dismiss()
+
                         val firebaseUser: FirebaseUser = task.result.user!!
 //                        val registeredEmail = firebaseUser.email!!
                         val users = Users(firebaseUser.uid, username, email)
 
 
 
-                        FirestoreClass().registerUserIntoFirestore( this, users)
+                        FirestoreClass().registerUserIntoFirestore(this, users)
                         findNavController().navigate(R.id.action_registerPage_to_startingPage)
 
                     } else {
@@ -115,7 +125,6 @@ class RegisterPage : Fragment() {
 
         }
     }
-
 
 
 }

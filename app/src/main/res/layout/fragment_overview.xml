@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:background="@color/colorPrimary"
-                android:hint="creation_time"
+                android:hint="@string/creation_time"
                 android:text="@{viewModel.creationTime}"
                 android:textColor="@android:color/white" />
 
@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@color/colorAccent"
-                android:hint="over"
+                android:hint="@string/overview"
                 android:textColor="@android:color/white" />
 
 
@@ -85,14 +85,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@color/teal_200"
-                android:hint="Link"
+                android:hint="@string/link"
                 android:textColor="@android:color/white" />
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

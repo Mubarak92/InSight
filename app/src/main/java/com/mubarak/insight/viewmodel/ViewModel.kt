@@ -82,11 +82,11 @@ class ViewModel : ViewModel() {
     }
 
 
-    fun imageInfo(creation_time: String){
+    fun imageInfo(creation_time: String) {
         val item = _images.value?.get(creation_time.toInt())
         imageUrl.value = item?.image_url
         title.value = item?.title
-        
+
     }
 
     private fun getImages() {
@@ -160,7 +160,16 @@ class EditFirebase {
 
 }
 
+fun removeUser(){
+    val user = Firebase.auth.currentUser!!
 
+    user.delete()
+        .addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Log.d("TAG", "User account deleted.")
+            }
+        }
+}
 class DeleteFirebase {
     fun delete() {
         val db = FirebaseFirestore.getInstance()

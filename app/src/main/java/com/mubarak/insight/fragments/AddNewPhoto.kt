@@ -9,9 +9,12 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.provider.MediaStore
 import android.util.Log
 import android.view.*
+import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
@@ -22,6 +25,7 @@ import androidx.fragment.app.Fragment
 import com.firebase.ui.auth.AuthUI
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -52,6 +56,14 @@ class AddNewPhoto : Fragment() {
     lateinit var currentPhotoPath: String
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
+//    private var progressBar: ProgressBar? = null
+//    private var i = 0
+//    private val handler = Handler()
+//    private var txtView: TextView? = null
+
+
+
+
 
 //    private lateinit var images:MutableList<Images>
 
@@ -93,12 +105,18 @@ class AddNewPhoto : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding?.choose?.setOnClickListener {
+        binding?.ivImage?.setOnClickListener {
             chooser()
         }
 
         binding?.upload?.setOnClickListener {
             uploadFile()
+            context?.let { it1 ->
+                MaterialAlertDialogBuilder(
+                    it1,
+                    R.style.AlertDialogTheme)
+                    .setMessage(resources.getString(R.string.sure))
+            }
         }
         binding?.camera?.setOnClickListener {
             takePhoto()

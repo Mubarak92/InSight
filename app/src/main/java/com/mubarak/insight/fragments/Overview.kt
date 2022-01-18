@@ -42,9 +42,7 @@ class Overview : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         val getTitle = navigationArgs.title
-        val getImages = navigationArgs.creationTime
-
-        binding?.textView2?.text = navigationArgs.title
+        val getImages = navigationArgs.imageUrl
         Glide.with(this).load(getImages).into(show_img)
 
 

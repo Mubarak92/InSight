@@ -5,89 +5,113 @@
     tools:context="com.mubarak.insight.fragments.Profile">
 
 
-
-    
     <data>
+
         <variable
             name="viewModel"
             type="com.mubarak.insight.viewmodel.ViewModel" />
+
         <variable
             name="imageList"
             type="com.mubarak.insight.data.Images" />
+
         <variable
             name="mainPage"
             type="com.mubarak.insight.fragments.Profile" />
     </data>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="409dp"
-        android:layout_height="203dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="4dp"
-        android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.constraintlayout.utils.widget.ImageFilterView
-                android:id="@+id/profile_image"
-                android:layout_width="130dp"
-                android:layout_height="139dp"
-                android:layout_marginEnd="3dp"
-                android:layout_marginBottom="48dp"
-                android:src="@drawable/ic_baseline_person_24"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/email" />
-
-<!--            <TextView-->
-<!--                android:id="@+id/email"-->
-<!--                android:layout_width="236dp"-->
-<!--                android:layout_height="36dp"-->
-<!--                android:layout_marginStart="3dp"-->
-<!--                android:layout_marginTop="16dp"-->
-<!--                android:text="TextView"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/profile_image"-->
-<!--                app:layout_constraintTop_toTopOf="parent" />-->
-
-            <TextView
-                android:id="@+id/username"
-                android:layout_width="236dp"
-                android:layout_height="36dp"
-                android:layout_marginStart="3dp"
-                android:layout_marginTop="16dp"
-                android:text="TextView"
-                app:layout_constraintStart_toEndOf="@+id/profile_image"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/edit"
-                android:layout_width="139dp"
-                android:layout_height="38dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="100dp"
-                android:src="@drawable/ic_baseline_edit_note_24"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.493"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_profile"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="522dp"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="409dp"
+            android:layout_height="203dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="4dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/profile_image"
+                    android:layout_width="130dp"
+                    android:layout_height="139dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="48dp"
+                    android:src="@drawable/ic_baseline_person_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/email" />
+
+                <!--            <TextView-->
+                <!--                android:id="@+id/email"-->
+                <!--                android:layout_width="236dp"-->
+                <!--                android:layout_height="36dp"-->
+                <!--                android:layout_marginStart="3dp"-->
+                <!--                android:layout_marginTop="16dp"-->
+                <!--                android:text="TextView"-->
+                <!--                app:layout_constraintStart_toEndOf="@+id/profile_image"-->
+                <!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+                <TextView
+                    android:id="@+id/username"
+                    android:layout_width="236dp"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginTop="16dp"
+                    android:text="TextView"
+                    app:layout_constraintStart_toEndOf="@+id/profile_image"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/edit"
+                    android:layout_width="139dp"
+                    android:layout_height="38dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="100dp"
+                    android:src="@drawable/ic_baseline_edit_note_24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.493"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tab1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/ic_baseline_account_circle_24"
+                android:text="Images" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tab2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/ic_baseline_favorite_24"
+                android:text="favorite" />
+
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/recyclerView_profile"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="522dp"-->
+<!--                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+
+<!--                />-->
+
+        </com.google.android.material.tabs.TabLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

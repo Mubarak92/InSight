@@ -12,11 +12,16 @@
     <string name="choose_photo">Choose Photo</string>
     <string name="login">Login</string>
     <string name="email">Email</string>
+    <string name="DELETE_ACCOUNT">DELETE</string>
+    <string name="decline">cancel</string>
+    <string name="sure">Are you sure?</string>
     <string name="password">Password</string>
     <string name="register">Register</string>
     <string name="note_register">Note: The user name can\'t be changed</string>
     <string name="username">Username</string>
-
+    <string name="usernameError">Please Enter Username</string>
+    <string name="emailError">Please Enter email</string>
+    <string name="passwordError">Please Enter Password</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label" translatable="false">First Fragment</string>
     <string name="second_fragment_label" translatable="false">Second Fragment</string>
@@ -42,11 +47,40 @@
     <string name="app_name">InSight</string>
 
     <!--shared prefrance-->
-        <string name="dark_theme_preference_value">dark_theme</string>
-        <string name="light_theme_preference_value">Light_theme</string>
-        <string name="system_theme_preference_value">defualt</string>
-        <string name="theme_preferences_key">prefrence</string>
-        <string name="dark_theme_description">dark</string>
-        <string name="light_theme_description">light</string>
-        <string name="system_theme_description">defualt</string>
+    <string name="dark_theme_preference_value">dark_theme</string>
+    <string name="light_theme_preference_value">Light_theme</string>
+    <string name="system_theme_preference_value">defualt</string>
+    <string name="theme_preferences_key">prefrence</string>
+    <string name="dark_theme_description">dark</string>
+    <string name="light_theme_description">light</string>
+    <string name="system_theme_description">defualt</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="link">Link</string>
+    <string name="overview">Overview</string>
+    <string name="creation_time">Creation Time</string>
+
+
+    <!--Alert Dialog-->
+
+    <style name="AlertDialogTheme" parent="Theme.MaterialComponents.Light.Dialog.Alert">
+        <item name="buttonBarPositiveButtonStyle">@style/Alert.Button.Positive</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Alert.Button.Neutral</item>
+        <item name="buttonBarNeutralButtonStyle">@style/Alert.Button.Neutral</item>
+    </style>
+
+    <style name="Alert.Button.Positive" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="backgroundTint">#0000FFFF</item>
+        <item name="rippleColor">@color/colorAccent</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="Alert.Button.Neutral" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="backgroundTint">#0000FFFF</item>
+        <item name="rippleColor">@color/colorAccent</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14sp</item>
+    </style>
 </resources>

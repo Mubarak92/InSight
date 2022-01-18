@@ -21,23 +21,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-
-            android:orientation="horizontal">
-
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-
-
-
-        </LinearLayout>
 
 
         <TextView
@@ -50,16 +33,6 @@
             android:text="Hello there"
             android:textColor="#1a1a1a"
             android:textSize="17sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center_horizontal"
-            android:lineSpacingExtra="0sp"
-            android:text="Mubarak"
-            android:textColor="#1a1a1a"
-            android:textSize="24sp" />
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -82,7 +55,8 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            app:endIconMode="password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passwordInputs"

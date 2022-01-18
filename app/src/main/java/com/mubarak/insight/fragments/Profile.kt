@@ -16,6 +16,7 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.mubarak.insight.R
+import com.mubarak.insight.adapters.MainPageAdapter
 import com.mubarak.insight.classes.FirestoreClass
 import com.mubarak.insight.data.Images
 import com.mubarak.insight.data.Users
@@ -37,7 +38,7 @@ class Profile : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mFirestore = FirebaseFirestore.getInstance()
-
+        FirestoreClass().signInUser(this)
 
     }
 
@@ -48,6 +49,16 @@ class Profile : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val fragmentProfileBinding = FragmentProfileBinding.inflate(inflater, container, false)
+
+//
+//
+//        binding?.recyclerViewProfile?.adapter = ProfilePageAdapter()
+
+        binding?.lifecycleOwner = viewLifecycleOwner
+
+        binding?.viewModel = viewModel
+
+
 
         binding = fragmentProfileBinding
         return fragmentProfileBinding.root
@@ -60,29 +71,21 @@ class Profile : Fragment() {
         val currentUser = mAuth.currentUser
 
 
+
+
+
+
+
         FirestoreClass().signInUser(this)
 
-
+        //=========================================================================
 
 
         binding?.username?.text = currentUser?.displayName
         binding?.edit?.setOnClickListener {
             findNavController().navigate(R.id.action_profile3_to_profileEdit)
         }
-        binding?.lifecycleOwner = viewLifecycleOwner
-
-        binding?.viewModel = viewModel
-
-
-
-
-
-
-
-
-
-
-
+        //====================================
 
         mFirestore.collection("images")
             .document(FirebaseAuth.getInstance().currentUser?.uid as String)
@@ -106,18 +109,17 @@ class Profile : Fragment() {
 
             for (image in imageList) {
                 Log.e(ContentValues.TAG, "image111 ${image}")
+//
+//                val adapter = binding?.recyclerViewProfile?.adapter as? ProfilePageAdapter
+//                adapter?.submitList(imageList)
             }
-
         }
 
 
     }
 
-    fun profileInfo(user: Users){
+    fun profileInfo(user: Users) {
         Glide.with(this).load(user.profile_image).into(profile_image)
-
-
-username.text = user.username
+        username.text = user.username
     }
-
 }

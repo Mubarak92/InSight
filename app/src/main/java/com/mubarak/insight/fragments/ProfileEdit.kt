@@ -8,6 +8,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.system.Os.accept
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -18,20 +19,23 @@ import androidx.fragment.app.activityViewModels
 import com.firebase.ui.auth.data.model.User
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ListResult
 import com.google.firebase.storage.UploadTask
+import com.mubarak.insight.R
+import com.mubarak.insight.activitys.MainActivity
+import com.mubarak.insight.activitys.NavActivity
 import com.mubarak.insight.adapters.MainPageAdapter
 import com.mubarak.insight.data.Images
 import com.mubarak.insight.databinding.FragmentMainPageBinding
 import com.mubarak.insight.databinding.FragmentProfileEditBinding
-import com.mubarak.insight.viewmodel.DeleteFirebase
-import com.mubarak.insight.viewmodel.EditFirebase
-import com.mubarak.insight.viewmodel.SaveFirebase
-import com.mubarak.insight.viewmodel.ViewModel
+import com.mubarak.insight.viewmodel.*
 import kotlinx.android.synthetic.main.fragment_add.*
 import kotlinx.android.synthetic.main.fragment_profile_edit.*
 
@@ -148,12 +152,36 @@ class ProfileEdit : Fragment() {
     }
 
     private fun delete() {
+        context?.let {
+            MaterialAlertDialogBuilder(
+                it,
+                R.style.AlertDialogTheme)
+                .setMessage(resources.getString(R.string.sure))
+                .setNegativeButton(resources.getString(R.string.decline)) { dialog, which ->
+                    // Respond to negative button press
+                }
+                .setPositiveButton(resources.getString(R.string.DELETE_ACCOUNT)) { dialog, which ->
+                    // Respond to positive button press
+                    DeleteFirebase().delete()
 
-        DeleteFirebase().delete()
+                    removeUser()
+
+                    activity?.let{
+                        val intent = Intent (it, MainActivity::class.java)
+                        it.startActivity(intent)
+                    }
+
+                }
+                .show()
+        }
+
+
     }
 
     private fun editProfile() {
-
+        val pd = ProgressDialog(this.requireContext())
+        pd.setTitle("Please Wait...")
+        pd.show()
         if (filePath != null) {
 
             val imageRef =
@@ -171,7 +199,7 @@ class ProfileEdit : Fragment() {
                 })?.addOnCompleteListener { task ->
                     if (task.isSuccessful) {
 
-//                        pd.dismiss()
+                        pd.dismiss()
                         Toast.makeText(this.requireContext(), "Profile edited", Toast.LENGTH_SHORT)
                             .show()
                         val downloadUri = task.result

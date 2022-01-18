@@ -39,7 +39,7 @@
         android:label="fragment_overview"
         tools:layout="@layout/fragment_overview" >
         <argument
-            android:name="creation_time"
+            android:name="image_url"
             app:argType="string" />
         <argument
             android:name="title"
