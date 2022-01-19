@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isNotEmpty
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
@@ -20,8 +21,8 @@ import kotlinx.android.synthetic.main.fragment_register_page.*
 
 
 class RegisterPage : Fragment() {
-    private var binding: FragmentRegisterPageBinding? = null
-//    private val binding get() = _binding
+    private var _binding: FragmentRegisterPageBinding? = null
+    private val binding get() = _binding
 
 
     override fun onCreateView(
@@ -31,8 +32,11 @@ class RegisterPage : Fragment() {
     ): View? {
         val fragmentRegisterPageBinding =
             FragmentRegisterPageBinding.inflate(inflater, container, false)
-        binding = fragmentRegisterPageBinding
+        _binding = fragmentRegisterPageBinding
         return fragmentRegisterPageBinding.root
+
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,7 +48,17 @@ class RegisterPage : Fragment() {
 
 //        binding?.progressbar?.currentDrawable
 
+
+
+
+
     }
+
+
+
+
+
+
 
     private fun validateRegister(username: String, email: String, password: String): Boolean {
         return when {
@@ -82,10 +96,6 @@ class RegisterPage : Fragment() {
 
 
     fun registerNewUser() {
-        val pd = ProgressDialog(this.requireContext())
-
-        pd.setTitle("Please wait")
-        pd.show()
 
 
         val username = binding?.usernameInput?.editableText.toString()
@@ -94,11 +104,14 @@ class RegisterPage : Fragment() {
         usernameReg?.error = getString(R.string.usernameError)
 
         emailReg?.error = getString(R.string.emailError)
-//        emailReg.error = null
+        emailReg.error = null
         passwordReg?.error = getString(R.string.passwordError)
-//        passwordReg.error = null
+        passwordReg.error = null
         if (validateRegister(username, email, password)) {
+            val pd = ProgressDialog(this.requireContext())
 
+            pd.setTitle("Please wait")
+            pd.show()
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
 
@@ -125,6 +138,5 @@ class RegisterPage : Fragment() {
 
         }
     }
-
 
 }

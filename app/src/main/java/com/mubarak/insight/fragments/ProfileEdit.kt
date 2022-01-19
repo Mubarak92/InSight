@@ -163,7 +163,6 @@ class ProfileEdit : Fragment() {
                 .setPositiveButton(resources.getString(R.string.DELETE_ACCOUNT)) { dialog, which ->
                     // Respond to positive button press
                     DeleteFirebase().delete()
-
                     removeUser()
 
                     activity?.let{

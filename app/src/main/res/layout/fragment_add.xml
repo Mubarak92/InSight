@@ -26,6 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="400dp"
             android:src="#dedede"
+            android:background="@drawable/corners"
             app:cardCornerRadius="14dp"
             app:cardElevation="0dp"
             />

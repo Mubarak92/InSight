@@ -60,7 +60,7 @@ class MainPageAdapter : ListAdapter<Images, MainPageAdapter.MainPageViewHolder>(
 
 
         holder.pointer.setOnClickListener{
-         val action = MainPageDirections.mainToOverview2(images.image_url.toString(),images.title.toString())
+         val action = MainPageDirections.mainToOverview2(images.image_url.toString(),images.title.toString(),images.overview, link1 = "google.com", link2 = "yahoo.com",images.creation_time)
             holder.itemView.findNavController().navigate(action)
         }
     }

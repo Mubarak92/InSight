@@ -1,12 +1,12 @@
-package com.example.testf.prefrence
+package com.mubarak.insight.prefrance
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.fragment.app.Fragment
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.mubarak.insight.R
+import com.mubarak.insight.prefrance.ProvideTheme
 
 class UserPrefrencFragment: PreferenceFragmentCompat() {
 

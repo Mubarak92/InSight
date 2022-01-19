@@ -10,10 +10,9 @@
     <LinearLayout
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="30dp"
 
-        android:layout_marginEnd="40dp"
         android:layout_marginBottom="256dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,6 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
                 android:src="#dedede"
+                android:background="@drawable/corners"
                 app:cardCornerRadius="14dp"
                 app:cardElevation="0dp"
                 />

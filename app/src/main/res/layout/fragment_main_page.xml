@@ -2,6 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="#9C8ABC"
     tools:context="com.mubarak.insight.fragments.MainPage">
 
     <data>
@@ -9,6 +10,7 @@
         <variable
             name="viewModel"
             type="com.mubarak.insight.viewmodel.ViewModel" />
+
         <variable
             name="imageList"
             type="com.mubarak.insight.data.Images" />
@@ -28,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:listData="@{viewModel.images}"/>
+            app:listData="@{viewModel.images}" />
 
         <androidx.constraintlayout.utils.widget.ImageFilterView
             android:id="@+id/status_image"
@@ -39,8 +41,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.498"
-            />
+            app:layout_constraintVertical_bias="0.498" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

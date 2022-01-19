@@ -60,6 +60,6 @@
         tools:layout="@layout/fragment_add" />
     <fragment
         android:id="@+id/userPrefrencFragment"
-        android:name="com.example.testf.prefrence.UserPrefrencFragment"
+        android:name="com.mubarak.insight.prefrance.UserPrefrencFragment"
         android:label="UserPrefrencFragment" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.example.testf.prefrence
+package com.mubarak.insight.prefrance
 
 import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate

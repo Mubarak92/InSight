@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#eeecf1"
+    android:background="#A8955D"
 >
 <data>
     <variable
@@ -25,10 +25,20 @@
             android:orientation="vertical">
 
             <!-- Media -->
+            <TextView
+                android:id="@+id/tv_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{imageList.title}"
+                android:layout_marginLeft="18dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                />
             <ImageView
                 android:id="@+id/fire_image"
                 android:layout_width="match_parent"
-                android:layout_height="194dp"
+                android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
                 imageUrl="@{imageList.image_url}"
                 />
@@ -40,13 +50,13 @@
                 android:padding="16dp">
 
                 <!-- Title, secondary and supporting text -->
-                <TextView
-                    android:id="@+id/tv_username"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{viewModel.title}"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    />
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_username"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@{viewModel.title}"-->
+<!--                    android:textAppearance="?attr/textAppearanceHeadline6"-->
+<!--                    />-->
                 <TextView
                     android:id="@+id/creation_time"
                     android:layout_width="wrap_content"

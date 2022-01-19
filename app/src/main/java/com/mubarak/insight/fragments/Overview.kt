@@ -1,5 +1,6 @@
 package com.mubarak.insight.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -43,16 +44,22 @@ class Overview : Fragment() {
 
         val getTitle = navigationArgs.title
         val getImages = navigationArgs.imageUrl
+        val getOverview = navigationArgs.overview
         Glide.with(this).load(getImages).into(show_img)
-
-
         Log.e("TAG", "onViewCreated: ${getImages}")
         Log.e("TAG", "onViewCreated: ${getTitle}")
         binding?.titleOverview?.text = getTitle
-
+        binding?.overview?.text = getOverview
+        binding?.share?.setOnClickListener {
+            onShare()
+        }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         _binding = FragmentOverviewBinding.inflate(inflater, container, false)
         binding?.apply {
             viewModel = this@Overview.viewModel
@@ -63,6 +70,17 @@ class Overview : Fragment() {
 
     }
 
+    private fun onShare() {
+        val getImages = navigationArgs.imageUrl
+
+        val intent = Intent(Intent.ACTION_SEND)
+            .putExtra(Intent.EXTRA_TEXT, " $getImages")
+            .setType("text/plain")
+        if (activity?.packageManager?.resolveActivity(intent, 0) != null) {
+            startActivity(intent)
+
+        }
+    }
 
     companion object {
 

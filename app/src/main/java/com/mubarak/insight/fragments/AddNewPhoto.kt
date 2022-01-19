@@ -11,6 +11,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.provider.MediaStore
+import android.text.TextUtils
 import android.util.Log
 import android.view.*
 import android.widget.ProgressBar
@@ -104,7 +105,69 @@ class AddNewPhoto : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+         fun validateAdd(title: String): Boolean {
+            return when {
 
+                TextUtils.isEmpty(title) -> {
+                    Toast.makeText(this.requireContext(), "Please Enter Title", Toast.LENGTH_SHORT)
+                        .show()
+                    false
+                }
+                else -> true
+            }
+
+        }
+
+         fun uploadFile() {
+            if (validateAdd(title.toString())){
+                val pd = ProgressDialog(this.requireContext())
+                pd.setTitle("Uploading")
+                pd.show()
+
+                if (filePath != null) {
+
+                    val imageRef =
+                        FirebaseStorage.getInstance().reference.child("images/${System.currentTimeMillis()}-Photo.jpg\"")
+                    val uploadTask = imageRef.putFile(filePath!!)
+
+                    val urlTask =
+                        uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+                            if (!task.isSuccessful) {
+                                task.exception?.let {
+                                    throw it
+                                }
+                            }
+                            return@Continuation imageRef.downloadUrl
+                        })?.addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+
+                                pd.dismiss()
+                                Toast.makeText(
+                                    this.requireContext(),
+                                    "Photo uploaded successfully",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                val downloadUri = task.result
+                                save(
+                                    downloadUri.toString(),
+                                    System.currentTimeMillis(),
+                                    title_image_input.text.toString(),
+                                    overview_input.text.toString(),
+//                            link1_input.text.toString().toUri(),
+//                            link2_input.text.toString().toUri()
+
+                                )
+
+                                Log.e("TAG", "massage:$filePath")
+                            } else {
+                                // Handle failures
+                            }
+                        }?.addOnFailureListener {
+
+
+                        }
+                }
+            }}
         binding?.ivImage?.setOnClickListener {
             chooser()
         }
@@ -320,53 +383,4 @@ class AddNewPhoto : Fragment() {
     }
 
 
-    private fun uploadFile() {
-
-        val pd = ProgressDialog(this.requireContext())
-        pd.setTitle("Uploading")
-        pd.show()
-        if (filePath != null) {
-
-            val imageRef =
-                FirebaseStorage.getInstance().reference.child("images/${System.currentTimeMillis()}-Photo.jpg\"")
-            val uploadTask = imageRef.putFile(filePath!!)
-
-            val urlTask =
-                uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
-                    if (!task.isSuccessful) {
-                        task.exception?.let {
-                            throw it
-                        }
-                    }
-                    return@Continuation imageRef.downloadUrl
-                })?.addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-
-                        pd.dismiss()
-                        Toast.makeText(
-                            this.requireContext(),
-                            "Photo uploaded successfully",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        val downloadUri = task.result
-                        save(
-                            downloadUri.toString(),
-                            System.currentTimeMillis(),
-                            title_image_input.text.toString(),
-                            overview_input.text.toString(),
-//                            link1_input.text.toString().toUri(),
-//                            link2_input.text.toString().toUri()
-
-                        )
-
-                        Log.e("TAG", "massage:$filePath")
-                    } else {
-                        // Handle failures
-                    }
-                }?.addOnFailureListener {
-
-                }
-        }
-
-    }
 }

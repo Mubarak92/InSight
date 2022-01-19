@@ -9,14 +9,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.firebase.ui.auth.data.model.User
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.mubarak.insight.R
-import com.mubarak.insight.adapters.MainPageAdapter
+import com.mubarak.insight.adapters.ViewPagerAdapter
 import com.mubarak.insight.classes.FirestoreClass
 import com.mubarak.insight.data.Images
 import com.mubarak.insight.data.Users
@@ -49,7 +51,6 @@ class Profile : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val fragmentProfileBinding = FragmentProfileBinding.inflate(inflater, container, false)
-
 //
 //
 //        binding?.recyclerViewProfile?.adapter = ProfilePageAdapter()
@@ -70,6 +71,24 @@ class Profile : Fragment() {
         mAuth = FirebaseAuth.getInstance()
         val currentUser = mAuth.currentUser
 
+        val tabLayout = binding?.tabLayout?.findViewById<TabLayout>(R.id.tab_layout)
+        val viewPager2 = binding?.viewPager?.findViewById<ViewPager2>(R.id.view_pager)
+        val adapter = ViewPagerAdapter(parentFragmentManager, lifecycle)
+
+
+        viewPager2?.adapter = adapter
+
+        TabLayoutMediator(tabLayout!!, viewPager2!!) { tab, position ->
+            when (position) {
+                0 -> {
+                    tab.text = "Images"
+                }
+                1 -> {
+                    tab.text = "Favorite"
+                }
+            }
+
+        }.attach()
 
 
 

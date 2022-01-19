@@ -16,6 +16,7 @@
         <entry key="..\:/InSight/app/src/main/res/drawable/ic_baseline_image_24.xml" value="0.17962962962962964" />
         <entry key="..\:/InSight/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1" />
         <entry key="..\:/InSight/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.1625" />
+        <entry key="..\:/InSight/app/src/main/res/drawable/ic_baseline_share_24.xml" value="0.1962962962962963" />
         <entry key="..\:/InSight/app/src/main/res/drawable/ic_baseline_shuffle_24.xml" value="0.3117948717948718" />
         <entry key="..\:/InSight/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3117948717948718" />
         <entry key="..\:/InSight/app/src/main/res/drawable/rounded_corner.xml" value="0.10185185185185185" />
@@ -31,16 +32,16 @@
         <entry key="..\:/InSight/app/src/main/res/layout/fragment_add.xml" value="0.22" />
         <entry key="..\:/InSight/app/src/main/res/layout/fragment_blank.xml" value="0.14564336372847012" />
         <entry key="..\:/InSight/app/src/main/res/layout/fragment_camera.xml" value="0.1" />
-        <entry key="..\:/InSight/app/src/main/res/layout/fragment_login_page.xml" value="0.14666666666666667" />
+        <entry key="..\:/InSight/app/src/main/res/layout/fragment_login_page.xml" value="0.1" />
         <entry key="..\:/InSight/app/src/main/res/layout/fragment_main_page.xml" value="0.1" />
         <entry key="..\:/InSight/app/src/main/res/layout/fragment_overview.xml" value="0.16666666666666666" />
-        <entry key="..\:/InSight/app/src/main/res/layout/fragment_profile.xml" value="0.13333333333333333" />
+        <entry key="..\:/InSight/app/src/main/res/layout/fragment_profile.xml" value="0.1" />
         <entry key="..\:/InSight/app/src/main/res/layout/fragment_profile_edit.xml" value="0.1461499493414387" />
         <entry key="..\:/InSight/app/src/main/res/layout/fragment_profile_favorite.xml" value="0.16757246376811594" />
         <entry key="..\:/InSight/app/src/main/res/layout/fragment_profile_images.xml" value="0.16757246376811594" />
-        <entry key="..\:/InSight/app/src/main/res/layout/fragment_register_page.xml" value="0.3333333333333333" />
+        <entry key="..\:/InSight/app/src/main/res/layout/fragment_register_page.xml" value="0.22" />
         <entry key="..\:/InSight/app/src/main/res/layout/fragment_settings.xml" value="0.1" />
-        <entry key="..\:/InSight/app/src/main/res/layout/fragment_start_page.xml" value="0.29270833333333335" />
+        <entry key="..\:/InSight/app/src/main/res/layout/fragment_start_page.xml" value="0.22" />
         <entry key="..\:/InSight/app/src/main/res/layout/item_list.xml" value="0.1" />
         <entry key="..\:/InSight/app/src/main/res/layout/item_list_main_page.xml" value="0.22" />
         <entry key="..\:/InSight/app/src/main/res/layout/item_list_profile_page.xml" value="0.1" />

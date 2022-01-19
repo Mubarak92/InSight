@@ -44,6 +44,18 @@
         <argument
             android:name="title"
             app:argType="string" />
+        <argument
+            android:name="overview"
+            app:argType="string" />
+        <argument
+            android:name="link1"
+            app:argType="string" />
+        <argument
+            android:name="link2"
+            app:argType="string" />
+        <argument
+            android:name="creation_time"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/profileEdit"
