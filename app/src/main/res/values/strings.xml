@@ -14,6 +14,7 @@
     <string name="email">Email</string>
     <string name="DELETE_ACCOUNT">DELETE</string>
     <string name="decline">cancel</string>
+    <string name="signout">SignOut</string>
     <string name="sure">Are you sure?</string>
     <string name="password">Password</string>
     <string name="register">Register</string>
@@ -44,7 +45,6 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <string name="app_name">InSight</string>
 
     <!--shared prefrance-->
     <string name="dark_theme_preference_value">dark_theme</string>
@@ -56,9 +56,12 @@
     <string name="system_theme_description">defualt</string>
     <string name="delete_account">Delete Account</string>
     <string name="save_changes">Save Changes</string>
-    <string name="link">Link</string>
     <string name="overview">Overview</string>
     <string name="creation_time">Creation Time</string>
+    <string name="app_name">InSight</string>
+    <string name="link">Link</string>
+    <string name="camera">camera</string>
+    <string name="hello_there">Hello there</string>
 
 
     <!--Alert Dialog-->

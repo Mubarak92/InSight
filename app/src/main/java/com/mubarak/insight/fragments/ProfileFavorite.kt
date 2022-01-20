@@ -16,6 +16,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ListResult
+import com.mubarak.insight.adapters.MainPageAdapter
 import com.mubarak.insight.adapters.ProfilePageAdapter
 import com.mubarak.insight.classes.FirestoreClass
 import com.mubarak.insight.data.Images
@@ -51,7 +52,7 @@ class ProfileFavorite : Fragment() {
         val fragmentProfileFavoriteBinding = FragmentProfileFavoriteBinding.inflate(inflater, container, false)
         binding = fragmentProfileFavoriteBinding
 
-        binding?.profileFavoriteRecyclerView?.adapter = ProfilePageAdapter()
+        binding?.profileFavoriteRecyclerView?.adapter = MainPageAdapter()
 
         binding?.lifecycleOwner = viewLifecycleOwner
 
@@ -85,7 +86,7 @@ class ProfileFavorite : Fragment() {
             val images = snapshot.toObjects(Images::class.java)
             imageUrl.addAll(images)
 
-            val adapter = binding?.profileFavoriteRecyclerView?.adapter as ProfilePageAdapter
+            val adapter = binding?.profileFavoriteRecyclerView?.adapter as MainPageAdapter
             adapter.submitList(imageUrl)
 
         }

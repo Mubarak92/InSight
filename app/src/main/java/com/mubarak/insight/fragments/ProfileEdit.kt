@@ -16,6 +16,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.navArgs
 import com.firebase.ui.auth.data.model.User
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
@@ -37,11 +38,13 @@ import com.mubarak.insight.databinding.FragmentMainPageBinding
 import com.mubarak.insight.databinding.FragmentProfileEditBinding
 import com.mubarak.insight.viewmodel.*
 import kotlinx.android.synthetic.main.fragment_add.*
+import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile_edit.*
 
 private const val PICK_PHOTO_CODE = 123
 
 class ProfileEdit : Fragment() {
+    private val navigationArgs: ProfileEditArgs by navArgs()
 
     var binding: FragmentProfileEditBinding? = null
 
@@ -84,7 +87,8 @@ class ProfileEdit : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+//        val getUsername = navigationArgs.username
+//        binding?.usernameInput?.setText(getUsername)
         binding?.saveChanges?.setOnClickListener {
             editProfile()
         }
@@ -155,7 +159,8 @@ class ProfileEdit : Fragment() {
         context?.let {
             MaterialAlertDialogBuilder(
                 it,
-                R.style.AlertDialogTheme)
+                R.style.AlertDialogTheme
+            )
                 .setMessage(resources.getString(R.string.sure))
                 .setNegativeButton(resources.getString(R.string.decline)) { dialog, which ->
                     // Respond to negative button press
@@ -165,8 +170,8 @@ class ProfileEdit : Fragment() {
                     DeleteFirebase().delete()
                     removeUser()
 
-                    activity?.let{
-                        val intent = Intent (it, MainActivity::class.java)
+                    activity?.let {
+                        val intent = Intent(it, MainActivity::class.java)
                         it.startActivity(intent)
                     }
 

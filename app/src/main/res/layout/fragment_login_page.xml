@@ -30,7 +30,7 @@
             android:layout_marginTop="8dp"
             android:gravity="center_horizontal"
             android:lineSpacingExtra="0sp"
-            android:text="Hello there"
+            android:text="@string/hello_there"
             android:textColor="#1a1a1a"
             android:textSize="16sp" />
 
@@ -44,7 +44,7 @@
                 android:id="@+id/emailInputs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
+                android:hint="@string/email"
                 android:inputType="text" />
 
 
@@ -62,7 +62,7 @@
                 android:id="@+id/passwordInputs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:inputType="textPassword" />
 
 

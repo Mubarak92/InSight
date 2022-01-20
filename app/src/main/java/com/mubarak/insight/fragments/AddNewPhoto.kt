@@ -17,26 +17,37 @@ import android.view.*
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.firebase.ui.auth.AuthUI
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import com.mubarak.insight.R
+import com.mubarak.insight.activitys.NavActivity
 import com.mubarak.insight.databinding.FragmentAddBinding
 import com.mubarak.insight.viewmodel.SaveFirebase
+import com.mubarak.insight.viewmodel.ViewModel
+import com.mubarak.insight.viewmodel.saveImages
 import kotlinx.android.synthetic.main.fragment_add.*
 import kotlinx.android.synthetic.main.fragment_camera.*
+import kotlinx.android.synthetic.main.fragment_camera.view.*
 import kotlinx.android.synthetic.main.fragment_overview.*
+import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_start_page.*
 import java.io.File
 import java.nio.ByteBuffer
@@ -50,6 +61,8 @@ val REQUEST_IMAGE_CAPTURE = 1
 
 class AddNewPhoto : Fragment() {
     private var filePath: Uri? = null
+    private val viewModel: ViewModel by viewModels()
+
     private val mFirestore = FirebaseFirestore.getInstance()
     private var storageReference: StorageReference? = null
     var binding: FragmentAddBinding? = null
@@ -57,13 +70,12 @@ class AddNewPhoto : Fragment() {
     lateinit var currentPhotoPath: String
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
+    private lateinit var mAuth: FirebaseAuth
+
 //    private var progressBar: ProgressBar? = null
 //    private var i = 0
 //    private val handler = Handler()
 //    private var txtView: TextView? = null
-
-
-
 
 
 //    private lateinit var images:MutableList<Images>
@@ -105,69 +117,10 @@ class AddNewPhoto : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-         fun validateAdd(title: String): Boolean {
-            return when {
-
-                TextUtils.isEmpty(title) -> {
-                    Toast.makeText(this.requireContext(), "Please Enter Title", Toast.LENGTH_SHORT)
-                        .show()
-                    false
-                }
-                else -> true
-            }
-
-        }
-
-         fun uploadFile() {
-            if (validateAdd(title.toString())){
-                val pd = ProgressDialog(this.requireContext())
-                pd.setTitle("Uploading")
-                pd.show()
-
-                if (filePath != null) {
-
-                    val imageRef =
-                        FirebaseStorage.getInstance().reference.child("images/${System.currentTimeMillis()}-Photo.jpg\"")
-                    val uploadTask = imageRef.putFile(filePath!!)
-
-                    val urlTask =
-                        uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
-                            if (!task.isSuccessful) {
-                                task.exception?.let {
-                                    throw it
-                                }
-                            }
-                            return@Continuation imageRef.downloadUrl
-                        })?.addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-
-                                pd.dismiss()
-                                Toast.makeText(
-                                    this.requireContext(),
-                                    "Photo uploaded successfully",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                val downloadUri = task.result
-                                save(
-                                    downloadUri.toString(),
-                                    System.currentTimeMillis(),
-                                    title_image_input.text.toString(),
-                                    overview_input.text.toString(),
-//                            link1_input.text.toString().toUri(),
-//                            link2_input.text.toString().toUri()
-
-                                )
-
-                                Log.e("TAG", "massage:$filePath")
-                            } else {
-                                // Handle failures
-                            }
-                        }?.addOnFailureListener {
 
 
-                        }
-                }
-            }}
+        viewModel.username.value
+        Log.e("TAG_view", "onViewCreated: ${viewModel.username.value} ", )
         binding?.ivImage?.setOnClickListener {
             chooser()
         }
@@ -177,12 +130,15 @@ class AddNewPhoto : Fragment() {
             context?.let { it1 ->
                 MaterialAlertDialogBuilder(
                     it1,
-                    R.style.AlertDialogTheme)
+                    R.style.AlertDialogTheme
+                )
                     .setMessage(resources.getString(R.string.sure))
             }
         }
         binding?.camera?.setOnClickListener {
             takePhoto()
+//            openCamera()
+
         }
 
     }
@@ -251,7 +207,7 @@ class AddNewPhoto : Fragment() {
             val imageAnalyzer = ImageAnalysis.Builder()
                 .build()
                 .also {
-                    it.setAnalyzer(cameraExecutor, Camera.LuminosityAnalyzer { luma ->
+                    it.setAnalyzer(cameraExecutor, LuminosityAnalyzer { luma ->
                         Log.d(TAG, "Average luminosity: $luma")
                     })
                 }
@@ -349,26 +305,126 @@ class AddNewPhoto : Fragment() {
         val i = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         i.type = "image/*"
         i.action = Intent.ACTION_GET_CONTENT
-        if (i != null) {
-            startActivityForResult(i, PICK_PHOTO_CODE)
-        }
+        startActivityForResult(i, PICK_PHOTO_CODE)
     }
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode == Activity.RESULT_OK && data != null) {
+        if (resultCode == AppCompatActivity.RESULT_OK) {
 
-            filePath = data.data!!
+            filePath = data!!.data!!
             binding?.ivImage?.setImageURI(filePath)
 
-//
-//            val imageBitmap = data.extras?.get("data") as Bitmap
-//            imageView.setImageBitmap(imageBitmap)
+//            val imageBitmap = data!!.extras!!.get("data") as Bitmap
+//            ivImage.setImageBitmap(imageBitmap)
+        }
+    }
 
-        } else {
-            Toast.makeText(this.requireContext(), "Image pick canceled", Toast.LENGTH_SHORT).show()
+//    private var resultLauncher =
+//        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+//            if (result.resultCode == Activity.RESULT_OK && result.data != null) {
+//                if (result.data!!.data != null) {
+//                    filePath = result.data!!.data!!
+//                    binding?.ivImage?.setImageURI(filePath)
+//
+//                } else {
+//
+//                    val imageBitmap = result.data!!.extras?.get("data") as Bitmap
+//                    ivImage.setImageBitmap(imageBitmap)
+//                }
+//
+//                //            val imageBitmap = data.extras?.get(filePath.toString()) as Bitmap
+////            imageView.setImageBitmap(imageBitmap)
+//
+//            }
+//        }
+//
+//    fun openCamera() {
+//        val intent = Intent(this.requireContext(), takePhoto()::class.java)
+//        resultLauncher.launch(intent)
+//    }
+
+    private fun validateAdd(title: String): Boolean {
+        return when {
+
+            TextUtils.isEmpty(title) -> {
+                Toast.makeText(this.requireContext(), "Please Enter Title", Toast.LENGTH_SHORT)
+                    .show()
+                false
+            }
+            else -> true
+        }
+
+    }
+
+    private fun uploadFile() {
+        mAuth = FirebaseAuth.getInstance()
+        val currentUser = mAuth.currentUser
+
+        if (validateAdd(title.toString())) {
+            val pd = ProgressDialog(this.requireContext())
+            pd.setTitle("Uploading")
+            pd.show()
+
+            if (filePath != null) {
+
+                val imageRef =
+                    FirebaseStorage.getInstance().reference.child("images/${System.currentTimeMillis()}-Photo.jpg\"")
+                val uploadTask = imageRef.putFile(filePath!!)
+
+                val urlTask =
+                    uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+                        if (!task.isSuccessful) {
+                            task.exception?.let {
+                                throw it
+                            }
+                        }
+                        return@Continuation imageRef.downloadUrl
+                    })?.addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+
+                            pd.dismiss()
+                            Toast.makeText(
+                                this.requireContext(),
+                                "Photo uploaded successfully",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            val downloadUri = task.result
+                            save(
+                                downloadUri.toString(),
+                                System.currentTimeMillis(),
+                                title_image_input.text.toString(),
+                                overview_input.text.toString(),
+                                viewModel.username.value.toString(),
+                                currentUser?.uid.toString()
+//                            link1_input.text.toString().toUri(),
+//                            link2_input.text.toString().toUri()
+
+                            )
+                            saveimage(
+                                downloadUri.toString(),
+                                System.currentTimeMillis(),
+                                title_image_input.text.toString(),
+                                overview_input.text.toString(),
+                                viewModel.username.value.toString(),
+                                currentUser?.uid.toString()
+//                            link1_input.text.toString().toUri(),
+//                            link2_input.text.toString().toUri()
+
+                            )
+
+
+                            Log.e("TAG", "massage:$filePath")
+                        } else {
+                            // Handle failures
+                        }
+                    }?.addOnFailureListener {
+
+
+                    }
+            }
         }
     }
 
@@ -376,11 +432,24 @@ class AddNewPhoto : Fragment() {
         uri: String,
         systemTime: Long = System.currentTimeMillis(),
         title: String,
-        overview: String
+        overview: String,
+        username: String,
+        uid:String
     ) {
 
-        SaveFirebase().save(uri, systemTime, title, overview)
+        SaveFirebase().save(uri, systemTime, title, overview,username, uid)
     }
 
+    private fun saveimage(
+        uri: String,
+        systemTime: Long = System.currentTimeMillis(),
+        title: String,
+        overview: String,
+        username: String,
+        uid: String
+    ) {
+       saveImages(uri, systemTime, title, overview,username, uid)
+
+    }
 
 }

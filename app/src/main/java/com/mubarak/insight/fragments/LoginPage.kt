@@ -165,7 +165,7 @@ class LoginPage : Fragment() {
                         } else {
                             Toast.makeText(
                                 this.requireContext(),
-                                "Email or password is Empty",
+                                "Error",
                                 Toast.LENGTH_SHORT
                             ).show()
 

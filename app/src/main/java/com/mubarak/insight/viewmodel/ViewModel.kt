@@ -3,9 +3,13 @@ package com.mubarak.insight.viewmodel
 import android.util.Log
 import androidx.lifecycle.*
 import androidx.lifecycle.ViewModel
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.SetOptions
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.mubarak.insight.data.Images
 import com.mubarak.insight.data.Users
@@ -72,6 +76,24 @@ class ViewModel : ViewModel() {
         return currentUserID
     }
 
+    fun getName(){
+        val id = Firebase.auth.currentUser!!.uid
+
+        Firebase.firestore.collection("Users").whereEqualTo("id",id)
+            .get()
+            .addOnCompleteListener(OnCompleteListener<QuerySnapshot?> { task ->
+                if (task.isSuccessful) {
+                    for (documentSnapshot in task.result.documents) {
+
+                        _username.value = documentSnapshot.data?.get("username").toString()
+
+                    }
+                }
+            })
+    }
+
+
+
 
     operator fun setValue(overview: Overview, property: KProperty<*>, viewModel: ViewModel) {
 
@@ -79,6 +101,7 @@ class ViewModel : ViewModel() {
 
     init {
         getImages()
+        getName().toString()
     }
 
 
@@ -91,16 +114,18 @@ class ViewModel : ViewModel() {
 
     private fun getImages() {
         users.value = listOf()
-
+        username.value
     }
 }
 
-class SaveFirebase {
-    fun save(
+
+    fun saveImages(
         uri: String,
         systemTime: Long = System.currentTimeMillis(),
         title: String,
         overview: String,
+        username: String,
+        uid:String
     ) {
         val db = FirebaseFirestore.getInstance()
         Firebase.auth
@@ -112,6 +137,47 @@ class SaveFirebase {
         data["creation_time"] = systemTime
         data["title"] = title
         data["overview"] = overview
+        data["username"] = username
+        data["uid"] = uid
+
+
+
+        db.collection("Users").document(FirebaseAuth.getInstance().currentUser!!.uid).collection("Images")
+            .add(data)
+            .addOnSuccessListener {
+                // Toast.makeText(this, "Working", Toast.LENGTH_SHORT).show()
+                Log.e("TAG", "save: true")
+            }
+            .addOnFailureListener { e ->
+                Log.e("TAG", "save: error $e")
+
+                //                Toast.makeText(this, "Fail $e", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+
+
+class SaveFirebase {
+    fun save(
+        uri: String,
+        systemTime: Long = System.currentTimeMillis(),
+        title: String,
+        overview: String,
+        username: String,
+        uid:String
+    ) {
+        val db = FirebaseFirestore.getInstance()
+        Firebase.auth
+        Log.e("TAG", "save: start")
+
+
+        val data: MutableMap<String, Any> = HashMap()
+        data["image_url"] = uri
+        data["creation_time"] = systemTime
+        data["title"] = title
+        data["overview"] = overview
+        data["username"] = username
+        data["uid"] = uid
 
 
 
@@ -144,8 +210,10 @@ class EditFirebase {
         data["username"] = username
 
 
+
         db.collection("Users").document(FirebaseAuth.getInstance().currentUser!!.uid)
-            .update(data)
+            .set(data, SetOptions.merge())
+//            .setOption.merge
             .addOnCompleteListener {
                 // Toast.makeText(this, "Working", Toast.LENGTH_SHORT).show()
                 Log.e("TAG", "save: true")

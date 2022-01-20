@@ -25,11 +25,10 @@
             android:id="@+id/ivImage"
             android:layout_width="match_parent"
             android:layout_height="400dp"
-            android:src="#dedede"
             android:background="@drawable/corners"
+            android:src="#dedede"
             app:cardCornerRadius="14dp"
-            app:cardElevation="0dp"
-            />
+            app:cardElevation="0dp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/title"
@@ -57,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
-            android:hint="Overview"
+            android:hint="@string/overview"
 
             app:layout_constraintBottom_toTopOf="@+id/email"
             app:layout_constraintEnd_toEndOf="parent"
@@ -69,13 +68,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp" />
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/link1"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
-            android:hint="Link "
+            android:hint="@string/link"
 
             app:layout_constraintBottom_toTopOf="@+id/email"
             app:layout_constraintEnd_toEndOf="parent"
@@ -84,17 +84,18 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/link1_input"
-                android:inputType="textUri"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:inputType="textUri" />
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/link2"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
-            android:hint="Link"
+            android:hint="@string/link"
 
             app:layout_constraintBottom_toTopOf="@+id/email"
             app:layout_constraintEnd_toEndOf="parent"
@@ -103,18 +104,21 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/link2_input"
-                android:inputType="textUri"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:inputType="textUri" />
         </com.google.android.material.textfield.TextInputLayout>
+
         <Button
             android:id="@+id/upload"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="@color/colorPrimary"
-            android:text="upload"
-            android:textColor="@android:color/white" />
+            android:background="@drawable/background_color"
+            android:text="@string/upload"
+            app:iconGravity="textStart"
+            android:textColor="@android:color/white"
+            app:icon="@drawable/ic_baseline_upload_24" />
 
 
         <Button
@@ -123,9 +127,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="30dp"
-            android:background="@color/colorAccent"
-            android:text="camera"
-            android:textColor="@android:color/white" />
+            android:background="@drawable/background_color"
+            android:text="@string/camera"
+            app:iconGravity="textStart"
+            android:textColor="@android:color/white"
+            app:icon="@drawable/ic_baseline_photo_camera_24" />
 
     </LinearLayout>
 

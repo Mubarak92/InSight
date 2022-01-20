@@ -60,7 +60,7 @@ class Camera : Fragment() {
         }
 
         // Set up the listener for take photo button
-        binding?.tosave?.setOnClickListener { takePhoto() }
+//        binding?.tosave?.setOnClickListener { takePhoto() }
 
         outputDirectory = getOutputDirectory()
 
@@ -81,9 +81,9 @@ class Camera : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding?.toshow?.setOnClickListener {
-takePhoto()
-        }
+//        binding?.toshow?.setOnClickListener {
+//takePhoto()
+//        }
     }
 
     private fun takePhoto() {
@@ -138,11 +138,11 @@ takePhoto()
             val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
 
             // Preview
-            val preview = Preview.Builder()
-                .build()
-                .also {
-                    it.setSurfaceProvider(viewFinder.surfaceProvider)
-                }
+//            val preview = Preview.Builder()
+//                .build()
+//                .also {
+//                    it.setSurfaceProvider(viewFinder.surfaceProvider)
+//                }
 
             imageCapture = ImageCapture.Builder()
                 .build()
@@ -163,9 +163,9 @@ takePhoto()
                 cameraProvider.unbindAll()
 
                 // Bind use cases to camera
-                cameraProvider.bindToLifecycle(
-                    this, cameraSelector,preview, imageCapture, imageAnalyzer
-                )
+//                cameraProvider.bindToLifecycle(
+//                    this, cameraSelector,preview, imageCapture, imageAnalyzer
+//                )
 
             } catch (exc: Exception) {
                 Log.e(TAG, "Use case binding failed", exc)
@@ -246,7 +246,7 @@ takePhoto()
         super.onActivityResult(requestCode, resultCode, data)
         if ( resultCode == RESULT_OK) {
             val imageBitmap = data!!.extras!!.get("data") as Bitmap
-            image.setImageBitmap(imageBitmap)
+//            image.setImageBitmap(imageBitmap)
         }
     }
 //    private var resultLauncher =

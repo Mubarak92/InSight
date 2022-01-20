@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">InSight</string>
     <string name="please_wait">الرجاء الانتظار</string>
     <string name="cancel">إلغاء</string>
     <string name="upload">رفع</string>
@@ -16,4 +15,19 @@
     <string name="next">التالي</string>
     <string name="previous">رجوع</string>
     <string name="title_add">هل ترعب في رفع الصورة؟</string>
+    <string name="app_name">InSight</string>
+    <string name="DELETE_ACCOUNT">حذف</string>
+    <string name="decline">إلغاء</string>
+    <string name="signout">تسجيل الخروج</string>
+    <string name="sure">هل أنت متأكد؟</string>
+    <string name="usernameError">الرجاء ادخال اسم المستخدم</string>
+    <string name="emailError">الرجاء ادخال البريد الالكتروني</string>
+    <string name="passwordError">الرجاء ادخال كلمة امرور</string>
+    <string name="creation_time">وقت الانشاء</string>
+    <string name="delete_account">حذف الحساب</string>
+    <string name="save_changes">حفظ التغييرات</string>
+    <string name="overview">نظرة عامة</string>
+    <string name="camera">الكاميرا</string>
+    <string name="hello_there">مرحبا</string>
+    <string name="link">الرابط</string>
 </resources>

@@ -14,23 +14,22 @@
         <action
             android:id="@+id/action_profile3_to_profileEdit"
             app:destination="@id/profileEdit" />
+        <action
+            android:id="@+id/action_profile3_to_overview"
+            app:destination="@id/overview" />
     </fragment>
     <fragment
         android:id="@+id/addNewPhoto"
         android:name="com.mubarak.insight.fragments.AddNewPhoto"
         android:label="fragment_add"
-        tools:layout="@layout/fragment_add" >
-        <action
-            android:id="@+id/action_addNewPhoto_to_camera2"
-            app:destination="@id/camera2" />
-    </fragment>
+        tools:layout="@layout/fragment_add" />
     <fragment
         android:id="@+id/mainPage"
         android:name="com.mubarak.insight.fragments.MainPage"
         android:label="fragment_main_page"
         tools:layout="@layout/fragment_main_page">
         <action
-            android:id="@+id/main_to_overview2"
+            android:id="@+id/action_mainPage_to_overview2"
             app:destination="@id/overview" />
     </fragment>
     <fragment
@@ -61,10 +60,27 @@
         android:id="@+id/profileEdit"
         android:name="com.mubarak.insight.fragments.ProfileEdit"
         android:label="fragment_profile_edit"
-        tools:layout="@layout/fragment_profile_edit" />
+        tools:layout="@layout/fragment_profile_edit" >
+        <argument
+            android:name="username"
+            app:argType="string" />
+    </fragment>
     <fragment
-        android:id="@+id/camera2"
-        android:name="com.mubarak.insight.fragments.Camera"
-        android:label="fragment_camera"
-        tools:layout="@layout/fragment_camera" />
+        android:id="@+id/profileFavorite"
+        android:name="com.mubarak.insight.fragments.ProfileFavorite"
+        android:label="fragment_profile_favorite"
+        tools:layout="@layout/fragment_profile_favorite" >
+        <action
+            android:id="@+id/action_profileFavorite_to_overview"
+            app:destination="@id/overview" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileImages"
+        android:name="com.mubarak.insight.fragments.ProfileImages"
+        android:label="fragment_profile_images"
+        tools:layout="@layout/fragment_profile_images" >
+        <action
+            android:id="@+id/action_profileImages_to_overview"
+            app:destination="@id/overview" />
+    </fragment>
 </navigation>
