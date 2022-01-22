@@ -13,6 +13,8 @@ import com.mubarak.insight.fragments.ProfileImages
 import java.util.ArrayList
 
 class ViewPagerAdapter(fragmentManager: FragmentManager,lifecycle: Lifecycle) : FragmentStateAdapter(fragmentManager, lifecycle) {
+
+    //
     override fun getItemCount(): Int = 2
 
     override fun createFragment(position: Int): Fragment  {

@@ -14,7 +14,7 @@ import com.mubarak.insight.fragments.MainPageDirections
 import com.mubarak.insight.fragments.ProfileImagesDirections
 import kotlinx.android.synthetic.main.item_list_main_page.view.creation_time
 
-
+//here we declared mainPageAdapter , and take the data from Images data class and save it in a list
 class MainPageAdapter : ListAdapter<Images, MainPageAdapter.MainPageViewHolder>(DiffCallback) {
 
     class MainPageViewHolder(
@@ -23,6 +23,7 @@ class MainPageAdapter : ListAdapter<Images, MainPageAdapter.MainPageViewHolder>(
     ) : RecyclerView.ViewHolder(binding.root) {
         //=================================================================================
 
+// here we defined binding fun the we used in bindingAdapter
 
         fun bind(PhotoItem: Images) {
             binding.apply {
@@ -33,11 +34,14 @@ class MainPageAdapter : ListAdapter<Images, MainPageAdapter.MainPageViewHolder>(
 
             }
         }
+
+        // the pointer here is used the make this item is apply for every item in the recycler
+        // for example make every image in the recyclerview clickable
         var pointer = binding.fireImage
     }
 
     //=================================================================================
-
+// here we check for every item and handle the changes only
     companion object DiffCallback : DiffUtil.ItemCallback<Images>() {
         override fun areItemsTheSame(oldItem: Images, newItem: Images): Boolean {
             return oldItem.image_url == newItem.image_url
@@ -54,7 +58,7 @@ class MainPageAdapter : ListAdapter<Images, MainPageAdapter.MainPageViewHolder>(
         viewType: Int
     ): MainPageViewHolder {
         return MainPageViewHolder(
-            ItemListMainPageBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+            ItemListMainPageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
     //=================================================================================
@@ -64,9 +68,16 @@ class MainPageAdapter : ListAdapter<Images, MainPageAdapter.MainPageViewHolder>(
         holder.bind(images)
         //=================================================================================
 
-
-        holder.pointer.setOnClickListener{
-         val action = MainPageDirections.actionMainPageToOverview2(images.image_url.toString(),images.title.toString(),images.overview, link1 = "google.com", link2 = "yahoo.com",images.creation_time)
+// here we move data from mainPage fragment to overview fragment
+        holder.pointer.setOnClickListener {
+            val action = MainPageDirections.actionMainPageToOverview2(
+                images.image_url.toString(),
+                images.title.toString(),
+                images.overview,
+                images.link1,
+                images.link2,
+                images.creation_time
+            )
             holder.itemView.findNavController().navigate(action)
         }
 //        holder.pointer.setOnClickListener{

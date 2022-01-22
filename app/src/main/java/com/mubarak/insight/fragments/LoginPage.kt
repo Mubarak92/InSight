@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.firebase.ui.auth.data.model.User
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -50,8 +51,6 @@ class LoginPage : Fragment() {
         googleSignInClient = GoogleSignIn.getClient(this.requireContext(), gso)
 
         mAuth = Firebase.auth
-
-
     }
 
     private fun signIn() {
@@ -137,9 +136,9 @@ class LoginPage : Fragment() {
 
         fun login() {
 
-//            var pd = ProgressDialog(this.requireContext())
-//            pd.setTitle("Please Wait")
-//            pd.show()
+            var pd = ProgressDialog(this.requireContext())
+            pd.setTitle("Please Wait")
+            pd.show()
             val email = binding?.emailInputs?.editableText.toString()
             val password = binding?.passwordInputs?.editableText.toString()
 
@@ -147,6 +146,7 @@ class LoginPage : Fragment() {
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
+                            pd.dismiss()
 
                             val firebaseUser: FirebaseUser = task.result.user!!
 //                            val loggedInUser = task.toObject(Users::class.java)!!
@@ -179,6 +179,9 @@ class LoginPage : Fragment() {
         binding?.login?.setOnClickListener {
             login()
         }
+        binding?.resetPassword?.setOnClickListener {
+            findNavController().navigate(R.id.action_Login_to_resetPasswordFragment)
+        }
 
     }
 
@@ -189,4 +192,17 @@ class LoginPage : Fragment() {
 
         }
     }
+        private fun isSignIn() {
+            val currentUser = Firebase.auth.currentUser
+
+            if (currentUser != null) {
+                activity?.let {
+                    val intent = Intent(this.requireContext(), NavActivity::class.java)
+                    this.startActivity(intent)
+                }
+                binding?.login
+            }
+
+        }
+
 }

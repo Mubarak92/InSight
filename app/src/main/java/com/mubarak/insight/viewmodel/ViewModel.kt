@@ -125,7 +125,9 @@ class ViewModel : ViewModel() {
         title: String,
         overview: String,
         username: String,
-        uid:String
+        uid: String,
+        link1:String,
+        link2:String
     ) {
         val db = FirebaseFirestore.getInstance()
         Firebase.auth
@@ -139,6 +141,8 @@ class ViewModel : ViewModel() {
         data["overview"] = overview
         data["username"] = username
         data["uid"] = uid
+        data["link1"] = link1
+        data["link2"] = link2
 
 
 
@@ -164,7 +168,9 @@ class SaveFirebase {
         title: String,
         overview: String,
         username: String,
-        uid:String
+        uid:String,
+        link1:String,
+        link2:String
     ) {
         val db = FirebaseFirestore.getInstance()
         Firebase.auth
@@ -178,6 +184,8 @@ class SaveFirebase {
         data["overview"] = overview
         data["username"] = username
         data["uid"] = uid
+        data["link1"] = link1
+        data["link2"] = link2
 
 
 
@@ -238,24 +246,4 @@ fun removeUser(){
             }
         }
 }
-class DeleteFirebase {
-    fun delete() {
-        val db = FirebaseFirestore.getInstance()
-        Firebase.auth
-        Log.e("TAG", "save: start")
 
-
-        db.collection("Users").document(FirebaseAuth.getInstance().currentUser!!.uid)
-            .delete()
-            .addOnSuccessListener {
-                // Toast.makeText(this, "Working", Toast.LENGTH_SHORT).show()
-                Log.e("TAG", "save: true")
-            }
-            .addOnFailureListener { e ->
-                Log.e("TAG", "save: error $e")
-
-                //                Toast.makeText(this, "Fail $e", Toast.LENGTH_SHORT).show()
-            }
-    }
-
-}

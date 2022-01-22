@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_Login_to_nav_graph2"
             app:destination="@id/nav_graph2" />
+        <action
+            android:id="@+id/action_Login_to_resetPasswordFragment"
+            app:destination="@id/Reset" />
     </fragment>
     <fragment
         android:id="@+id/startingPage"
@@ -36,7 +39,7 @@
             app:destination="@id/navActivity" />
         <action
             android:id="@+id/action_startingPage_to_userPrefrencFragment"
-            app:destination="@id/userPrefrencFragment" />
+            app:destination="@id/Settings" />
     </fragment>
     <fragment
         android:id="@+id/registerPage"
@@ -59,7 +62,16 @@
         android:label="fragment_add"
         tools:layout="@layout/fragment_add" />
     <fragment
-        android:id="@+id/userPrefrencFragment"
+        android:id="@+id/Settings"
         android:name="com.mubarak.insight.prefrance.UserPrefrencFragment"
         android:label="UserPrefrencFragment" />
+    <fragment
+        android:id="@+id/Reset"
+        android:name="com.mubarak.insight.fragments.ResetPasswordFragment"
+        android:label="@string/reset_password"
+        tools:layout="@layout/fragment_reset_password" >
+        <action
+            android:id="@+id/action_Reset_to_Login"
+            app:destination="@id/Login" />
+    </fragment>
 </navigation>

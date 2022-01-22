@@ -1,6 +1,7 @@
 package com.mubarak.insight.fragments
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -45,11 +46,22 @@ class Overview : Fragment() {
         val getTitle = navigationArgs.title
         val getImages = navigationArgs.imageUrl
         val getOverview = navigationArgs.overview
+        val getCreationTime = navigationArgs.creationTime
+        val getLink1 = navigationArgs.link1
+        val getLink2 = navigationArgs.link2
         Glide.with(this).load(getImages).into(show_img)
         Log.e("TAG", "onViewCreated: ${getImages}")
         Log.e("TAG", "onViewCreated: ${getTitle}")
         binding?.titleOverview?.text = getTitle
         binding?.overview?.text = getOverview
+        binding?.creationTime
+        binding?.link1?.text= getLink1
+binding?.link1?.setOnClickListener{
+    val queryUrl: Uri = Uri.parse(getLink1)
+    val intent = Intent(Intent.ACTION_VIEW, queryUrl)
+    context?.startActivity(intent)
+}
+        binding?.link2?.text = getLink2
         binding?.share?.setOnClickListener {
             onShare()
         }

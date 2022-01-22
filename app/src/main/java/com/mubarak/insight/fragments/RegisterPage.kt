@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.mubarak.insight.R
 import com.mubarak.insight.classes.FirestoreClass
 import com.mubarak.insight.data.Users
@@ -36,7 +38,6 @@ class RegisterPage : Fragment() {
         return fragmentRegisterPageBinding.root
 
 
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,16 +49,7 @@ class RegisterPage : Fragment() {
 
 //        binding?.progressbar?.currentDrawable
 
-
-
-
-
     }
-
-
-
-
-
 
 
     private fun validateRegister(username: String, email: String, password: String): Boolean {
@@ -116,17 +108,24 @@ class RegisterPage : Fragment() {
                 .addOnCompleteListener { task ->
 
                     if (task.isSuccessful) {
-                        pd.dismiss()
+                        val user = Firebase.auth.currentUser
 
+
+                        user!!.sendEmailVerification().addOnCompleteListener { task ->
+                            if (task.isSuccessful){
+                                findNavController().navigate(R.id.action_registerPage_to_startingPage)
+
+                            }
+                        }
                         val firebaseUser: FirebaseUser = task.result.user!!
-//                        val registeredEmail = firebaseUser.email!!
+////                        val registeredEmail = firebaseUser.email!!
                         val users = Users(firebaseUser.uid, username, email)
-
+//
 
 
                         FirestoreClass().registerUserIntoFirestore(this, users)
-                        findNavController().navigate(R.id.action_registerPage_to_startingPage)
 
+                        pd.dismiss()
                     } else {
                         Toast.makeText(this.requireContext(), "error", Toast.LENGTH_SHORT).show()
 

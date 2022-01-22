@@ -1,34 +1,24 @@
 package com.mubarak.insight.fragments
 
 import android.Manifest
-import android.app.Activity
 import android.app.ProgressDialog
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
 import android.provider.MediaStore
 import android.text.TextUtils
 import android.util.Log
 import android.view.*
-import android.widget.ProgressBar
-import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import com.firebase.ui.auth.AuthUI
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -38,7 +28,6 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import com.mubarak.insight.R
-import com.mubarak.insight.activitys.NavActivity
 import com.mubarak.insight.databinding.FragmentAddBinding
 import com.mubarak.insight.viewmodel.SaveFirebase
 import com.mubarak.insight.viewmodel.ViewModel
@@ -120,7 +109,7 @@ class AddNewPhoto : Fragment() {
 
 
         viewModel.username.value
-        Log.e("TAG_view", "onViewCreated: ${viewModel.username.value} ", )
+        Log.e("TAG_view", "onViewCreated: ${viewModel.username.value} ")
         binding?.ivImage?.setOnClickListener {
             chooser()
         }
@@ -398,10 +387,9 @@ class AddNewPhoto : Fragment() {
                                 title_image_input.text.toString(),
                                 overview_input.text.toString(),
                                 viewModel.username.value.toString(),
-                                currentUser?.uid.toString()
-//                            link1_input.text.toString().toUri(),
-//                            link2_input.text.toString().toUri()
-
+                                currentUser?.uid.toString(),
+                                link1_input.text.toString(),
+                                link2_input.text.toString()
                             )
                             saveimage(
                                 downloadUri.toString(),
@@ -409,10 +397,9 @@ class AddNewPhoto : Fragment() {
                                 title_image_input.text.toString(),
                                 overview_input.text.toString(),
                                 viewModel.username.value.toString(),
-                                currentUser?.uid.toString()
-//                            link1_input.text.toString().toUri(),
-//                            link2_input.text.toString().toUri()
-
+                                currentUser?.uid.toString(),
+                                link1_input.text.toString(),
+                                link2_input.text.toString()
                             )
 
 
@@ -434,10 +421,12 @@ class AddNewPhoto : Fragment() {
         title: String,
         overview: String,
         username: String,
-        uid:String
+        uid: String,
+        link1: String,
+        link2: String
     ) {
 
-        SaveFirebase().save(uri, systemTime, title, overview,username, uid)
+        SaveFirebase().save(uri, systemTime, title, overview, username, uid, link1, link2)
     }
 
     private fun saveimage(
@@ -446,9 +435,11 @@ class AddNewPhoto : Fragment() {
         title: String,
         overview: String,
         username: String,
-        uid: String
+        uid: String,
+        link1: String,
+        link2: String
     ) {
-       saveImages(uri, systemTime, title, overview,username, uid)
+        saveImages(uri, systemTime, title, overview, username, uid, link1,link2)
 
     }
 

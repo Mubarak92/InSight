@@ -6,18 +6,16 @@
     android:layout_height="match_parent"
     tools:context="com.mubarak.insight.fragments.StartingPage">
 
+
     <Button
         android:id="@+id/Login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="80dp"
         android:layout_marginTop="500dp"
-        android:layout_marginBottom="183dp"
         android:text="@string/login"
+        android:layout_marginLeft="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
 
     <ImageView
         android:id="@+id/settings"
@@ -36,10 +34,8 @@
         android:id="@+id/Register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_marginStart="220dp"
         android:layout_marginTop="500dp"
-        android:layout_marginBottom="183dp"
         android:text="@string/register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

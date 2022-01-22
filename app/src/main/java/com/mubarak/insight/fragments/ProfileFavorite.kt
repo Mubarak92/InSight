@@ -52,7 +52,7 @@ class ProfileFavorite : Fragment() {
         val fragmentProfileFavoriteBinding = FragmentProfileFavoriteBinding.inflate(inflater, container, false)
         binding = fragmentProfileFavoriteBinding
 
-        binding?.profileFavoriteRecyclerView?.adapter = MainPageAdapter()
+        binding?.profileFavoriteRecyclerView?.adapter = ProfilePageAdapter()
 
         binding?.lifecycleOwner = viewLifecycleOwner
 
@@ -86,7 +86,7 @@ class ProfileFavorite : Fragment() {
             val images = snapshot.toObjects(Images::class.java)
             imageUrl.addAll(images)
 
-            val adapter = binding?.profileFavoriteRecyclerView?.adapter as MainPageAdapter
+            val adapter = binding?.profileFavoriteRecyclerView?.adapter as ProfilePageAdapter
             adapter.submitList(imageUrl)
 
         }

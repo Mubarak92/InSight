@@ -27,8 +27,8 @@ class ProfilePageAdapter : ListAdapter<Images, ProfilePageAdapter.ProfilePageVie
             binding.apply {
 
                 binding.imageList = PhotoItem
-                itemView.creation_time.text =
-                    DateUtils.getRelativeTimeSpanString(PhotoItem.creation_time)
+//                itemView.creation_time.text =
+//                    DateUtils.getRelativeTimeSpanString(PhotoItem.creation_time)
 
             }
         }
@@ -64,10 +64,10 @@ class ProfilePageAdapter : ListAdapter<Images, ProfilePageAdapter.ProfilePageVie
         holder.bind(images)
 
 //        //=================================================================================
-        holder.pointer.setOnClickListener{
-            val action = ProfileImagesDirections.actionProfileImagesToOverview(images.image_url.toString(),images.title.toString(),images.overview, link1 = "google.com", link2 = "yahoo.com",images.creation_time)
-            holder.itemView.findNavController().navigate(action)
-        }
+//        holder.pointer.setOnClickListener{
+//            val action = ProfileImagesDirections.actionProfileImagesToOverview(images.image_url.toString(),images.title.toString(),images.overview, link1 = "google.com", link2 = "yahoo.com",images.creation_time)
+//            holder.itemView.findNavController().navigate(action)
+//        }
 
 
     }

@@ -28,7 +28,6 @@ import com.mubarak.insight.classes.FirestoreClass
 import com.mubarak.insight.data.Images
 import com.mubarak.insight.data.Users
 import com.mubarak.insight.databinding.FragmentProfileBinding
-import com.mubarak.insight.viewmodel.DeleteFirebase
 import com.mubarak.insight.viewmodel.ViewModel
 import com.mubarak.insight.viewmodel.removeUser
 import kotlinx.android.synthetic.main.fragment_camera.*
@@ -92,9 +91,11 @@ class Profile : Fragment() {
             when (position) {
                 0 -> {
                     tab.text = "My Images"
+                    tab.setIcon(R.drawable.ic_baseline_account_circle_24)
                 }
                 1 -> {
                     tab.text = "Favorite"
+                    tab.setIcon(R.drawable.ic_baseline_favorite_24)
                 }
             }
 
@@ -119,14 +120,14 @@ class Profile : Fragment() {
                     }
                     .setPositiveButton(resources.getString(R.string.signout)) { dialog, which ->
                         // Respond to positive button press
-                        Firebase.auth.signOut()
+//
+//                        Firebase.auth.signOut()
 
 
                         activity?.let {
                             val intent = Intent(it, MainActivity::class.java)
                             it.startActivity(intent)
                         }
-
                     }
                     .show()
             }

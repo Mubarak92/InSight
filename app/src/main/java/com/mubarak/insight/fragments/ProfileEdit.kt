@@ -33,6 +33,7 @@ import com.mubarak.insight.R
 import com.mubarak.insight.activitys.MainActivity
 import com.mubarak.insight.activitys.NavActivity
 import com.mubarak.insight.adapters.MainPageAdapter
+import com.mubarak.insight.classes.DeleteUser
 import com.mubarak.insight.data.Images
 import com.mubarak.insight.databinding.FragmentMainPageBinding
 import com.mubarak.insight.databinding.FragmentProfileEditBinding
@@ -167,7 +168,7 @@ class ProfileEdit : Fragment() {
                 }
                 .setPositiveButton(resources.getString(R.string.DELETE_ACCOUNT)) { dialog, which ->
                     // Respond to positive button press
-                    DeleteFirebase().delete()
+                    DeleteUser().delete()
                     removeUser()
 
                     activity?.let {

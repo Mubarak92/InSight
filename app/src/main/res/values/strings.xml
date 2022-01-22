@@ -62,6 +62,7 @@
     <string name="link">Link</string>
     <string name="camera">camera</string>
     <string name="hello_there">Hello there</string>
+    <string name="reset_password">Reset Password</string>
 
 
     <!--Alert Dialog-->

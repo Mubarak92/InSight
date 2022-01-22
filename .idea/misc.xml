@@ -43,11 +43,12 @@
         <entry key="..\:/InSight/app/src/main/res/layout/fragment_profile_favorite.xml" value="0.16757246376811594" />
         <entry key="..\:/InSight/app/src/main/res/layout/fragment_profile_images.xml" value="0.16757246376811594" />
         <entry key="..\:/InSight/app/src/main/res/layout/fragment_register_page.xml" value="0.22" />
+        <entry key="..\:/InSight/app/src/main/res/layout/fragment_reset_password.xml" value="0.1" />
         <entry key="..\:/InSight/app/src/main/res/layout/fragment_settings.xml" value="0.1" />
         <entry key="..\:/InSight/app/src/main/res/layout/fragment_start_page.xml" value="0.22" />
         <entry key="..\:/InSight/app/src/main/res/layout/item_list.xml" value="0.1" />
         <entry key="..\:/InSight/app/src/main/res/layout/item_list_main_page.xml" value="0.22" />
-        <entry key="..\:/InSight/app/src/main/res/layout/item_list_profile_page.xml" value="0.1" />
+        <entry key="..\:/InSight/app/src/main/res/layout/item_list_profile_page.xml" value="0.3383742911153119" />
         <entry key="..\:/InSight/app/src/main/res/layout/notification.xml" value="0.1640625" />
         <entry key="..\:/InSight/app/src/main/res/layout/toolbar.xml" value="0.1" />
         <entry key="..\:/InSight/app/src/main/res/menu/bottom_nav_menu.xml" value="0.14666666666666667" />

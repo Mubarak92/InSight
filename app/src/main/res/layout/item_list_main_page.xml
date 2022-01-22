@@ -16,43 +16,48 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp">
+        android:layout_height="434dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+
+        android:padding="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
             <!-- Media -->
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{imageList.title}"
                 android:layout_marginLeft="18dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                />
+                android:text="@{imageList.title}"
+                android:textAppearance="?attr/textAppearanceHeadline6" />
+
             <TextView
                 android:id="@+id/tv_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{imageList.username}"
-                android:textColor="#2196F3"
                 android:layout_marginLeft="18dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
+                android:text="@{imageList.username}"
                 android:textAppearance="?attr/textAppearanceHeadline6"
-                />
+                android:textColor="#2196F3" />
+
             <ImageView
                 android:id="@+id/fire_image"
+                imageUrl="@{imageList.image_url}"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:scaleType="centerCrop"
-                imageUrl="@{imageList.image_url}"
-                />
+                android:scaleType="centerCrop" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -61,30 +66,29 @@
                 android:padding="16dp">
 
                 <!-- Title, secondary and supporting text -->
-<!--                <TextView-->
-<!--                    android:id="@+id/tv_username"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="@{viewModel.title}"-->
-<!--                    android:textAppearance="?attr/textAppearanceHeadline6"-->
-<!--                    />-->
+                <!--                <TextView-->
+                <!--                    android:id="@+id/tv_username"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:text="@{viewModel.title}"-->
+                <!--                    android:textAppearance="?attr/textAppearanceHeadline6"-->
+                <!--                    />-->
                 <TextView
                     android:id="@+id/creation_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary"
-                    />
+                    android:textColor="?android:attr/textColorSecondary" />
+
                 <TextView
                     android:id="@+id/overview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:textAppearance="?attr/textAppearanceBody2"
                     android:text="@{imageList.overview}"
-                    android:textColor="?android:attr/textColorSecondary"
-                    />
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="?android:attr/textColorSecondary" />
 
             </LinearLayout>
 

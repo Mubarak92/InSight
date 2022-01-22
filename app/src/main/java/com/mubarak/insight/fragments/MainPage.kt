@@ -24,7 +24,7 @@ import com.mubarak.insight.viewmodel.ViewModel
 class MainPage : Fragment() {
 
 
-    private val viewModel: ViewModel by viewModels()
+    private val viewModel: ViewModel by      viewModels()
     private var signedInUser: User? = null
     private var binding: FragmentMainPageBinding? = null
     private lateinit var mFirestore: FirebaseFirestore

@@ -249,7 +249,7 @@ class Camera : Fragment() {
 //            image.setImageBitmap(imageBitmap)
         }
     }
-//    private var resultLauncher =
+//    private var resultLauncher =yahoo.com
 //        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
 //
 //            if (result.resultCode == RESULT_OK && result.data?.data !=null) {
