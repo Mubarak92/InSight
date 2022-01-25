@@ -1,5 +1,5 @@
 # InSight
-> A social media app that have some of the popular featcuer of the big apps
+> A social media app that have some of the popular features of the big apps
 
 <img width="254" alt="Screenshot 2022-01-20 184504" src="https://user-images.githubusercontent.com/92260213/150374078-ca013789-48ff-4e6d-8076-5f0e8b0f6a42.png">
 
