@@ -25,7 +25,6 @@
             android:id="@+id/ivImage"
             android:layout_width="match_parent"
             android:layout_height="400dp"
-            android:background="@drawable/corners"
             android:src="#dedede"
             app:cardCornerRadius="14dp"
             app:cardElevation="0dp" />

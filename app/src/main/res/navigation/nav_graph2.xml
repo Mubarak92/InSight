@@ -22,7 +22,11 @@
         android:id="@+id/addNewPhoto"
         android:name="com.mubarak.insight.fragments.AddNewPhoto"
         android:label="fragment_add"
-        tools:layout="@layout/fragment_add" />
+        tools:layout="@layout/fragment_add" >
+        <action
+            android:id="@+id/action_addNewPhoto_to_camera2"
+            app:destination="@id/camera2" />
+    </fragment>
     <fragment
         android:id="@+id/mainPage"
         android:name="com.mubarak.insight.fragments.MainPage"
@@ -82,5 +86,14 @@
         <action
             android:id="@+id/action_profileImages_to_overview"
             app:destination="@id/overview" />
+    </fragment>
+    <fragment
+        android:id="@+id/camera2"
+        android:name="com.mubarak.insight.fragments.Camera"
+        android:label="fragment_camera"
+        tools:layout="@layout/fragment_camera" >
+        <action
+            android:id="@+id/action_camera2_to_addNewPhoto"
+            app:destination="@id/addNewPhoto" />
     </fragment>
 </navigation>

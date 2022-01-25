@@ -19,6 +19,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -82,7 +83,7 @@ class AddNewPhoto : Fragment() {
             )
         }
         // Set up the listener for take photo button
-        binding?.camera?.setOnClickListener { startCamera() }
+//        binding?.camera?.setOnClickListener { startCamera() }
 
         outputDirectory = getOutputDirectory()
 
@@ -124,10 +125,10 @@ class AddNewPhoto : Fragment() {
                     .setMessage(resources.getString(R.string.sure))
             }
         }
-        binding?.camera?.setOnClickListener {
-            takePhoto()
-//            openCamera()
 
+
+        binding?.camera?.setOnClickListener {
+            findNavController().navigate(R.id.action_addNewPhoto_to_camera2)
         }
 
     }

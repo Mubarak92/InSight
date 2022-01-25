@@ -28,7 +28,7 @@ class FirestoreClass {
     fun signInUser(fragment: Fragment) {
         Log.e("TAG", "signInUser: userId = ${getUserId()}", )
         // Here we pass the collection name from which we wants the data.
-       var a= mFirestore.collection("Users")
+       val a= mFirestore.collection("Users")
             .document(getUserId())
 
 

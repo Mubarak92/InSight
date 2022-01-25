@@ -121,7 +121,7 @@ class Profile : Fragment() {
                     .setPositiveButton(resources.getString(R.string.signout)) { dialog, which ->
                         // Respond to positive button press
 //
-//                        Firebase.auth.signOut()
+                        Firebase.auth.signOut()
 
 
                         activity?.let {

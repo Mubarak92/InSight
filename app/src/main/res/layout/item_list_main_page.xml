@@ -52,7 +52,7 @@
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:textColor="#2196F3" />
 
-            <ImageView
+            <androidx.constraintlayout.utils.widget.ImageFilterView
                 android:id="@+id/fire_image"
                 imageUrl="@{imageList.image_url}"
                 android:layout_width="match_parent"

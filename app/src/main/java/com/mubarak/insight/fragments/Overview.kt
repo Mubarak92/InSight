@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
@@ -55,12 +56,12 @@ class Overview : Fragment() {
         binding?.titleOverview?.text = getTitle
         binding?.overview?.text = getOverview
         binding?.creationTime
-        binding?.link1?.text= getLink1
-binding?.link1?.setOnClickListener{
-    val queryUrl: Uri = Uri.parse(getLink1)
-    val intent = Intent(Intent.ACTION_VIEW, queryUrl)
-    context?.startActivity(intent)
-}
+//        binding?.link1?.text= getLink1
+        binding?.link1?.setOnClickListener {
+            val queryUrl: Uri = Uri.parse(getLink1)
+            val intent = Intent(Intent.ACTION_VIEW, queryUrl)
+            context?.startActivity(intent)
+        }
         binding?.link2?.text = getLink2
         binding?.share?.setOnClickListener {
             onShare()

@@ -60,7 +60,7 @@ class Camera : Fragment() {
         }
 
         // Set up the listener for take photo button
-//        binding?.tosave?.setOnClickListener { takePhoto() }
+        binding?.tosave?.setOnClickListener { takePhoto() }
 
         outputDirectory = getOutputDirectory()
 
@@ -81,20 +81,20 @@ class Camera : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        binding?.toshow?.setOnClickListener {
-//takePhoto()
-//        }
+        binding?.tosave?.setOnClickListener {
+takePhoto()
+        }
     }
 
     private fun takePhoto() {
         // Get a stable reference of the modifiable image capture use case
         val imageCapture = imageCapture ?: return
-        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        try {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
-        } catch (e: ActivityNotFoundException) {
-            // display error state to the user
-        }
+//        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+//        try {
+//            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+//        } catch (e: ActivityNotFoundException) {
+//            // display error state to the user
+//        }
         // Create time-stamped output file to hold the image
         val photoFile = File(
             outputDirectory,
@@ -122,7 +122,8 @@ class Camera : Fragment() {
                         mediaScanIntent.data = Uri.fromFile(f)
                         activity?.sendBroadcast(mediaScanIntent)
                     }
-                    val msg = "Photo capture succeeded"
+                    val msg = "Photo capture succeeded" +
+                            "Image saved in Gallery"
                     Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
                     Log.d(TAG, msg)
                 }
@@ -137,12 +138,12 @@ class Camera : Fragment() {
             // Used to bind the lifecycle of cameras to the lifecycle owner
             val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
 
-            // Preview
-//            val preview = Preview.Builder()
-//                .build()
-//                .also {
-//                    it.setSurfaceProvider(viewFinder.surfaceProvider)
-//                }
+//             Preview
+            val preview = Preview.Builder()
+                .build()
+                .also {
+                    it.setSurfaceProvider(viewFinder.surfaceProvider)
+                }
 
             imageCapture = ImageCapture.Builder()
                 .build()
@@ -163,9 +164,9 @@ class Camera : Fragment() {
                 cameraProvider.unbindAll()
 
                 // Bind use cases to camera
-//                cameraProvider.bindToLifecycle(
-//                    this, cameraSelector,preview, imageCapture, imageAnalyzer
-//                )
+                cameraProvider.bindToLifecycle(
+                    this, cameraSelector,preview, imageCapture, imageAnalyzer
+                )
 
             } catch (exc: Exception) {
                 Log.e(TAG, "Use case binding failed", exc)
